@@ -5,9 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - 'issue*'
+    pull_request:
+      branches:
+        - main
 
 jobs:
   build:
@@ -16,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,6 +29,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Get dependencies
+      run: npm ci
+    - name: Lint using eslint
+      run: npm run lint
+    - name: Build
+      run: npm run build --if-present
+    - name: unit test
+      run: npm test

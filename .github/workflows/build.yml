@@ -4,6 +4,9 @@ on:
     branches:
       - main
       - 'issue*'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -14,21 +17,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Node ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - name: get dependencies
         run: |
-          - npm install
+          - npm ci
       - name: lint with eslint
         run: |
           npm run lint

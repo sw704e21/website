@@ -1,0 +1,11 @@
+.mat-toolbar{
+  background: #293142;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100% !important;
+  height: 75px;
+  font-size: 40px;
+}
+

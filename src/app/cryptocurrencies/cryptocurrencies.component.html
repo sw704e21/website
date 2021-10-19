@@ -1,4 +1,4 @@
-<table mat-table [dataSource]=CryptoList class="crypto-table">
+<table mat-table [dataSource]=cryptoList class="crypto-table">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Coin </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -6,7 +6,7 @@
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element"> <a class="linksidk" routerLink="../crypto/{{element.id}}"> {{element.name}} </a></td>
   </ng-container>
 
   <ng-container matColumnDef="price">

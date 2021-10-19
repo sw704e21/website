@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Crypto} from "../crypto";
-import {CRYPTOCURRENCIES} from "../mockDB";
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import {CryptoServiceService} from "../crypto-service.service";
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -9,13 +11,18 @@ import {CRYPTOCURRENCIES} from "../mockDB";
 })
 export class CryptocurrenciesComponent implements OnInit {
 
-  CryptoList = CRYPTOCURRENCIES;
+  cryptoList: Crypto[] = [];
   displayedColumns: string[] = ['id', 'name', 'price', 'mentions', 'mentionsPercent', 'pos', 'neg', 'pos-neg'];
-  dataSource = CRYPTOCURRENCIES;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
+
 
   ngOnInit(): void {
+    this.getCryptocurrencies();
+  }
+
+  getCryptocurrencies(): void {
+    this.cryptoServiceService.getCryptocurrencies().subscribe(cryptoList => this.cryptoList = cryptoList)
   }
 
 }

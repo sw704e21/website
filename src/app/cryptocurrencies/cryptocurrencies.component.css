@@ -1,0 +1,100 @@
+.crypto-table {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.mat-column-id {
+  width: 32px;
+  border-right: 1px solid white;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-name {
+  padding-left: 32px;
+  padding-right: 100px;
+  width: 64px;
+  font-size: 20px;
+  text-align: left;
+}
+.mat-column-price {
+  padding-left: 32px;
+  padding-right: 100px;
+  width: 64px;
+  font-size: 20px;
+  text-align: right;
+}
+td.mat-column-price {
+  font-size: 15px;
+}
+
+.mat-column-mentions {
+  font-size: 20px;
+  width: 100px;
+  padding-right: 100px;
+  text-align: right;
+}
+td.mat-column-mentions {
+  font-size: 15px;
+}
+
+.mat-column-mentionsPercent {
+  font-size: 20px;
+  width: 100px;
+  text-align: center;
+  padding-right: 50px;
+}
+
+td.mat-column-mentionsPercent {
+  color: #26d870;
+  font-size: 15px;
+}
+
+.mat-column-pos {
+  font-size: 20px;
+  width: 100px;
+  padding-right: 50px;
+  text-align: right;
+}
+td.mat-column-pos {
+  font-size: 15px;
+  color: #26d870;
+}
+
+.mat-column-neg {
+  font-size: 20px;
+  width: 100px;
+  padding-right: 50px;
+  text-align: right;
+}
+
+td.mat-column-neg {
+  font-size: 15px;
+  color: #ff7060;
+}
+
+.mat-column-pos-neg {
+  font-size: 20px;
+  width: 100px;
+  padding-right: 100px;
+  text-align: center;
+}
+
+td.mat-column-pos-neg {
+  color: #26d870;
+  font-size: 15px;
+}
+
+.filler {
+  flex: 1 1 auto;
+}
+.gap {
+  margin-right: 10px;
+}
+
+.linksidk{
+  color: white;
+  text-decoration: none;
+}

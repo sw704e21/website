@@ -31,26 +31,39 @@ export class CryptoViewComponent implements OnInit {
 
     this.chart = new Chart({
       chart: {
-        events: {
-          redraw: function () {
-            alert('Redrawn');
-          }
-        },
-        type: 'line',
-        plotBackgroundColor: '#293142'
+        plotBackgroundColor: '#171b26',
+        backgroundColor: '#293142',
       },
       title: {
-        text: this.currentCrypto.name
+        text: this.currentCrypto.name,
+        style: {
+          color: '#666666'
+        }
       },
       credits: {
         enabled: false
       },
+      legend: {
+        itemStyle: {
+          color: '#666666'
+        }
+      },
+      yAxis: {
+        gridLineColor: '#293142',
+      },
       series: [
         {
           name: 'Mentions',
+          type: 'column',
+          color: '#666666',
+          opacity: 0.5,
+          data: [1, 2, 3, 1, 5, 7, 9, 2, 3, 5, 4, 7, 2, 10, 11, 2, 9]
+        },
+        {
+          name: 'Price',
           type: 'line',
-          data: [1, 2, 3, 1, 5, 7, 9, 2, 3, 5, 4, 7, 2, 10]
-        }
+          data: [1, 2, 3, 1, 5, 7, 9, 2, 3, 5, 4, 7, 2, 10, 11, 2, 9]
+        },
       ]
     });
   }

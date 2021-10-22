@@ -28,7 +28,7 @@ export class CryptoViewComponent implements OnInit {
   getPriceWeek(): void {
     let tempData: number[] = [];
     let tempDate: number[] = [];
-    this.cryptoServiceService.getPriceWeek(this.route.snapshot.paramMap.get("id")!)
+    this.cryptoServiceService.getPriceWeek(this.route.snapshot.paramMap.get("id")!.toUpperCase())
       .subscribe(resp => { for (let i = 0; i < resp.history.length; i++){
         tempData.push(resp.history[i].rate);
         tempDate.push(resp.history[i].date);

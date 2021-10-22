@@ -27,28 +27,18 @@ export class CryptoViewComponent implements OnInit {
 
   getPriceWeek(): void {
     let tempData: number[] = [];
-    let tempDate: number[] = [];
     this.cryptoServiceService.getPriceWeek(this.route.snapshot.paramMap.get("id")!.toUpperCase())
       .subscribe(resp => { for (let i = 0; i < resp.history.length; i++){
         tempData.push(resp.history[i].rate);
-        tempDate.push(resp.history[i].date);
-      };
+      }; const date = Math.floor((Date.now() - resp.history[0].date) / (1000*60*60)); console.log(date)
         this.chart.addSeries({
-        name: 'Price',
-        type: 'line',
-        data: tempData,
-        pointStart: tempDate[0],
-        pointInterval: 3600 * 1000 * 1.68
+          name: 'Price',
+          type: 'line',
+          data: tempData,
+          pointStart: resp.history[0].date,
+          pointInterval: 3600 * 1000 * (date/100)
       }, true, true);
       });
-
-
-    //console.log(tempData);
-
-    //this.printFunction()
-
-    //this.priceData.push(1);
-
   }
 
   getCryptocurrency(): void {

@@ -21,19 +21,27 @@ export class CryptoViewComponent implements OnInit {
 
   currentCrypto: Crypto = {id: "Placeholder", name: "Placeholder", mentions: 200, mentionsPercent: "5", neg: 2, pos: 2, price: 100};
 
-  priceData: number[] = [1, 2, 3];
-  test: number = 2;
-
   chart = new Chart()
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) { }
 
   getPriceWeek(): void {
-    let tempData: number[] = [1, 5, 10];
+    let tempData: number[] = [];
+    let tempDate: number[] = [];
     this.cryptoServiceService.getPriceWeek(this.route.snapshot.paramMap.get("id")!)
-      .subscribe(resp => {tempData.push(resp.history.length); console.log(tempData); this.priceData = tempData; console.log(this.priceData);
+      .subscribe(resp => { for (let i = 0; i < resp.history.length; i++){
+        tempData.push(resp.history[i].rate);
+        tempDate.push(resp.history[i].date);
+      };
+        this.chart.addSeries({
+        name: 'Price',
+        type: 'line',
+        data: tempData,
+        pointStart: tempDate[0],
+        pointInterval: 3600 * 1000 * 1.68
+      }, true, true);
+      });
 
-      } )
 
     //console.log(tempData);
 
@@ -42,11 +50,6 @@ export class CryptoViewComponent implements OnInit {
     //this.priceData.push(1);
 
   }
-
-  printFunction(): void {
-    console.log(this.test)
-    console.log(this.priceData.length)
-    console.log(this.priceData[0])  }
 
   getCryptocurrency(): void {
     this.cryptoServiceService.getCryptocurrency(this.route.snapshot.paramMap.get("id")!)
@@ -79,20 +82,16 @@ export class CryptoViewComponent implements OnInit {
           format: "${text}"
         }
       },
-      series: [
-       /* {
-          name: 'Mentions',
-          type: 'column',
-          color: '#666666',
-          opacity: 0.5,
-          data: [1, 2, 3, 1, 5, 7, 9, 2, 3, 5, 4, 7, 2, 10, 11, 2, 9]
-        },*/
-        {
-          name: 'Price',
-          type: 'line',
-          data: this.priceData
-        },
-      ]
+      xAxis: {
+        type: 'datetime'
+      },
+      plotOptions: {
+        series: {
+          marker:{
+            enabled: false
+          }
+        }
+      }
     });
   }
 

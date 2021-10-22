@@ -11,6 +11,7 @@ import {CryptoServiceService} from "../crypto-service.service";
 })
 export class CryptocurrenciesComponent implements OnInit {
 
+  testPrice?: Number;
   cryptoList: Crypto[] = [];
   displayedColumns: string[] = ['id', 'name', 'price', 'mentions', 'mentionsPercent', 'pos', 'neg', 'pos-neg'];
 
@@ -19,10 +20,16 @@ export class CryptocurrenciesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCryptocurrencies();
+    this.getPrice("BTC");
   }
 
   getCryptocurrencies(): void {
-    this.cryptoServiceService.getCryptocurrencies().subscribe(cryptoList => this.cryptoList = cryptoList)
+    this.cryptoServiceService.getCryptocurrencies().subscribe(resp => this.cryptoList = resp)
+  }
+
+  getPrice(id: string): void{
+    this.cryptoServiceService.getPrice(id).subscribe(resp => this.testPrice = resp.rate)
+    console.log(this.testPrice);
   }
 
 }

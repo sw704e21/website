@@ -4,7 +4,7 @@ import { catchError, retry } from 'rxjs/operators';
 import {Crypto} from "./crypto";
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
 
-const endpoint = "";
+const endpoint = "http://cryptoserver.northeurope.cloudapp.azure.com";
 
 let headers = new HttpHeaders();
 headers = headers.set('content-type', 'application/json').set( 'x-api-key', '157e82ac-4d6a-4fed-b7a7-064db24230ed');
@@ -18,7 +18,7 @@ export class CryptoServiceService {
   constructor(private http: HttpClient) { }
 
   getCryptocurrencies(): Observable<any> {
-    return this.http.get<Crypto>(endpoint).pipe(catchError(this.handleError));
+    return this.http.get<Crypto>(endpoint + "/coins").pipe(catchError(this.handleError));
   }
 
   getCryptocurrency(id: string): Observable<any> {
@@ -48,6 +48,5 @@ export class CryptoServiceService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-
 
 }

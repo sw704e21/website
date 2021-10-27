@@ -19,7 +19,7 @@ export class CryptoViewComponent implements OnInit {
     this.getCryptocurrency()
   }
 
-  currentCrypto: Crypto = {id: "Placeholder", name: "Placeholder", mentions: 200, mentionsPercent: "5", neg: 2, pos: 2, price: 100};
+  currentCrypto: Crypto = {id: "Placeholder", name: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
 
   chart = new Chart()
 

@@ -57,7 +57,8 @@ export class CryptoViewComponent implements OnInit {
       });
   }
 
-  onValChange(value: string){
+  // Changes how far back to display the data
+  onPeriodChange(value: string){
     switch (value) {
       case "Day":
         this.getPriceHistory(TimeInterval.Day);

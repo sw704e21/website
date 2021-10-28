@@ -10,6 +10,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { CryptoViewComponent } from './crypto-view/crypto-view.component';
 import { ChartModule } from 'angular-highcharts';
+import { HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ChartModule } from 'angular-highcharts';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatTableModule,
-    MatSidenavModule
+    MatSidenavModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

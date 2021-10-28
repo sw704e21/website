@@ -6,12 +6,12 @@
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> <a class="linksidk" routerLink="../crypto/{{element.id}}"> {{element.name}} </a></td>
+    <td mat-cell *matCellDef="let element"> <a class="LinkToCrypto" routerLink="../crypto/{{element.id}}"> {{element.name}} </a></td>
   </ng-container>
 
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let element"> <p>${{element.price}}</p> </td>
+    <td mat-cell *matCellDef="let element">{{'$' + element.price}}</td>
   </ng-container>
 
   <ng-container matColumnDef="mentions">
@@ -21,22 +21,22 @@
 
   <ng-container matColumnDef="mentionsPercent">
     <th mat-header-cell *matHeaderCellDef> Mentions% </th>
-    <td mat-cell *matCellDef="let element"> {{element.mentionsPercent}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.relMentions.toFixed(2) + '%'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="pos">
     <th mat-header-cell *matHeaderCellDef> Pos </th>
-    <td mat-cell *matCellDef="let element"> {{element.pos}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.posSentiment}} </td>
   </ng-container>
 
   <ng-container matColumnDef="neg">
     <th mat-header-cell *matHeaderCellDef> Neg </th>
-    <td mat-cell *matCellDef="let element"> {{element.neg}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.negSentiment}} </td>
   </ng-container>
 
   <ng-container matColumnDef="pos-neg">
     <th mat-header-cell *matHeaderCellDef> Pos/Neg </th>
-    <td mat-cell *matCellDef="let element"> {{(element.pos / element.neg).toFixed(2)}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.relSentiment.toFixed(2)}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

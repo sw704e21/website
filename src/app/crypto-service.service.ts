@@ -22,7 +22,7 @@ export class CryptoServiceService {
   }
 
   getCryptocurrency(id: string): Observable<any> {
-    return this.http.get<Crypto>(endpoint + '/' + id).pipe(catchError(this.handleError));
+    return this.http.get<Crypto>(endpoint + '/coins/' + id).pipe(catchError(this.handleError));
   }
 
   getPrice(id: string, index: number): Observable<any> {
@@ -37,6 +37,7 @@ export class CryptoServiceService {
       {headers: headers});
   }
 
+  //Primitive error handling
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

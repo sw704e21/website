@@ -21,9 +21,11 @@ export class CryptocurrenciesComponent implements OnInit {
     this.getCryptocurrencies();
   }
 
+  //Gets currencies for the table on the frontpage
   getCryptocurrencies(): void {
     this.cryptoServiceService.getCryptocurrencies().subscribe(resp => {
       this.cryptoList = resp;
+      //Placeholder till the backend supports token ID
       this.cryptoList[0].id = "BTC";
       for (var i = 0; i < this.cryptoList.length; i++){
 
@@ -31,7 +33,6 @@ export class CryptocurrenciesComponent implements OnInit {
 
       }
     })
-
   }
 
   getPrice(id: string, index: number): void{

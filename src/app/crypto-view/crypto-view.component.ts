@@ -30,7 +30,7 @@ export class CryptoViewComponent implements OnInit {
     this.cryptoServiceService.getPriceWeek(this.route.snapshot.paramMap.get("id")!.toUpperCase())
       .subscribe(resp => { for (let i = 0; i < resp.history.length; i++){
         tempData.push(resp.history[i].rate);
-      }; const date = Math.floor((Date.now() - resp.history[0].date) / (1000*60*60)); console.log(date)
+      }; const date = Math.floor((Date.now() - resp.history[0].date) / (1000*60*60));
         this.chart.addSeries({
           name: 'Price',
           type: 'line',
@@ -38,6 +38,7 @@ export class CryptoViewComponent implements OnInit {
           pointStart: resp.history[0].date,
           pointInterval: 3600 * 1000 * (date/100)
       }, true, true);
+
       });
   }
 
@@ -53,7 +54,7 @@ export class CryptoViewComponent implements OnInit {
         backgroundColor: '#293142',
       },
       title: {
-        text: this.currentCrypto.name,
+        text: this.route.snapshot.paramMap.get("id")!.toUpperCase(),
         style: {
           color: '#666666'
         }

@@ -4,4 +4,11 @@
   margin: auto;
 }
 
+.mat-button-toggle{
+  background-color: #293142;
+}
+.mat-button-toggle-checked{
+  background-color: #7bb4eb;
+}
+
 

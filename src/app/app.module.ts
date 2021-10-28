@@ -11,6 +11,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { CryptoViewComponent } from './crypto-view/crypto-view.component';
 import { ChartModule } from 'angular-highcharts';
 import { HttpClientModule} from "@angular/common/http";
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { HttpClientModule} from "@angular/common/http";
     MatToolbarModule,
     MatTableModule,
     MatSidenavModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

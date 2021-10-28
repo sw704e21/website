@@ -1,4 +1,11 @@
 <div class="chartThing">
+  <mat-button-toggle-group name="timeToggles" class="toggles">
+    <mat-button-toggle (change)="onValChange($event.value)" value="Day">Day</mat-button-toggle>
+    <mat-button-toggle (change)="onValChange($event.value)" value="Week">Week</mat-button-toggle>
+    <mat-button-toggle (change)="onValChange($event.value)" value=1>Month</mat-button-toggle>
+    <mat-button-toggle (change)="onValChange($event.value)" value="3Month">3 Months</mat-button-toggle>
+    <mat-button-toggle (change)="onValChange($event.value)" value="Year">Year</mat-button-toggle>
+  </mat-button-toggle-group>
   <highcharts-chart
     [chart]="chart"
     style="width: 100%; height: 400px; display: block;"

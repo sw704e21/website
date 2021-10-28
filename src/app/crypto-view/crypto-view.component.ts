@@ -47,6 +47,9 @@ export class CryptoViewComponent implements OnInit {
       });
   }
 
+  onValChange(value: string){
+    console.log(value);
+  }
   //For getting the specific crypto
   getCryptocurrency(): void {
     //NOT a recursive call. Calling the endpoint from our service file

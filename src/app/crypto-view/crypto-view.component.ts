@@ -5,6 +5,15 @@ import {Chart} from "angular-highcharts";
 import {CryptoServiceService} from "../crypto-service.service";
 import {Crypto} from "../crypto";
 
+// Time intervals for retrieving the history of a crypto
+enum TimeInterval {
+  Day = 86400000,
+  Week = 604800000,
+  Month = 2629743000,
+  ThreeMonths = 7889229000,
+  Year = 31556926000
+}
+
 @Component({
   selector: 'app-crypto-view',
   templateUrl: './crypto-view.component.html',
@@ -14,7 +23,7 @@ import {Crypto} from "../crypto";
 export class CryptoViewComponent implements OnInit {
 
   ngOnInit(): void {
-    this.getPriceWeek()
+    this.getPriceHistory(TimeInterval.Week)
     this.getCryptocurrency()
   }
 
@@ -27,15 +36,16 @@ export class CryptoViewComponent implements OnInit {
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) { }
 
   //Gets the price of the crypto, for the past week
-  getPriceWeek(): void {
+  getPriceHistory(period: number): void {
     let tempData: number[] = [];
     //Retrieves the ID from the URL using paramMap
-    this.cryptoServiceService.getPriceWeek(this.route.snapshot.paramMap.get("id")!.toUpperCase())
+    this.cryptoServiceService.getPriceHistory(this.route.snapshot.paramMap.get("id")!.toUpperCase(), period)
       .subscribe(resp => {
         //Formats the data for the chart
         for (let i = 0; i < resp.history.length; i++){
           tempData.push(resp.history[i].rate); };
         const date = Math.floor((resp.history[resp.history.length-1].date - resp.history[0].date));
+        this.chart.removeSeries(0)
         //Adds a new series to the chart
         this.chart.addSeries({
           name: 'Price',
@@ -48,7 +58,24 @@ export class CryptoViewComponent implements OnInit {
   }
 
   onValChange(value: string){
-    console.log(value);
+    switch (value) {
+      case "Day":
+        this.getPriceHistory(TimeInterval.Day);
+        break;
+      case "Week":
+        this.getPriceHistory(TimeInterval.Week);
+        break;
+      case "Month":
+        this.getPriceHistory(TimeInterval.Month);
+        break;
+      case "3Months":
+        this.getPriceHistory(TimeInterval.ThreeMonths);
+        break;
+      case "Year":
+        this.getPriceHistory(TimeInterval.Year);
+        break;
+
+    }
   }
   //For getting the specific crypto
   getCryptocurrency(): void {

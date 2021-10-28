@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+.mat-button-toggle-group {
+  border-radius: 0px;
+}
+
 .mat-button-toggle{
   background-color: #293142;
 }

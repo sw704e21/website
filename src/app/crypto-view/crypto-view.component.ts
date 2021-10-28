@@ -35,14 +35,14 @@ export class CryptoViewComponent implements OnInit {
         //Formats the data for the chart
         for (let i = 0; i < resp.history.length; i++){
           tempData.push(resp.history[i].rate); };
-        const date = Math.floor((Date.now() - resp.history[0].date) / (1000*60*60));
+        const date = Math.floor((resp.history[resp.history.length-1].date - resp.history[0].date));
         //Adds a new series to the chart
         this.chart.addSeries({
           name: 'Price',
           type: 'line',
           data: tempData,
           pointStart: resp.history[0].date,
-          pointInterval: 3600 * 1000 * (date/100)
+          pointInterval: date / resp.history.length
       }, true, true);
       });
   }

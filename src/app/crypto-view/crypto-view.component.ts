@@ -111,7 +111,10 @@ export class CryptoViewComponent implements OnInit {
       yAxis: {
         gridLineColor: '#293142',
         labels: {
-          format: "${text}"
+          format: "${text}",
+        },
+        title: {
+          text: null
         }
       },
       xAxis: {

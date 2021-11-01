@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
-import {Chart} from "angular-highcharts";
+import {Chart, StockChart} from "angular-highcharts";
 import {CryptoServiceService} from "../crypto-service.service";
 import {Crypto} from "../crypto";
+import {Highcharts} from "highcharts/modules/stock";
 
 // Time intervals for retrieving the history of a crypto
 enum TimeInterval {
@@ -44,7 +45,7 @@ export class CryptoViewComponent implements OnInit {
         //Formats the data for the chart
         for (let i = 0; i < resp.history.length; i++){
           tempData.push(resp.history[i].rate); };
-        const date = Math.floor((resp.history[resp.history.length-1].date - resp.history[0].date));
+        const date = (resp.history[resp.history.length-1].date - resp.history[0].date);
         this.chart.removeSeries(0)
         //Adds a new series to the chart
         this.chart.addSeries({
@@ -127,7 +128,7 @@ export class CryptoViewComponent implements OnInit {
           }
         }
       }
-    });
+    })
   }
 
 }

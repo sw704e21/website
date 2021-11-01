@@ -26,11 +26,10 @@ export class CryptocurrenciesComponent implements OnInit {
     this.cryptoServiceService.getCryptocurrencies().subscribe(resp => {
       this.cryptoList = resp;
       //Placeholder till the backend supports token ID
-      this.cryptoList[0].id = "BTC";
+      //this.cryptoList[0].id = "BTC";
       for (var i = 0; i < this.cryptoList.length; i++){
-
+        this.cryptoList[i].id = resp[i].identifier;
         this.getPrice(this.cryptoList[i].id, i)
-
       }
     })
   }

@@ -8,11 +8,11 @@ import {Highcharts} from "highcharts/modules/stock";
 
 // Time intervals for retrieving the history of a crypto
 enum TimeInterval {
-  Day = 86400000,
-  Week = 604800000,
-  Month = 2629743000,
-  ThreeMonths = 7889229000,
-  Year = 31556926000
+  Day = 90000000,
+  Week = 630000000,
+  Month = 2700000000,
+  ThreeMonths = 8100000000,
+  Year = 32400000000
 }
 
 @Component({
@@ -78,10 +78,9 @@ export class CryptoViewComponent implements OnInit {
     this.chart.addSeries({
       name: 'Price',
       type: 'line',
-      data: [],
-      pointStart: Date.UTC(2015, 2, 5),
+      data: []
     }, true, true)
-    this.getPriceHistory(TimeInterval.Month)
+    this.getPriceHistory(TimeInterval.Week)
   }
 
   //Gets the price of the crypto, for the past week
@@ -94,6 +93,7 @@ export class CryptoViewComponent implements OnInit {
         for (let i = 0; i < resp.history.length; i++){
           tempData.push(resp.history[i].rate); }
 
+        console.log(tempData.length)
         const date = (resp.history[resp.history.length-1].date - resp.history[0].date);
         this.chart.ref.series[0].setData(tempData, true, true, true);
       });

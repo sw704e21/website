@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
-import {Chart, StockChart} from "angular-highcharts";
 import {CryptoServiceService} from "../crypto-service.service";
 import {Crypto} from "../crypto";
 import {Highcharts} from "highcharts/modules/stock";
+import {Chart} from "angular-highcharts";
 
 // Time intervals for retrieving the history of a crypto
 enum TimeInterval {
@@ -36,6 +36,7 @@ export class CryptoViewComponent implements OnInit {
     chart: {
       plotBackgroundColor: '#171b26',
       backgroundColor: '#293142',
+      type: 'line'
     },
     title: {
       text: this.route.snapshot.paramMap.get("id")!.toUpperCase(),
@@ -67,9 +68,12 @@ export class CryptoViewComponent implements OnInit {
       series: {
         marker:{
           enabled: false
-        }
+        },
       }
-    }
+    },
+    series: [{
+      type: "line"
+    }]
   })
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) { }
@@ -81,12 +85,13 @@ export class CryptoViewComponent implements OnInit {
       data: [],
       pointStart: Date.UTC(2015, 2, 5),
     }, true, true)
-    this.getPriceHistory(TimeInterval.Month)
+    this.getPriceHistory(TimeInterval.Week)
   }
 
   //Gets the price of the crypto, for the past week
-  getPriceHistory(period: number): void {
+  getPriceHistory(period: number) {
     let tempData: number[] = [];
+
     //Retrieves the ID from the URL using paramMap
     this.cryptoServiceService.getPriceHistory(this.route.snapshot.paramMap.get("id")!.toUpperCase(), period)
       .subscribe(resp => {
@@ -95,6 +100,12 @@ export class CryptoViewComponent implements OnInit {
           tempData.push(resp.history[i].rate); }
 
         const date = (resp.history[resp.history.length-1].date - resp.history[0].date);
+        this.chart.ref.series[0].update({
+          type: "line",
+          pointStart: resp.history[0].date,
+          pointInterval: date / resp.history.length,
+        });
+
         this.chart.ref.series[0].setData(tempData, true, true, true);
       });
   }
@@ -117,7 +128,6 @@ export class CryptoViewComponent implements OnInit {
       case "Year":
         this.getPriceHistory(TimeInterval.Year);
         break;
-
     }
   }
   //For getting the specific crypto

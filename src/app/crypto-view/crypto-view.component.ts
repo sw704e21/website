@@ -71,9 +71,6 @@ export class CryptoViewComponent implements OnInit {
         },
       }
     },
-    series: [{
-      type: "line"
-    }]
   })
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) { }

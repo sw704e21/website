@@ -3,6 +3,7 @@ import { Crypto} from "../crypto";
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import {CryptoServiceService} from "../crypto-service.service";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -26,9 +27,9 @@ export class CryptocurrenciesComponent implements OnInit {
     this.cryptoServiceService.getCryptocurrencies().subscribe(resp => {
       this.cryptoList = resp;
       //Placeholder till the backend supports token ID
-      this.cryptoList[0].id = "BTC";
       for (var i = 0; i < this.cryptoList.length; i++){
 
+        this.cryptoList[i].id = resp[i].identifier;
         this.getPrice(this.cryptoList[i].id, i)
 
       }
@@ -39,4 +40,8 @@ export class CryptocurrenciesComponent implements OnInit {
     this.cryptoServiceService.getPrice(id, index).subscribe(resp => this.cryptoList[index].price = resp.rate.toPrecision(5))
   }
 
+
+  sortData($event: Sort) {
+    
+  }
 }

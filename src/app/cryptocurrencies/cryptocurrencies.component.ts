@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Crypto} from "../crypto";
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Crypto} from "../crypto";
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 import {CryptoServiceService} from "../crypto-service.service";
 import {Sort} from "@angular/material/sort";
+import {MatTable} from "@angular/material/table";
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -17,6 +18,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
 
+  @ViewChild(MatTable) table: MatTable<any>;
 
   ngOnInit(): void {
     this.getCryptocurrencies();
@@ -30,7 +32,7 @@ export class CryptocurrenciesComponent implements OnInit {
       for (var i = 0; i < this.cryptoList.length; i++){
 
         this.cryptoList[i].id = resp[i].identifier;
-        this.getPrice(this.cryptoList[i].id, i)
+        this.getPrice(this.cryptoList[i].id, i);
 
       }
     })
@@ -42,6 +44,26 @@ export class CryptocurrenciesComponent implements OnInit {
 
 
   sortData($event: Sort) {
-    
+    this.sortByPrice()
+    console.log(this.cryptoList)
+    //this.reverseCrypto();
+  }
+
+  sortByPrice(){
+    this.cryptoList.sort((obj1, obj2) => {
+      if (obj1.price > obj2.price) {
+        return 1;
+      }
+      if (obj1.price < obj2.price) {
+        return -1;
+      }
+
+      return 0
+    });
+  }
+
+  reverseCrypto(){
+    this.cryptoList.reverse()
+    this.table.renderRows()
   }
 }

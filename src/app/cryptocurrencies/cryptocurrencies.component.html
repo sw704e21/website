@@ -1,4 +1,4 @@
-<table mat-table [dataSource]=cryptoList class="crypto-table" matSort (matSortChange)="sortData($event)" matSortActive="Mentions" matSortDirection="asc" matSortDisableClear>
+<table mat-table [dataSource]=cryptoList class="crypto-table" matSort (matSortChange)="sortData($event)" matSortActive="Price" matSortDirection="asc" matSortDisableClear>
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Coin </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>

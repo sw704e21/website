@@ -17,8 +17,8 @@ export class CryptoServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getCryptocurrencies(): Observable<any> {
-    return this.http.get<Crypto>(endpoint + "/coins/all").pipe(catchError(this.handleError));
+  getCryptocurrencies(params: HttpParams): Observable<any> {
+    return this.http.get<Crypto>(endpoint + "/coins/all", {params: params}).pipe(catchError(this.handleError));
   }
 
   getCryptocurrency(id: string): Observable<any> {

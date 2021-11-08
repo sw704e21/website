@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {CryptoServiceService} from "../crypto-service.service";
 import {Sort} from "@angular/material/sort";
 import {MatTable} from "@angular/material/table";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -20,13 +21,17 @@ export class CryptocurrenciesComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
+  params = new HttpParams()
+    .set('length', 25)
+    .set('sortParam', 'mentions')
+
   ngOnInit(): void {
-    this.getCryptocurrencies();
+    this.getCryptocurrencies(this.params);
   }
 
   //Gets currencies for the table on the frontpage
-  getCryptocurrencies(): void {
-    this.cryptoServiceService.getCryptocurrencies().subscribe(resp => {
+  getCryptocurrencies(params: HttpParams): void {
+    this.cryptoServiceService.getCryptocurrencies(this.params).subscribe(resp => {
       this.cryptoList = resp;
       //Placeholder till the backend supports token ID
       for (var i = 0; i < this.cryptoList.length; i++){
@@ -35,6 +40,7 @@ export class CryptocurrenciesComponent implements OnInit {
         this.getPrice(this.cryptoList[i].id, i);
 
       }
+      this.table.renderRows();
     })
   }
 
@@ -43,24 +49,18 @@ export class CryptocurrenciesComponent implements OnInit {
   }
 
 
-  sortData($event: Sort) {
-    this.sortByPrice()
+  sortData(sortParam: string) {
+    this.params = new HttpParams()
+      .set('length', 25)
+      .set('sortParam', sortParam);
+
+    this.getCryptocurrencies(this.params);
+
+    console.log(this.params)
     console.log(this.cryptoList)
-    //this.reverseCrypto();
+
   }
 
-  sortByPrice(){
-    this.cryptoList.sort((obj1, obj2) => {
-      if (obj1.price > obj2.price) {
-        return 1;
-      }
-      if (obj1.price < obj2.price) {
-        return -1;
-      }
-
-      return 0
-    });
-  }
 
   reverseCrypto(){
     this.cryptoList.reverse()

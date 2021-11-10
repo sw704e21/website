@@ -15,7 +15,7 @@
   </ng-container>
 
   <ng-container matColumnDef="mentions">
-    <th mat-header-cell (click)="sortData('-mentions')" *matHeaderCellDef mat-sort-header="Mentions"> Mentions </th>
+    <th mat-header-cell (click)="this.params.get('sortParam') === 'mentions' ?  sortData('-mentions') : sortData('mentions')" *matHeaderCellDef mat-sort-header="Mentions"> Mentions </th>
     <td mat-cell  *matCellDef="let element"> {{element.mentions}} </td>
   </ng-container>
 

@@ -15,6 +15,7 @@ import {HttpParams} from "@angular/common/http";
 export class CryptocurrenciesComponent implements OnInit {
 
   cryptoList: Crypto[] = []
+  priceCache: [string, Number][] = []
   displayedColumns: string[] = ['id', 'name', 'price', 'mentions', 'mentionsPercent', 'pos', 'neg', 'pos-neg'];
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
@@ -35,7 +36,6 @@ export class CryptocurrenciesComponent implements OnInit {
       this.cryptoList = resp;
       //Placeholder till the backend supports token ID
       for (var i = 0; i < this.cryptoList.length; i++){
-
         this.cryptoList[i].id = resp[i].identifier;
         this.getPrice(this.cryptoList[i].id, i);
 
@@ -45,7 +45,19 @@ export class CryptocurrenciesComponent implements OnInit {
   }
 
   getPrice(id: string, index: number): void{
-    this.cryptoServiceService.getPrice(id, index).subscribe(resp => this.cryptoList[index].price = resp.rate.toPrecision(5))
+
+    //Caching for prices. Will save many API calls.
+    for (var i = 0; i < this.priceCache.length; i++){
+      if(this.priceCache[i][0] === id){
+        this.cryptoList[index].price = this.priceCache[i][1];
+        return;
+      }
+    }
+
+    this.cryptoServiceService.getPrice(id, index).subscribe(resp => {
+      this.cryptoList[index].price = resp.rate.toPrecision(5);
+      this.priceCache.push([id, resp.rate.toPrecision(5)])
+    } )
   }
 
 
@@ -55,9 +67,6 @@ export class CryptocurrenciesComponent implements OnInit {
       .set('sortParam', sortParam);
 
     this.getCryptocurrencies(this.params);
-
-    console.log(this.params)
-    console.log(this.cryptoList)
 
   }
 

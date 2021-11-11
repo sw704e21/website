@@ -6,14 +6,15 @@ import {Crypto} from "../crypto";
 import {Highcharts} from "highcharts/modules/stock";
 import {Chart} from "angular-highcharts";
 import {HttpParams} from "@angular/common/http";
+import {PERIOD} from "@angular/cdk/keycodes";
 
 // Time intervals for retrieving the history of a crypto
 enum TimeInterval {
-  Day = 90000000,
-  Week = 630000000,
-  Month = 2700000000,
-  ThreeMonths = 8100000000,
-  Year = 32400000000
+  Day = 86400000,
+  Week = 604800000,
+  Month = 2592000000,
+  ThreeMonths = 7776000000,
+  Year = 31536000000
 }
 
 @Component({
@@ -97,7 +98,23 @@ export class CryptoViewComponent implements OnInit {
       data: [],
       visible: true
     }, true, true)
-    this.getCryptoHistory(this.historyParams);
+
+    //Add the interactions series to the graph. Index 2
+    this.chart.addSeries({
+      name: 'Interactions',
+      type: 'line',
+      data: [],
+      visible: true
+    }, true, true)
+
+    //Add the sentiment series to the graph. Index 3
+    this.chart.addSeries({
+      name: 'Sentiment',
+      type: 'line',
+      data: [],
+      visible: true
+    }, true, true)
+    this.getCryptoHistory(this.historyParams)
   }
 
   //Gets the price of the crypto, for the past week
@@ -124,22 +141,55 @@ export class CryptoViewComponent implements OnInit {
 
   getCryptoHistory(params: HttpParams){
     let tempMentions: number[] = [];
+    let tempInteractions: number[] = []
+    let tempSentiment: number[] = []
 
     //Retrieve the ID from the URL using parammap
     this.cryptoServiceService.getCryptoHistory(this.route.snapshot.paramMap.get("id")!.toUpperCase(), params)
       .subscribe(resp => {
         for (let i = 0; i < resp.length; i++){
-          tempMentions.push(resp[i].mentions);}
+          tempMentions.push(resp[i].mentions);
+          tempInteractions.push(resp[i].interaction);
+          tempSentiment.push(resp[i].sentiment);
+        }
 
+        // Reverse the data. First element in resp is the newest data point when it should be the last.
         tempMentions.reverse();
-        const period = parseInt(params.get('age')!)*24*60*60*1000
-        this.chart.ref.series[1].update({
-          type: 'bar',
-          pointStart: Date.now() - period,
-          pointInterval: period / resp.length
-        })
+        tempInteractions.reverse();
+        tempSentiment.reverse();
+
+        // Set the earliest data point we have on the graph
+        let maxPeriod = resp[resp.length-1].time *60*60*1000
+        this.updateCryptoSeries(maxPeriod, resp.length)
+
+        // Set the data for each series, gotten from the response
         this.chart.ref.series[1].setData(tempMentions, true, true, true)
+        this.chart.ref.series[2].setData(tempInteractions, true, true, true)
+        this.chart.ref.series[3].setData(tempSentiment, true, true, true)
       });
+  }
+
+  // Updates the series option for each series
+  updateCryptoSeries(period: number, numPoints: number): void{
+    // Mentions series
+    this.chart.ref.series[1].update({
+      type: 'bar',
+      pointStart: Date.now() - period,
+      pointInterval: period / numPoints
+    })
+    // Interaction series
+    this.chart.ref.series[2].update({
+      type: 'line',
+      pointStart: Date.now() - period,
+      pointInterval: period / numPoints
+    })
+    // Sentiment series
+    this.chart.ref.series[3].update({
+      type: 'bar',
+      color: '#0066FF',
+      pointStart: Date.now() - period,
+      pointInterval: period / numPoints
+    })
   }
 
   // Changes how far back to display the data
@@ -147,18 +197,23 @@ export class CryptoViewComponent implements OnInit {
     switch (value) {
       case "Day":
         this.getPriceHistory(TimeInterval.Day);
+        this.getCryptoHistory(this.historyParams.set('age', 1))
         break;
       case "Week":
         this.getPriceHistory(TimeInterval.Week);
+        this.getCryptoHistory(this.historyParams.set('age', 7))
         break;
       case "Month":
         this.getPriceHistory(TimeInterval.Month);
+        this.getCryptoHistory(this.historyParams.set('age', 30))
         break;
       case "3Months":
         this.getPriceHistory(TimeInterval.ThreeMonths);
+        this.getCryptoHistory(this.historyParams.set('age', 90))
         break;
       case "Year":
         this.getPriceHistory(TimeInterval.Year);
+        this.getCryptoHistory(this.historyParams.set('age', 365))
         break;
     }
   }

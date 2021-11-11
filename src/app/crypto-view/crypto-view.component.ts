@@ -90,7 +90,6 @@ export class CryptoViewComponent implements OnInit {
       data: [],
       visible: false
     }, true, true)
-    this.getPriceHistory(TimeInterval.Week)
 
     //Add the mentions series to the graph. Index 1
     this.chart.addSeries({
@@ -110,6 +109,26 @@ export class CryptoViewComponent implements OnInit {
       visible: false
     }, true, true)
 
+    //Add the positive sentiment series to the graph. Index 3
+    this.chart.addSeries({
+      name: "PosSentiment",
+      type: 'bar',
+      color: '#2AA62A',
+      borderColor: '#2aa62a',
+      data: [],
+      visible: false
+    }, true, true)
+
+    //Add the negative sentiment series to the graph. Index 4
+    this.chart.addSeries({
+      name: "NegSentiment",
+      type: 'bar',
+      color: '#a81e1e',
+      borderColor: '#A81E1E',
+      data: [],
+      visible: false
+    }, true, true)
+
     //Add the sentiment series to the graph. Index 3
     this.chart.addSeries({
       name: 'Sentiment',
@@ -120,6 +139,7 @@ export class CryptoViewComponent implements OnInit {
       visible: false
     }, true, true)
     this.getCryptoHistory(this.historyParams)
+    this.getPriceHistory(TimeInterval.Week)
   }
 
   //Gets the price of the crypto, for the past week
@@ -146,8 +166,10 @@ export class CryptoViewComponent implements OnInit {
 
   getCryptoHistory(params: HttpParams){
     let tempMentions: number[] = [];
-    let tempInteractions: number[] = []
-    let tempSentiment: number[] = []
+    let tempInteractions: number[] = [];
+    let tempPosSentiment: number[] = [];
+    let tempNegSentiment: number[] = [];
+    //let tempSentiment: number[] = [];
 
     //Retrieve the ID from the URL using parammap
     this.cryptoServiceService.getCryptoHistory(this.route.snapshot.paramMap.get("id")!.toUpperCase(), params)
@@ -155,13 +177,17 @@ export class CryptoViewComponent implements OnInit {
         for (let i = 0; i < resp.length; i++){
           tempMentions.push(resp[i].mentions);
           tempInteractions.push(resp[i].interaction);
-          tempSentiment.push(resp[i].sentiment);
+          tempPosSentiment.push(resp[i].posSentiment)
+          tempNegSentiment.push(-resp[i].negSentiment)
+          //tempSentiment.push(resp[i].sentiment);
         }
 
         // Reverse the data. First element in resp is the newest data point when it should be the last.
         tempMentions.reverse();
         tempInteractions.reverse();
-        tempSentiment.reverse();
+        tempPosSentiment.reverse();
+        tempNegSentiment.reverse();
+        //tempSentiment.reverse();
 
         // Set the earliest data point we have on the graph
         let maxPeriod = resp[resp.length-1].time *60*60*1000
@@ -170,7 +196,9 @@ export class CryptoViewComponent implements OnInit {
         // Set the data for each series, gotten from the response
         this.chart.ref.series[1].setData(tempMentions, true, true, true)
         this.chart.ref.series[2].setData(tempInteractions, true, true, true)
-        this.chart.ref.series[3].setData(tempSentiment, true, true, true)
+        this.chart.ref.series[3].setData(tempPosSentiment, true, true, true)
+        this.chart.ref.series[4].setData(tempNegSentiment, true, true, true)
+        //his.chart.ref.series[5].setData(tempSentiment, true, true, true)
       });
   }
 
@@ -188,12 +216,25 @@ export class CryptoViewComponent implements OnInit {
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
-    // Sentiment series
+    // Positive sentiment series
     this.chart.ref.series[3].update({
       type: 'bar',
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
+    // Negative sentiment series
+    this.chart.ref.series[4].update({
+      type: 'bar',
+      pointStart: Date.now() - period,
+      pointInterval: period / numPoints
+    })
+    // Sentiment series
+    /*this.chart.ref.series[5].update({
+      type: 'bar',
+      color: '#0066FF',
+      pointStart: Date.now() - period,
+      pointInterval: period / numPoints
+    })*/
   }
 
   // Changes how far back to display the data
@@ -243,6 +284,9 @@ export class CryptoViewComponent implements OnInit {
         break;
       case 'Sentiment':
         this.chart.ref.series[3].update({visible: event.checked, type: 'bar'})
+        this.chart.ref.series[4].update({visible: event.checked, type: 'bar'})
+        //Total sentiment
+        //this.chart.ref.series[5].update({visible: event.checked, type: 'bar'})
         break;
     }
 

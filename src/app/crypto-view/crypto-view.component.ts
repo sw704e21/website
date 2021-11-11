@@ -51,9 +51,7 @@ export class CryptoViewComponent implements OnInit {
       enabled: false
     },
     legend: {
-      itemStyle: {
-        color: '#666666'
-      }
+      enabled: false
     },
     yAxis: {
       gridLineColor: '#293142',

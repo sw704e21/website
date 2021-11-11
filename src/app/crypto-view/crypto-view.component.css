@@ -1,11 +1,11 @@
 .chartDiv{
-  width: 80%;
-  padding-top: 100px;
-  margin: auto;
+  padding-top: 30px;
+  margin-left: 60px;
 }
 
 .mat-button-toggle-group {
   border-radius: 0px;
+  border: none;
 }
 
 .mat-button-toggle{

@@ -95,7 +95,9 @@ export class CryptoViewComponent implements OnInit {
     //Add the mentions series to the graph. Index 1
     this.chart.addSeries({
       name: 'Mentions',
+      color: '#1d5d1d',
       type: 'bar',
+      borderColor: '#1d5d1d',
       data: [],
       visible: true
     }, true, true)
@@ -111,6 +113,8 @@ export class CryptoViewComponent implements OnInit {
     //Add the sentiment series to the graph. Index 3
     this.chart.addSeries({
       name: 'Sentiment',
+      color: '#FF0000',
+      borderColor: '#FF0000',
       type: 'bar',
       data: [],
       visible: false
@@ -187,7 +191,6 @@ export class CryptoViewComponent implements OnInit {
     // Sentiment series
     this.chart.ref.series[3].update({
       type: 'bar',
-      color: '#0066FF',
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
@@ -223,7 +226,6 @@ export class CryptoViewComponent implements OnInit {
     //NOT a recursive call. Calling the endpoint from our service file
     this.cryptoServiceService.getCryptocurrency(this.route.snapshot.paramMap.get("id")!)
       .subscribe(returnedCrypto => this.currentCrypto = returnedCrypto)
-
   }
 
   checkboxEvent(event: MatCheckboxChange, id: string){

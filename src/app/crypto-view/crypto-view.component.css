@@ -15,4 +15,31 @@
   background-color: #7bb4eb;
 }
 
+.example-container {
+  position: absolute;
+  top: 75px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.seriesToggles {
+  font-size: 20px;
+  pointer-events: none;
+}
 
+.Wrapper {
+  width: 150px;
+  overflow: hidden;
+}
+.buttonID {
+  width: 125px;
+  text-align: left;
+  float:left;
+}
+.checkboxID {
+  overflow: hidden;
+}
+.checkboxID2 {
+  height: 0;
+  pointer-events: auto;
+}

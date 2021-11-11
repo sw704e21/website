@@ -12,6 +12,7 @@ import { CryptoViewComponent } from './crypto-view/crypto-view.component';
 import { ChartModule } from 'angular-highcharts';
 import { HttpClientModule} from "@angular/common/http";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -20,17 +21,18 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     CryptocurrenciesComponent,
     CryptoViewComponent
   ],
-  imports: [
-    BrowserModule,
-    ChartModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSidenavModule,
-    HttpClientModule,
-    MatButtonToggleModule
-  ],
+    imports: [
+        BrowserModule,
+        ChartModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSidenavModule,
+        HttpClientModule,
+        MatButtonToggleModule,
+        MatCheckboxModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

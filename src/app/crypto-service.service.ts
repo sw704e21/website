@@ -36,6 +36,10 @@ export class CryptoServiceService {
       {headers: headers});
   }
 
+  getCryptoHistory(id: string, params: HttpParams): Observable<any> {
+    return this.http.get<Crypto>(endpoint + '/coins/'+id+'/',{params: params}).pipe(catchError(this.handleError));
+  }
+
   //Primitive error handling
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {

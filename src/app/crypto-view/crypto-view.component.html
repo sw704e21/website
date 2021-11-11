@@ -4,25 +4,26 @@
       <mat-button-toggle>
         <div class="Wrapper">
           <div class="buttonID">Price</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2"></mat-checkbox></div>
+          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Price')">
+          </mat-checkbox></div>
         </div>
       </mat-button-toggle>
       <mat-button-toggle>
         <div class="Wrapper">
           <div class="buttonID">Mentions</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2"></mat-checkbox></div>
+          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Mentions')"></mat-checkbox></div>
         </div>
       </mat-button-toggle>
       <mat-button-toggle>
         <div class="Wrapper">
           <div class="buttonID">Sentiment</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2"></mat-checkbox></div>
+          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Sentiment')"></mat-checkbox></div>
         </div>
       </mat-button-toggle>
       <mat-button-toggle>
         <div class="Wrapper">
           <div class="buttonID">Interactions</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2"></mat-checkbox></div>
+          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Interactions')"></mat-checkbox></div>
         </div>
       </mat-button-toggle>
 

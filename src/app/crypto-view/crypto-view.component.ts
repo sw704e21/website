@@ -7,6 +7,7 @@ import {Highcharts} from "highcharts/modules/stock";
 import {Chart} from "angular-highcharts";
 import {HttpParams} from "@angular/common/http";
 import {PERIOD} from "@angular/cdk/keycodes";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 // Time intervals for retrieving the history of a crypto
 enum TimeInterval {
@@ -87,7 +88,7 @@ export class CryptoViewComponent implements OnInit {
       name: 'Price',
       type: 'line',
       data: [],
-      visible: true
+      visible: false
     }, true, true)
     this.getPriceHistory(TimeInterval.Week)
 
@@ -104,15 +105,15 @@ export class CryptoViewComponent implements OnInit {
       name: 'Interactions',
       type: 'line',
       data: [],
-      visible: true
+      visible: false
     }, true, true)
 
     //Add the sentiment series to the graph. Index 3
     this.chart.addSeries({
       name: 'Sentiment',
-      type: 'line',
+      type: 'bar',
       data: [],
-      visible: true
+      visible: false
     }, true, true)
     this.getCryptoHistory(this.historyParams)
   }
@@ -222,6 +223,26 @@ export class CryptoViewComponent implements OnInit {
     //NOT a recursive call. Calling the endpoint from our service file
     this.cryptoServiceService.getCryptocurrency(this.route.snapshot.paramMap.get("id")!)
       .subscribe(returnedCrypto => this.currentCrypto = returnedCrypto)
+
+  }
+
+  checkboxEvent(event: MatCheckboxChange, id: string){
+    console.log(event.checked + ": " + id)
+
+    switch (id){
+      case 'Price':
+        this.chart.ref.series[0].update({visible: event.checked, type: 'line'})
+        break;
+      case 'Mentions':
+        this.chart.ref.series[1].update({visible: event.checked, type: 'bar'})
+        break;
+      case 'Interactions':
+        this.chart.ref.series[2].update({visible: event.checked, type: 'line'})
+        break;
+      case 'Sentiment':
+        this.chart.ref.series[3].update({visible: event.checked, type: 'bar'})
+        break;
+    }
 
   }
 

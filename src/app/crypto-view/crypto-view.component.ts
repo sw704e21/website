@@ -290,4 +290,8 @@ export class CryptoViewComponent implements OnInit {
 
   }
 
+  resizeChart(){
+    this.chart.ref.setSize(200, 200, true);
+  }
+
 }

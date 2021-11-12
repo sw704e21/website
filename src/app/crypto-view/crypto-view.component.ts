@@ -56,7 +56,7 @@ export class CryptoViewComponent implements OnInit {
     yAxis: {
       gridLineColor: '#293142',
       labels: {
-        format: "${text}",
+        format: "{text}",
       },
       title: {
         text: null
@@ -86,7 +86,11 @@ export class CryptoViewComponent implements OnInit {
       name: 'Price',
       type: 'line',
       data: [],
-      visible: false
+      visible: false,
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.y}</b>',
+        valuePrefix: '$'
+      }
     }, true, true)
 
     //Add the mentions series to the graph. Index 1
@@ -149,7 +153,11 @@ export class CryptoViewComponent implements OnInit {
       .subscribe(resp => {
         //Formats the data for the chart
         for (let i = 0; i < resp.history.length; i++){
-          tempData.push(resp.history[i].rate); }
+          tempData.push(resp.history[i].rate);
+          tempData[i] = tempData[i] > 1
+              ? parseFloat(tempData[i].toFixed(2))
+              : parseFloat(tempData[i].toPrecision(4))
+        }
 
         const date = (resp.history[resp.history.length-1].date - resp.history[0].date);
         this.chart.ref.series[0].update({

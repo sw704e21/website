@@ -24,7 +24,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   params = new HttpParams()
     .set('length', 25)
-    .set('sortParam', 'mentions')
+    .set('sortParam', '-mentions')
 
   ngOnInit(): void {
     this.getCryptocurrencies(this.params);

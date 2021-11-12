@@ -55,8 +55,8 @@ export class CryptocurrenciesComponent implements OnInit {
     }
 
     this.cryptoServiceService.getPrice(id, index).subscribe(resp => {
-      this.cryptoList[index].price = resp.rate.toPrecision(5);
-      this.priceCache.push([id, resp.rate.toPrecision(5)])
+      this.cryptoList[index].price = resp.rate > 1 ? resp.rate.toFixed(2): resp.rate.toPrecision(4);
+      this.priceCache.push([id, resp.rate > 1 ? resp.rate.toFixed(2): resp.rate.toPrecision(4)])
     } )
   }
 

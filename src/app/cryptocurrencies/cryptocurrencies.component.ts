@@ -34,11 +34,9 @@ export class CryptocurrenciesComponent implements OnInit {
   getCryptocurrencies(params: HttpParams): void {
     this.cryptoServiceService.getCryptocurrencies(this.params).subscribe(resp => {
       this.cryptoList = resp;
-      //Placeholder till the backend supports token ID
       for (var i = 0; i < this.cryptoList.length; i++){
         this.cryptoList[i].id = resp[i].identifier;
-        this.getPrice(this.cryptoList[i].id, i);
-
+        this.getPrice(this.cryptoList[i].id, i)
       }
       this.table.renderRows();
     })

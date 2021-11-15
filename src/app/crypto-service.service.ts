@@ -14,7 +14,6 @@ headers = headers.set('content-type', 'application/json').set( 'x-api-key', '157
 })
 
 export class CryptoServiceService {
-
   constructor(private http: HttpClient) { }
 
   getCryptocurrencies(params: HttpParams): Observable<any> {
@@ -31,10 +30,14 @@ export class CryptoServiceService {
       {headers: headers});
   }
 
-  getPriceWeek(id: string): Observable<any> {
+  getPriceHistory(id: string, period: number): Observable<any> {
     return this.http.post("https://api.livecoinwatch.com/coins/single/history",
-      JSON.stringify({currency: 'USD', code: id, meta: false, start: Date.now() - 604800000, end: Date.now()}),
+      JSON.stringify({currency: 'USD', code: id, meta: false, start: Date.now() - period, end: Date.now()}),
       {headers: headers});
+  }
+
+  getCryptoHistory(id: string, params: HttpParams): Observable<any> {
+    return this.http.get<Crypto>(endpoint + '/coins/'+id+'/',{params: params}).pipe(catchError(this.handleError));
   }
 
   //Primitive error handling
@@ -49,5 +52,4 @@ export class CryptoServiceService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-
 }

@@ -12,6 +12,8 @@ import { CryptoViewComponent } from './crypto-view/crypto-view.component';
 import { ChartModule } from 'angular-highcharts';
 import { HttpClientModule} from "@angular/common/http";
 import {MatSortModule} from "@angular/material/sort";
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {MatSortModule} from "@angular/material/sort";
         MatTableModule,
         MatSidenavModule,
         HttpClientModule,
-        MatSortModule
+        MatSortModule,
+        MatButtonToggleModule,
+        MatCheckboxModule
     ],
   providers: [],
   bootstrap: [AppComponent]

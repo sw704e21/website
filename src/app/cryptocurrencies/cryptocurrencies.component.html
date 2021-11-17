@@ -16,7 +16,8 @@
 
   <ng-container matColumnDef="mentions">
     <th mat-header-cell (click)="this.params.get('sortParam') === '-mentions' ? sortData('mentions'): sortData('-mentions')"
-        *matHeaderCellDef mat-sort-header="Mentions" matTooltip="The amount of social media posts in the last 24 hours"
+        *matHeaderCellDef mat-sort-header="Mentions"
+        matTooltip="The amount of social media posts in the last 24 hours"
         matTooltipPosition="above" [matTooltipShowDelay]="500"> Mentions </th>
     <td mat-cell  *matCellDef="let element"> {{element.mentions}} </td>
   </ng-container>

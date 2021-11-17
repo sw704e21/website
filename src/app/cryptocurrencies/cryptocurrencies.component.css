@@ -110,3 +110,10 @@ td.mat-column-pos-neg {
   color: white;
   text-decoration: none;
 }
+
+::ng-deep .mat-tooltip{
+  font-size: 15px;
+  white-space: pre-wrap;
+  background-color: #171b26;
+  border: 1px solid gray;
+}

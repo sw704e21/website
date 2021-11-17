@@ -15,7 +15,7 @@ import {HttpParams} from "@angular/common/http";
 export class CryptocurrenciesComponent implements OnInit {
 
   cryptoList: Crypto[] = []
-  priceCache: [string, Number][] = []
+  priceCache: [string, Number, string][] = []
   displayedColumns: string[] = ['name', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
@@ -44,11 +44,11 @@ export class CryptocurrenciesComponent implements OnInit {
   }
 
   getPrice(id: string, index: number): void{
-
     //Caching for prices. Will save many API calls.
     for (var i = 0; i < this.priceCache.length; i++){
       if(this.priceCache[i][0] === id){
         this.cryptoList[index].price = this.priceCache[i][1];
+        this.cryptoList[index].icon = this.priceCache[i][2];
         return;
       }
     }
@@ -56,7 +56,7 @@ export class CryptocurrenciesComponent implements OnInit {
     this.cryptoServiceService.getPrice(id, index).subscribe(resp => {
       this.cryptoList[index].icon = resp.png32;
       this.cryptoList[index].price = resp.rate > 1 ? resp.rate.toFixed(2): resp.rate.toPrecision(4);
-      this.priceCache.push([id, resp.rate > 1 ? resp.rate.toFixed(2): resp.rate.toPrecision(4)])
+      this.priceCache.push([id, resp.rate > 1 ? resp.rate.toFixed(2): resp.rate.toPrecision(4), resp.png32])
     } )
   }
 

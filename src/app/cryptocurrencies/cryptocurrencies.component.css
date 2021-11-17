@@ -60,7 +60,6 @@ td.mat-column-mentionsPercent {
 }
 
 td.mat-column-interactions {
-  color: #26d870;
   font-size: 15px;
 }
 
@@ -119,7 +118,7 @@ td.mat-column-pos-neg {
 }
 
 .nameText{
-  font-size: 15px;
+  font-size: 13px;
   color: grey;
 }
 
@@ -131,4 +130,8 @@ td.mat-column-pos-neg {
 
 .tokenIcon {
   padding-right: 15px;
+}
+
+.idText{
+  font-size: 17px;
 }

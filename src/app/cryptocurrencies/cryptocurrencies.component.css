@@ -126,3 +126,8 @@ td.mat-column-pos-neg {
 .mat-icon {
   height: 100%;
 }
+
+.nameHeaderDiv {
+  border: #26d870;
+  width: 200px;
+}

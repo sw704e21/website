@@ -14,6 +14,7 @@ import { HttpClientModule} from "@angular/common/http";
 import {MatSortModule} from "@angular/material/sort";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         HttpClientModule,
         MatSortModule,
         MatButtonToggleModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatTooltipModule
     ],
   providers: [],
   bootstrap: [AppComponent]

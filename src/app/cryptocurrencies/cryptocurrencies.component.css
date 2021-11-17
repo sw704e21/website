@@ -1,7 +1,7 @@
 .crypto-table {
   margin-left: auto;
   margin-right: auto;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 10px;
 }
 
@@ -52,6 +52,18 @@ td.mat-column-mentionsPercent {
   font-size: 15px;
 }
 
+.mat-column-interactions {
+  font-size: 20px;
+  width: 100px;
+  text-align: center;
+  padding-right: 50px;
+}
+
+td.mat-column-interactions {
+  color: #26d870;
+  font-size: 15px;
+}
+
 .mat-column-pos {
   font-size: 20px;
   width: 100px;
@@ -97,4 +109,11 @@ td.mat-column-pos-neg {
 .LinkToCrypto{
   color: white;
   text-decoration: none;
+}
+
+::ng-deep .mat-tooltip{
+  font-size: 15px;
+  white-space: pre-wrap;
+  background-color: #171b26;
+  border: 1px solid gray;
 }

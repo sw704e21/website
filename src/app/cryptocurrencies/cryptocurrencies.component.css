@@ -1,8 +1,9 @@
-.crypto-table {
+#crypto-table {
   margin-left: auto;
   margin-right: auto;
-  border-radius: 5px;
-  padding: 10px;
+  background-color: #1C1D214d;
+  box-shadow: none !important;
+  transition: none !important;
 }
 
 .mat-column-id {
@@ -113,7 +114,7 @@ td.mat-column-pos-neg {
 ::ng-deep .mat-tooltip{
   font-size: 15px;
   white-space: pre-wrap;
-  background-color: #171b26;
+  background-color: #090A0B;
   border: 1px solid gray;
 }
 

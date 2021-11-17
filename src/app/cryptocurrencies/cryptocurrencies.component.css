@@ -123,11 +123,12 @@ td.mat-column-pos-neg {
   color: grey;
 }
 
-.mat-icon {
-  height: 100%;
+.nameHeaderDiv {
+  display: flex;
+  width: 150px;
+  align-items: center;
 }
 
-.nameHeaderDiv {
-  border: #26d870;
-  width: 200px;
+.tokenIcon {
+  padding-right: 15px;
 }

@@ -33,7 +33,7 @@ export class CryptoViewComponent implements OnInit {
 
   //This is the typescript file for the page that displays a specific crypto.
 
-  currentCrypto: Crypto = {id: "Placeholder", name: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
+  currentCrypto: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
 
   chart = new Chart({
     chart: {

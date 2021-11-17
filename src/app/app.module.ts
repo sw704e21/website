@@ -15,6 +15,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         MatSortModule,
         MatButtonToggleModule,
         MatCheckboxModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatIconModule
     ],
   providers: [],
   bootstrap: [AppComponent]

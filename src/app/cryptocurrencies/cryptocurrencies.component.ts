@@ -16,7 +16,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   cryptoList: Crypto[] = []
   priceCache: [string, Number][] = []
-  displayedColumns: string[] = ['id', 'name', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
+  displayedColumns: string[] = ['name', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
 
@@ -36,6 +36,7 @@ export class CryptocurrenciesComponent implements OnInit {
       this.cryptoList = resp;
       for (var i = 0; i < this.cryptoList.length; i++){
         this.cryptoList[i].id = resp[i].identifier;
+        //this.cryptoList[i].displayName = resp[i].displayName;
         this.getPrice(this.cryptoList[i].id, i)
       }
       this.table.renderRows();

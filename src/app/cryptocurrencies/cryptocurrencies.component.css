@@ -117,3 +117,12 @@ td.mat-column-pos-neg {
   background-color: #171b26;
   border: 1px solid gray;
 }
+
+.nameText{
+  font-size: 15px;
+  color: grey;
+}
+
+.mat-icon {
+  height: 100%;
+}

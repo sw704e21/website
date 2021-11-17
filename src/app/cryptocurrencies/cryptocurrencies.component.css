@@ -1,7 +1,7 @@
 .crypto-table {
   margin-left: auto;
   margin-right: auto;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 10px;
 }
 
@@ -48,6 +48,18 @@ td.mat-column-mentions {
 }
 
 td.mat-column-mentionsPercent {
+  color: #26d870;
+  font-size: 15px;
+}
+
+.mat-column-interactions {
+  font-size: 20px;
+  width: 100px;
+  text-align: center;
+  padding-right: 50px;
+}
+
+td.mat-column-interactions {
   color: #26d870;
   font-size: 15px;
 }

@@ -15,23 +15,20 @@
   </ng-container>
 
   <ng-container matColumnDef="mentions">
-    <th mat-header-cell (click)="this.params.get('sortParam') === '-mentions' ?  sortData('mentions') : sortData('-mentions')" *matHeaderCellDef mat-sort-header="Mentions"> Mentions </th>
+    <th mat-header-cell (click)="this.params.get('sortParam') === '-mentions' ? sortData('mentions'): sortData('-mentions')"
+        *matHeaderCellDef mat-sort-header="Mentions" matTooltip="The amount of social media posts in the last 24 hours"
+        matTooltipPosition="above" [matTooltipShowDelay]="500"> Mentions </th>
     <td mat-cell  *matCellDef="let element"> {{element.mentions}} </td>
   </ng-container>
 
   <ng-container matColumnDef="mentionsPercent">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Mentions%" (click)="this.params.get('sortParam') === '-relMentions' ?  sortData('relMentions') : sortData('-relMentions')"> Mentions% </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Mentions%" (click)="this.params.get('sortParam') === '-relMentions' ?  sortData('relMentions') : sortData('-relMentions')"> 24h change </th>
     <td mat-cell *matCellDef="let element" [style.color]="element.relMentions>0? '#26d870':'#ff7060'"> {{element.relMentions.toFixed(2) + '%'}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="pos">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Pos" (click)="this.params.get('sortParam') === '-posSentiment' ?  sortData('posSentiment') : sortData('-posSentiment')"> Pos </th>
-    <td mat-cell *matCellDef="let element"> {{element.posSentiment}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="neg">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Neg" (click)="this.params.get('sortParam') === '-negSentiment' ?  sortData('negSentiment') : sortData('-negSentiment')"> Neg </th>
-    <td mat-cell *matCellDef="let element"> {{element.negSentiment}} </td>
+  <ng-container matColumnDef="interactions">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Interactions" (click)="this.params.get('sortParam') === '-mostInteractions' ?  sortData('mostInteractions') : sortData('-mostInteractions')"> Interactions </th>
+    <td mat-cell *matCellDef="let element"> {{element.mostInteractions}} </td>
   </ng-container>
 
   <ng-container matColumnDef="pos-neg">

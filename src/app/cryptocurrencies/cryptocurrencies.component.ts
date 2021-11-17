@@ -16,7 +16,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   cryptoList: Crypto[] = []
   priceCache: [string, Number][] = []
-  displayedColumns: string[] = ['id', 'name', 'price', 'mentions', 'mentionsPercent', 'pos', 'neg', 'pos-neg'];
+  displayedColumns: string[] = ['id', 'name', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
 
@@ -66,11 +66,5 @@ export class CryptocurrenciesComponent implements OnInit {
 
     this.getCryptocurrencies(this.params);
 
-  }
-
-
-  reverseCrypto(){
-    this.cryptoList.reverse()
-    this.table.renderRows()
   }
 }

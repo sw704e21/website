@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {HttpParams} from "@angular/common/http";
+import {CryptoServiceService} from "./crypto-service.service";
+
 
 @Component({
   selector: 'app-root',
@@ -8,19 +11,43 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'Cryptopinion';
-  search: String = "";
-  placeholder: [id: string, displayName: string, icon: string][] = [];
+  searchWord: string = "";
+  placeholder: [identifier: string, display_name: string][] = [];
+  displaySearchResults: string = 'none';
+  maxSearchResultSize: number = 5;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private cryptoServiceService: CryptoServiceService, private route: ActivatedRoute) {
   }
 
-  ngOnInit(){
-    this.placeholder.push(["BTC", "Bitcoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.webp'])
-    this.placeholder.push(["DOGE", "DogeCoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/doge.webp'])
-    this.placeholder.push(["SHIB", "Shiba Inu Coin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/shib.webp'])
-    this.placeholder.push(["SHIB", "Shiba Inu Coin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/shib.webp'])
+  getSearchResult(searchQuery: string): void {
+    this.cryptoServiceService.getSearchResult(searchQuery).subscribe(resp => {
+      this.placeholder.length = 0;
+      for (var i = 0; i < (resp.length < this.maxSearchResultSize ? resp.length : this.maxSearchResultSize); i++) {
+        this.placeholder.push([resp[i].identifier, resp[i].display_name]);
+      }
+    })
   }
 
+  // Called when the user writes in the search field. Called for every new input.
+  search() {
+    if (this.searchWord.length >= 1) {
+      this.getSearchResult(this.searchWord)
+    } else {
+      this.placeholder.length = 0;
+    }
+  }
+
+  // Called when the user enters the search field
+  onFocus() {
+    this.search()
+    this.displaySearchResults = 'block';
+  }
+
+  // Called when the user leaves the search field
+  onBlur() {
+    this.displaySearchResults = 'none';
+    this.placeholder.length = 0;
+  }
 
   reloadPage(param: string) {
     window.location.assign('../crypto/' + param)

@@ -44,21 +44,20 @@
 }
 
 #searchResult li{
-  border: 1px solid #ddd; /* Add a border to all links */
   margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6; /* Grey background color */
-  padding: 12px; /* Add some padding */
+  background-color: #1C1D21FC; /* Grey background color */
+  padding: 6px;
+  border: 1px solid #ddd; /* Add a border to all links */
   text-decoration: none; /* Remove default text underline */
-  font-size: 18px; /* Increase the font-size */
-  color: black; /* Add a black text color */
+  color: white; /* Add a black text color */
   display: block; /* Make it into a block element to fill the whole list */
 }
 
 #searchResultDiv{
-  width: 200px;
+  width: 250px;
   position: relative;
   float: right;
-  margin-right: 80px;
+  margin-right: 90px;
   margin-top: 31px;
 }
 

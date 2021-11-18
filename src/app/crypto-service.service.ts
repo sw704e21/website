@@ -40,6 +40,10 @@ export class CryptoServiceService {
     return this.http.get<Crypto>(endpoint + '/coins/'+id+'/',{params: params}).pipe(catchError(this.handleError));
   }
 
+  getSearchResult(searchQuery: string): Observable<any> {
+    return this.http.get<Crypto>(endpoint + '/coins/search/' + searchQuery).pipe(catchError(this.handleError));
+  }
+
   //Primitive error handling
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {

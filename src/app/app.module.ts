@@ -18,6 +18,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -26,23 +27,24 @@ import {MatInputModule} from "@angular/material/input";
     CryptocurrenciesComponent,
     CryptoViewComponent
   ],
-  imports: [
-    BrowserModule,
-    ChartModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSidenavModule,
-    HttpClientModule,
-    MatSortModule,
-    MatButtonToggleModule,
-    MatCheckboxModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        ChartModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSidenavModule,
+        HttpClientModule,
+        MatSortModule,
+        MatButtonToggleModule,
+        MatCheckboxModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

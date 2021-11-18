@@ -17,16 +17,16 @@
 #searchBar {
   font-size: 20px;
   width: 250px;
-  float: left;
 }
 
 #searchBarDiv {
-  padding-left: 70%;
-  display: flex;
-  width: 300px;
-  align-items: center;
 }
 
 #searchIcon {
-  float:left;
+}
+
+#searchResult {
+  background-color: #00B7FFFF;
+  font-size: 20px;
+
 }

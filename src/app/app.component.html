@@ -9,7 +9,15 @@
 
 <div id="searchResultDiv">
   <ul id="searchResult" *ngFor="let crypto of placeholder">
-    <li><img [src]="crypto[2]" alt="tokenIcon"/> {{crypto[0]}} {{crypto[1]}}</li>
+    <li>
+      <div id="nameHeaderDiv">
+        <div id="tokenIcon"><img [src]="crypto[2]" alt="tokenIcon"/></div>
+        <div>
+          <div id="nameText">{{crypto[1]}}</div>
+          <div id="idText">{{crypto[0]}}</div>
+        </div>
+      </div>
+    </li>
   </ul>
 </div>
 

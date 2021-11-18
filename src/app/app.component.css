@@ -58,22 +58,26 @@
   width: 200px;
   position: relative;
   float: right;
-  margin-right: 10%;
+  margin-right: 80px;
   margin-top: 31px;
 }
 
-.nameHeaderDiv {
+#nameHeaderDiv {
   display: flex;
   width: 150px;
   align-items: center;
-
 }
 
-.tokenIcon {
+#tokenIcon {
   padding-right: 15px;
 }
 
-.idText{
-  font-size: 17px;
+#nameText {
+  font-size: 15px;
+}
+
+#idText{
+  font-size: 13px;
+  color: grey;
 }
 

@@ -2,19 +2,20 @@
   <div id="searchBarDiv">
       <mat-icon id="searchIcon">search</mat-icon>
       <mat-form-field id="searchBar">
-        <input type="text" matInput placeholder="" name="search" [(ngModel)]="search">
+        <input matInput type="text" name="search" [(ngModel)]="searchWord" (input)="search()"
+               (focus)="onFocus()" (blur)="onBlur()">
       </mat-form-field>
   </div>
 </mat-toolbar>
 
-<div id="searchResultDiv">
-  <ul id="searchResult" *ngFor="let crypto of placeholder">
-    <li>
+
+<div id="searchResultDiv" [style.display]="displaySearchResults">
+  <ul id="searchResult" *ngFor="let crypto of placeholder; let i = index">
+    <li *ngIf="i<5">
       <div id="nameHeaderDiv">
-        <div id="tokenIcon"><img [src]="crypto[2]" alt="tokenIcon"/></div>
         <div>
-          <div id="nameText">{{crypto[1]}}</div>
-          <div id="idText">{{crypto[0]}}</div>
+          <div id="nameText"> {{crypto[1]}}</div>
+          <div id="idText"> {{crypto[0]}}</div>
         </div>
       </div>
     </li>

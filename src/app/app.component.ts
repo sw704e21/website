@@ -11,9 +11,9 @@ export class AppComponent {
   placeholder: [id: string, displayName: string, icon: string][] = [];
 
   ngOnInit(){
-    this.placeholder.push(["BTC", "Bitcoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.png'])
-    this.placeholder.push(["DOGE", "DogeCoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/doge.png'])
-    this.placeholder.push(["SHIB", "Shiba Inu Coin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/shib.png'])
+    this.placeholder.push(["BTC", "Bitcoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.webp'])
+    this.placeholder.push(["DOGE", "DogeCoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/doge.webp'])
+    this.placeholder.push(["SHIB", "Shiba Inu Coin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/shib.webp'])
   }
 
 }

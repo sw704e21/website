@@ -7,14 +7,10 @@
   </div>
 </mat-toolbar>
 
-<form>
-  <div class="nameHeaderDiv" id="searchResult" *ngFor="let crypto of placeholder">
-    <div class="tokenIcon"><img [src]="crypto[2]"  alt="tokenIcon"/></div>
-    <div>
-      <div class="idText">{{crypto[0]}}</div>
-      <div class="nameText">{{crypto[1]}}</div>
-    </div>
-  </div>
-</form>
+<div id="searchResultDiv">
+  <ul id="searchResult" *ngFor="let crypto of placeholder">
+    <li><img [src]="crypto[2]" alt="tokenIcon"/> {{crypto[0]}} {{crypto[1]}}</li>
+  </ul>
+</div>
 
 <router-outlet></router-outlet>

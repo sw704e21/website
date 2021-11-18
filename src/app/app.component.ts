@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Cryptopinion';
   search: String = "";
-  placeholder: [string, string, string][] = [];
+  placeholder: [id: string, displayName: string, icon: string][] = [];
 
   ngOnInit(){
     this.placeholder.push(["BTC", "Bitcoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.png'])

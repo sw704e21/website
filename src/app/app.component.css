@@ -17,16 +17,38 @@
 #searchBar {
   font-size: 20px;
   width: 250px;
+  float: left;
 }
 
 #searchBarDiv {
+  display: flex;
+  width: 300px;
+  padding-left: 70%;
+
 }
 
 #searchIcon {
+  float: left;
 }
 
 #searchResult {
   background-color: #00B7FFFF;
-  font-size: 20px;
-
+  font-size: 15px;
+  position: relative;
 }
+
+.nameHeaderDiv {
+  display: flex;
+  width: 150px;
+  align-items: center;
+  
+}
+
+.tokenIcon {
+  padding-right: 15px;
+}
+
+.idText{
+  font-size: 17px;
+}
+

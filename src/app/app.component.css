@@ -14,3 +14,14 @@
   text-decoration: none;
 }
 
+#searchBar {
+  font-size: 20px;
+  width: 250px;
+}
+
+#searchBarDiv {
+  padding-left: 70%;
+}
+
+#searchIcon {
+}

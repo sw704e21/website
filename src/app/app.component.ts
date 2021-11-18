@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,9 @@ export class AppComponent {
   search: String = "";
   placeholder: [id: string, displayName: string, icon: string][] = [];
 
+  constructor(private route: ActivatedRoute) {
+  }
+
   ngOnInit(){
     this.placeholder.push(["BTC", "Bitcoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.webp'])
     this.placeholder.push(["DOGE", "DogeCoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/doge.webp'])
@@ -17,4 +21,8 @@ export class AppComponent {
     this.placeholder.push(["SHIB", "Shiba Inu Coin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/shib.webp'])
   }
 
+
+  reloadPage(param: string) {
+    window.location.assign('../crypto/' + param)
+  }
 }

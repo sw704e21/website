@@ -23,7 +23,7 @@
 #searchBarDiv {
   display: flex;
   width: 300px;
-  padding-left: 70%;
+  margin-left: 70%;
   position: absolute;
 
 }
@@ -73,6 +73,7 @@
 
 #nameText {
   font-size: 15px;
+  color: white;
 }
 
 #idText{
@@ -80,3 +81,6 @@
   color: grey;
 }
 
+#link {
+  text-decoration: none;
+}

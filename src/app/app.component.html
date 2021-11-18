@@ -1,9 +1,15 @@
 <mat-toolbar> <span> <a class="LinkText" routerLink="/">{{title}}</a></span>
   <div id="searchBarDiv">
-  <mat-icon id="searchIcon">search</mat-icon>
-  <mat-form-field id="searchBar">
-    <input type="text" matInput placeholder="">
-  </mat-form-field>
+    <form>
+      <mat-icon id="searchIcon">search</mat-icon>
+      <mat-form-field id="searchBar">
+        <input type="text" matInput placeholder="" name="search" [(ngModel)]="search">
+      </mat-form-field>
+      <br/>
+      <tr id="searchResult" *ngFor="let crypto of placeholder">
+        <td>{{crypto}}</td>
+      </tr>
+    </form>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>

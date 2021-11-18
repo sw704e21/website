@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Cryptopinion';
+  search: String = "";
+  placeholder: [string, string, string][] = [];
+
+  ngOnInit(){
+    this.placeholder.push(["BTC", "Bitcoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.png'])
+    this.placeholder.push(["DOGE", "DogeCoin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/doge.png'])
+    this.placeholder.push(["SHIB", "Shiba Inu Coin", 'https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/shib.png'])
+  }
+
 }

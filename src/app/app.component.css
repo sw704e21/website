@@ -20,8 +20,13 @@
 }
 
 #searchBarDiv {
-  padding-left: 70%;
 }
 
 #searchIcon {
+}
+
+#searchResult {
+  background-color: #00B7FFFF;
+  font-size: 20px;
+
 }

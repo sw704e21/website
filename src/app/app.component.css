@@ -23,8 +23,7 @@
 #searchBarDiv {
   display: flex;
   width: 300px;
-  margin-left: 70%;
-  position: absolute;
+  float: right;
   align-items: center;
 }
 
@@ -54,11 +53,10 @@
 }
 
 #searchResultDiv{
-  width: 250px;
+  width: 275px;
   position: relative;
   float: right;
-  margin-right: 90px;
-  margin-top: 31px;
+  margin-top: 32px;
 }
 
 #nameHeaderDiv {
@@ -84,4 +82,10 @@
 
 #link {
   text-decoration: none;
+}
+
+#toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

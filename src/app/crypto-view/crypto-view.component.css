@@ -21,7 +21,7 @@
 
 .cryptoNavBar{
   height: 50px;
-  background-color: red;
+  background-color: #00000000;
   display: flex;
   justify-content: space-between;
 }
@@ -36,10 +36,11 @@
 
 
 .mat-button-toggle-group {
-  border-radius: 0px;
-  border: none;
+  border-radius: 0;
   height: 100%;
+  border: none;
   float: right;
+  margin-right: 3.5%;
   display: flex;
 }
 
@@ -47,7 +48,8 @@
   background-color: #29314200;
 }
 .mat-button-toggle-checked{
-  background-color: #7bb4eb;
+
+  border-bottom: 2px solid white;
 }
 
 .mat-button-toggle-disabled {

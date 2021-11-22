@@ -13,7 +13,7 @@ import {delay} from "rxjs/operators";
 export class AppComponent {
   title = 'Cryptopinion';
   searchWord: string = "";
-  placeholder: [identifier: string, display_name: string][] = [];
+  placeholder: [identifier: string, display_name: string, icon: string][] = [];
   displaySearchResults: string = 'none';
   maxSearchResultSize: number = 5;
   hoverSearchResults: boolean = false;
@@ -26,7 +26,7 @@ export class AppComponent {
     this.cryptoServiceService.getSearchResult(searchQuery).subscribe(resp => {
       this.placeholder.length = 0;
       for (var i = 0; i < (resp.length < this.maxSearchResultSize ? resp.length : this.maxSearchResultSize); i++) {
-        this.placeholder.push([resp[i].identifier, resp[i].display_name]);
+        this.placeholder.push([resp[i].identifier, resp[i].display_name, resp[i].icon]);
       }
     })
   }

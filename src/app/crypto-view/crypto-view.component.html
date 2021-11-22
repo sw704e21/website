@@ -1,35 +1,4 @@
-<body>
-<mat-sidenav-container class="example-container">
-  <mat-sidenav class="eh" opened mode="side">
-    <mat-button-toggle-group disabled vertical multiple class="seriesToggles">
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Price</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Price')">
-          </mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Mentions</div>
-          <div class="checkboxID"><mat-checkbox [checked]="true" class="checkboxID2" (change)="checkboxEvent($event, 'Mentions')"></mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Sentiment</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Sentiment')"></mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Interactions</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Interactions')"></mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
-
-    </mat-button-toggle-group>
-  </mat-sidenav>
+<div class="container">
   <div class="chartDiv" id="chartDiv">
     <mat-button-toggle-group  name="timeToggles" class="toggles" value="Week">
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Day"> Day </mat-button-toggle>
@@ -38,11 +7,9 @@
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="3Months">3 Months</mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Year">Year</mat-button-toggle>
     </mat-button-toggle-group>
-    <highcharts-chart (load)="resizeChart()"
-      [chart]="chart"
+    <highcharts-chart (load)="resizeChart()" [chart]="chart"
       style="width: 100%; height: 400px; display: block;"
     ></highcharts-chart>
   </div>
-</mat-sidenav-container>
-</body>
+</div>
 

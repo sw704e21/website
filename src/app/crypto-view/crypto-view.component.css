@@ -21,13 +21,10 @@
   color: #FFFFFF;
 }
 
-.example-container {
-  position: absolute;
-  top: 75px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
+
+
+
+/*
 .seriesToggles {
   font-size: 20px;
   pointer-events: none;
@@ -49,3 +46,4 @@
   height: 0;
   pointer-events: auto;
 }
+ */

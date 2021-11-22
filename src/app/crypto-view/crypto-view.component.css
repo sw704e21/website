@@ -1,9 +1,24 @@
 .chartDiv{
-  padding-top: 30px;
-  margin-left: 60px;
+  position: relative;
   height: 400px;
-  width: 1200px;
+  width: 95%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
+
+.container{
+  background-color: #0000004d;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 80%;
+  height: 100%;
+  margin-top: 1%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 
 .mat-button-toggle-group {
   border-radius: 0px;

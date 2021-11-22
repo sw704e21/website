@@ -8,7 +8,7 @@
 }
 
 .container{
-  background-color: #0000004d;
+  background-color: #00000080;
   position: absolute;
   left: 0;
   right: 0;
@@ -19,14 +19,32 @@
   margin-left: auto;
 }
 
+.cryptoNavBar{
+  height: 50px;
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+}
+
+#TokenName{
+  color: White;
+  position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 2%;
+}
+
 
 .mat-button-toggle-group {
   border-radius: 0px;
   border: none;
+  height: 100%;
+  float: right;
+  display: flex;
 }
 
 .mat-button-toggle{
-  background-color: #293142;
+  background-color: #29314200;
 }
 .mat-button-toggle-checked{
   background-color: #7bb4eb;

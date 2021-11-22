@@ -38,14 +38,11 @@ export class CryptoViewComponent implements OnInit {
   chart = new Chart({
     chart: {
       plotBackgroundColor: '#171b26',
-      backgroundColor: '#293142',
+      backgroundColor: '#29314200',
       type: 'line'
     },
     title: {
-      text: this.route.snapshot.paramMap.get("id")!.toUpperCase(),
-      style: {
-        color: '#666666'
-      }
+      text: ""
     },
     credits: {
       enabled: false
@@ -57,13 +54,21 @@ export class CryptoViewComponent implements OnInit {
       gridLineColor: '#293142',
       labels: {
         format: "{text}",
+        style: {
+          color: '#FFFFFF'
+        }
       },
       title: {
         text: null
       }
     },
     xAxis: {
-      type: 'datetime'
+      type: 'datetime',
+      labels: {
+        style: {
+          color: '#FFFFFF'
+        }
+      }
     },
     plotOptions: {
       series: {

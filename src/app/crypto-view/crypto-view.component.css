@@ -31,24 +31,62 @@
   position: relative;
   margin-top: auto;
   margin-bottom: auto;
-  margin-left: 3.5%;
+  margin-left: 2.5%;
 }
 
+.toggleSeriesDiv{
+  /*Position*/
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
 
-.mat-button-toggle-group {
+  /*Size*/
+  height: 50px;
+  width: 95%;
+  background-color: #00000000;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Toggle buttons for the data to display on the graph */
+.seriesToggle{
+  /*Position*/
+  position: relative;
+  align-items: center;
+  border: none;
+}
+
+.seriesBtn{
+  width: 100%;
+  height: 100%;
+}
+
+.seriesBtnDiv{
+  width: 180px;
+}
+
+.seriesBtn.mat-button-toggle-checked{
+  border-bottom: 2px solid white;
+}
+
+/* Toggle buttons for time period to display on the graph */
+.timeToggles {
   border-radius: 0;
   height: 100%;
   border: none;
   float: right;
-  margin-right: 3.5%;
+  margin-right: 2.5%;
   display: flex;
 }
+
 
 .mat-button-toggle{
   background-color: #29314200;
 }
 .mat-button-toggle-checked{
-
   border-bottom: 2px solid white;
 }
 

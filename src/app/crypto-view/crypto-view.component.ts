@@ -37,6 +37,12 @@ export class CryptoViewComponent implements OnInit {
 
   chart = new Chart({
     chart: {
+      // Edit chart spacing
+      spacingBottom: 0,
+      spacingTop: 10,
+      spacingLeft: 0,
+      spacingRight: 0,
+
       plotBackgroundColor: '#171b26',
       backgroundColor: '#29314200',
       type: 'line'
@@ -280,22 +286,21 @@ export class CryptoViewComponent implements OnInit {
       .subscribe(returnedCrypto => this.currentCrypto = returnedCrypto)
   }
 
-  checkboxEvent(event: MatCheckboxChange, id: string){
-    console.log(event.checked + ": " + id)
+  onSeriesToggle(id: string){
 
     switch (id){
       case 'Price':
-        this.chart.ref.series[0].update({visible: event.checked, type: 'line'})
+        this.chart.ref.series[0].update({visible: !this.chart.ref.series[0].visible, type: 'line'})
         break;
       case 'Mentions':
-        this.chart.ref.series[1].update({visible: event.checked, type: 'bar'})
+        this.chart.ref.series[1].update({visible: !this.chart.ref.series[1].visible, type: 'bar'})
         break;
       case 'Interactions':
-        this.chart.ref.series[2].update({visible: event.checked, type: 'line'})
+        this.chart.ref.series[2].update({visible: !this.chart.ref.series[2].visible, type: 'line'})
         break;
       case 'Sentiment':
-        this.chart.ref.series[3].update({visible: event.checked, type: 'bar'})
-        this.chart.ref.series[4].update({visible: event.checked, type: 'bar'})
+        this.chart.ref.series[3].update({visible: !this.chart.ref.series[3].visible, type: 'bar'})
+        this.chart.ref.series[4].update({visible: !this.chart.ref.series[4].visible, type: 'bar'})
         //Total sentiment
         //this.chart.ref.series[5].update({visible: event.checked, type: 'bar'})
         break;
@@ -306,5 +311,4 @@ export class CryptoViewComponent implements OnInit {
   resizeChart(){
     this.chart.ref.setSize(200, 200, true);
   }
-
 }

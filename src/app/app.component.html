@@ -1,2 +1,27 @@
-<mat-toolbar> <span> <a class="LinkText" routerLink="/">{{title}}</a></span></mat-toolbar>
+<mat-toolbar id="toolbar"> <span> <a class="LinkText" routerLink="/">{{title}}</a></span>
+  <div id="searchBarDiv">
+      <mat-icon id="searchIcon">search</mat-icon>
+      <mat-form-field id="searchBar">
+        <input matInput type="text" name="search" [(ngModel)]="searchWord" (input)="search()"
+               (focus)="onFocus()" (blur)="onBlur()">
+      </mat-form-field>
+  </div>
+</mat-toolbar>
+
+<div id="searchResultDiv" [style.display]="displaySearchResults" (mouseover)="hoverSearchResults=true" (mouseout)="hoverSearchResults=false">
+  <ul id="searchResult" *ngFor="let crypto of placeholder; let i = index">
+    <li *ngIf="i<5">
+      <a  routerLink="../crypto/{{crypto[0]}}" id="link" (click)="reloadPage(crypto[0])">
+        <div id="nameHeaderDiv">
+          <div id="tokenIcon"><img [src]="crypto[2]" alt="TokenIcon"/></div>
+        <div>
+          <div id="nameText"> {{crypto[1]}}</div>
+          <div id="idText"> {{crypto[0]}}</div>
+        </div>
+      </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
 <router-outlet></router-outlet>

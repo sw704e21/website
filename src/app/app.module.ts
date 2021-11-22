@@ -16,6 +16,9 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import {MatIconModule} from "@angular/material/icon";
         MatButtonToggleModule,
         MatCheckboxModule,
         MatTooltipModule,
-        MatIconModule
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

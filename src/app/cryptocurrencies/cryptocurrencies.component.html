@@ -1,4 +1,4 @@
-<table mat-table [dataSource]=cryptoList class="crypto-table" matSort matSortActive="Mentions" matSortStart="desc" matSortDirection="desc" matSortDisableClear>
+<table mat-table [dataSource]=cryptoList id="crypto-table" class="mat-elevation-z0" matSort matSortActive="Mentions" matSortStart="desc" matSortDirection="desc" matSortDisableClear>
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="Name" (click)="this.params.get('sortParam') === 'name' ?  sortData('-name') : sortData('name')"> Name </th>
@@ -11,7 +11,6 @@
         </div>
       </div>
     </a></td>
-
   </ng-container>
 
   <ng-container matColumnDef="price">

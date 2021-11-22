@@ -8,7 +8,7 @@
   </div>
 </mat-toolbar>
 
-<div id="searchResultDiv" [style.display]="displaySearchResults">
+<div id="searchResultDiv" [style.display]="displaySearchResults" (mouseover)="hoverSearchResults=true" (mouseout)="hoverSearchResults=false">
   <ul id="searchResult" *ngFor="let crypto of placeholder; let i = index">
     <li *ngIf="i<5">
       <a  routerLink="../crypto/{{crypto[0]}}" id="link" (click)="reloadPage(crypto[0])">

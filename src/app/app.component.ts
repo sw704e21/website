@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpParams} from "@angular/common/http";
 import {CryptoServiceService} from "./crypto-service.service";
+import {delay} from "rxjs/operators";
 
 
 @Component({
@@ -15,6 +16,7 @@ export class AppComponent {
   placeholder: [identifier: string, display_name: string][] = [];
   displaySearchResults: string = 'none';
   maxSearchResultSize: number = 5;
+  hoverSearchResults: boolean = false;
 
   constructor(private cryptoServiceService: CryptoServiceService, private route: ActivatedRoute) {
   }
@@ -47,8 +49,10 @@ export class AppComponent {
 
   // Called when the user leaves the search field
   onBlur() {
-    this.displaySearchResults = 'none';
-    this.placeholder.length = 0;
+    if (!this.hoverSearchResults){
+      this.displaySearchResults = 'none';
+      this.placeholder.length = 0;
+    }
   }
 
   reloadPage(param: string) {

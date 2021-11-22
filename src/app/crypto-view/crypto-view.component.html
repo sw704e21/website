@@ -19,10 +19,10 @@
 
   <div class="toggleSeriesDiv">
     <mat-button-toggle-group multiple name="seriesToggles" class="seriesToggle" value="Mentions" >
-      <div class="seriesBtnDiv"><mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Price"> Price </mat-button-toggle></div>
-      <div class="seriesBtnDiv"><mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Mentions"> Mentions </mat-button-toggle></div>
-      <div class="seriesBtnDiv"><mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Sentiment"> Sentiment </mat-button-toggle></div>
-      <div class="seriesBtnDiv"><mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Interactions"> Interactions </mat-button-toggle></div>
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Price"> Price </mat-button-toggle>
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Mentions"> Mentions </mat-button-toggle>
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Sentiment"> Sentiment </mat-button-toggle>
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Interactions"> Interactions </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 </div>

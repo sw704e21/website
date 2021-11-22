@@ -40,6 +40,7 @@ export class AppComponent {
 
   // Called when the user enters the search field
   onFocus() {
+    this.searchWord = "";
     this.search()
     this.displaySearchResults = 'block';
   }

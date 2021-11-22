@@ -19,6 +19,7 @@ export class AppComponent {
   constructor(private cryptoServiceService: CryptoServiceService, private route: ActivatedRoute) {
   }
 
+  //Send query to the api when the user searches for something
   getSearchResult(searchQuery: string): void {
     this.cryptoServiceService.getSearchResult(searchQuery).subscribe(resp => {
       this.placeholder.length = 0;

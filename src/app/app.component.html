@@ -13,6 +13,7 @@
     <li *ngIf="i<5">
       <a  routerLink="../crypto/{{crypto[0]}}" id="link" (click)="reloadPage(crypto[0])">
         <div id="nameHeaderDiv">
+          <div id="tokenIcon"><img [src]="crypto[2]" alt="TokenIcon"/></div>
         <div>
           <div id="nameText"> {{crypto[1]}}</div>
           <div id="idText"> {{crypto[0]}}</div>

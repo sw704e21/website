@@ -1,7 +1,7 @@
 <body>
 <div class="container">
   <div class="cryptoNavBar">
-    <h1 id="TokenName">Bitcoon</h1>
+    <h1 id="TokenName">{{cryptoInfo.displayName}}</h1>
     <mat-button-toggle-group  name="timeToggles" class="timeToggles" value="Week" >
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Day"> Day </mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Week">Week</mat-button-toggle>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="chartDiv" id="chartDiv">
-    <highcharts-chart (load)="resizeChart()" [chart]="chart"
+    <highcharts-chart [chart]="chart"
       style="width: 100%; height: 400px; display: block;"
     ></highcharts-chart>
   </div>
@@ -24,6 +24,14 @@
       <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Sentiment"> Sentiment </mat-button-toggle>
       <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Interactions"> Interactions </mat-button-toggle>
     </mat-button-toggle-group>
+  </div>
+
+  <div class="tokenInfoDiv">
+
+  </div>
+
+  <div class="socialMediaSegmentDiv">
+
   </div>
 </div>
 </body>

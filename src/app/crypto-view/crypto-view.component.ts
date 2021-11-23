@@ -27,13 +27,14 @@ enum TimeInterval {
 export class CryptoViewComponent implements OnInit {
 
   ngOnInit(): void {
-    this.initSeries()
-    this.getCryptocurrency()
+    this.initSeries();
+    this.getCryptoInfo();
   }
 
   //This is the typescript file for the page that displays a specific crypto.
 
-  currentCrypto: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
+  cryptoInfo: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
+
 
   chart = new Chart({
     chart: {
@@ -219,6 +220,12 @@ export class CryptoViewComponent implements OnInit {
       });
   }
 
+  // Gets all the info related to a specific crypto
+  getCryptoInfo(): void {
+    this.cryptoServiceService.getCryptoInfo(this.route.snapshot.paramMap.get("id")!)
+      .subscribe(resp => {this.cryptoInfo = resp;})
+  }
+
   // Updates the series option for each series
   updateCryptoSeries(period: number, numPoints: number): void{
     // Mentions series
@@ -279,13 +286,7 @@ export class CryptoViewComponent implements OnInit {
         break;
     }
   }
-  //For getting the specific crypto
-  getCryptocurrency(): void {
-    //NOT a recursive call. Calling the endpoint from our service file
-    this.cryptoServiceService.getCryptocurrency(this.route.snapshot.paramMap.get("id")!)
-      .subscribe(returnedCrypto => this.currentCrypto = returnedCrypto)
-  }
-
+  // Change which series to display on the graph
   onSeriesToggle(id: string){
 
     switch (id){
@@ -308,7 +309,5 @@ export class CryptoViewComponent implements OnInit {
 
   }
 
-  resizeChart(){
-    this.chart.ref.setSize(200, 200, true);
-  }
+
 }

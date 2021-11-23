@@ -1,7 +1,14 @@
 <body>
 <div class="container">
   <div class="cryptoNavBar">
-    <h1 id="TokenName">{{cryptoInfo.displayName}}</h1>
+    <div class="tokenIdentifier">
+      <div id="tokenIcon"><img [src]="cryptoInfo.icon"/></div>
+      <div>
+        <div id="tokenName"> {{cryptoInfo.displayName}} </div>
+        <div id="tokenId"> {{cryptoInfo.id}} </div>
+      </div>
+    </div>
+    
     <mat-button-toggle-group  name="timeToggles" class="timeToggles" value="Week" >
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Day"> Day </mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Week">Week</mat-button-toggle>

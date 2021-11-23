@@ -3,11 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {CryptoServiceService} from "../crypto-service.service";
 import {Crypto} from "../crypto";
-import {Highcharts} from "highcharts/modules/stock";
 import {Chart} from "angular-highcharts";
 import {HttpParams} from "@angular/common/http";
-import {PERIOD} from "@angular/cdk/keycodes";
-import {MatCheckboxChange} from "@angular/material/checkbox";
 
 // Time intervals for retrieving the history of a crypto
 enum TimeInterval {
@@ -85,6 +82,33 @@ export class CryptoViewComponent implements OnInit {
       }
     },
   })
+  wordcloud = new Chart({
+    chart: {
+      // Edit chart spacing
+      spacingBottom: 0,
+      spacingTop: 10,
+      spacingLeft: 0,
+      spacingRight: 0,
+
+      plotBackgroundColor: '#171b26',
+      backgroundColor: '#29314200',
+      type: 'wordcloud'
+    },
+    title: {
+      text: "Wordcloud"
+    },
+    credits: {
+      enabled: false
+    },
+    legend: {
+      enabled: false
+    },
+    series: [{
+      type: 'wordcloud',
+      name: 'Occurrences',
+    }]
+
+  })
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) { }
 
@@ -156,7 +180,7 @@ export class CryptoViewComponent implements OnInit {
     this.getPriceHistory(TimeInterval.Week)
   }
 
-  //Gets the price of the crypto, for the past week
+  // Gets the price of the crypto, for the past week
   getPriceHistory(period: number) {
     let tempData: number[] = [];
 
@@ -182,6 +206,7 @@ export class CryptoViewComponent implements OnInit {
       });
   }
 
+  // Get the history for a specific crypto
   getCryptoHistory(params: HttpParams){
     let tempMentions: number[] = [];
     let tempInteractions: number[] = [];

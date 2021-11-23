@@ -26,12 +26,27 @@
   justify-content: space-between;
 }
 
-#TokenName{
-  color: White;
-  position: relative;
-  margin-top: auto;
-  margin-bottom: auto;
+.tokenIdentifier{
+  display: flex;
+  width: 150px;
+  align-items: center;
   margin-left: 2.5%;
+  margin-top: 1%;
+}
+
+#tokenIcon{
+  padding-right: 10px;
+  float: left;
+}
+
+#tokenName{
+  color: White;
+  font-size: 20px;
+}
+
+#tokenId {
+  color: grey;
+  font-size: 17px;
 }
 
 .toggleSeriesDiv{

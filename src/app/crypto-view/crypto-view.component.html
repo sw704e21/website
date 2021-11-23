@@ -8,7 +8,7 @@
         <div id="tokenId"> {{cryptoInfo.id}} </div>
       </div>
     </div>
-    
+
     <mat-button-toggle-group  name="timeToggles" class="timeToggles" value="Week" >
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Day"> Day </mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Week">Week</mat-button-toggle>
@@ -35,7 +35,49 @@
 
   <div class="segmentContainer">
     <div class="tokenInfoDiv">
-      
+      <div class="column">
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> Positive Sentiment </div>
+            <div class="bigText"> {{cryptoInfo.posSentiment.toPrecision(4)}} </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> Mentions </div>
+            <div class="bigText"> {{cryptoInfo.mentions}} </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> Negative Sentiment </div>
+            <div class="bigText"> {{cryptoInfo.negSentiment.toPrecision(4)}} </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> 24h change </div>
+            <div class="bigText"> {{cryptoInfo.relMentions.toPrecision(4)}} </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> Relative Sentiment </div>
+            <div class="bigText"> {{cryptoInfo.relSentiment.toPrecision(4)}} </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> Interactions </div>
+            <div class="bigText"> {{cryptoInfo.mostInteractions}} </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="socialMediaSegmentDiv">

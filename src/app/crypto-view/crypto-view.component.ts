@@ -34,6 +34,7 @@ export class CryptoViewComponent implements OnInit {
   private wordcloud: any;
 
   ngOnInit(): void {
+    // Render the highcharts to the html
     this.chart = Highcharts.chart('chartDiv', {
       chart: {
         // Edit chart spacing
@@ -84,6 +85,9 @@ export class CryptoViewComponent implements OnInit {
       },
     }) //Index 0
     this.wordcloud = Highcharts.chart('wordcloudDiv',{
+      chart: {
+        backgroundColor: '#00000000'
+      },
       series: [{
         type: 'wordcloud',
         data: [{
@@ -106,9 +110,6 @@ export class CryptoViewComponent implements OnInit {
     this.initSeries();
     this.getCryptoInfo();
 
-    // Render the highcharts to the html
-
-    console.log(Highcharts.charts[0])
   }
 
   //This is the typescript file for the page that displays a specific crypto.

@@ -108,14 +108,41 @@
   margin-right: auto;
   width: 95%;
   height: 400px;
-  background-color: #26d870;
+  background-color: #0000004d;
 }
 
 .tokenInfoDiv{
-  background-color: red;
   width: 45%;
   height: 95%;
   margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoContainer{
+  width: 100%;
+  height: 50%;
+}
+
+.column{
+  float: left;
+  width: 30%;
+  height: 100%;
+}
+
+.row{
+  width: 100%;
+  height: 50%;
+}
+
+.smallText{
+  font-size: 15px;
+  color: grey;
+}
+
+.bigText {
+  font-size: 24px;
+  color: white;
 }
 
 .wordcloudDiv{
@@ -124,6 +151,7 @@
   width: 45%;
   height: 95%;
 }
+
 
 
 

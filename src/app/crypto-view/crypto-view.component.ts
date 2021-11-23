@@ -1,10 +1,17 @@
+import {Chart} from "angular-highcharts";
+
+declare var require: any;
+const More = require('highcharts/highcharts-more');
+More(Highcharts);
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {CryptoServiceService} from "../crypto-service.service";
 import {Crypto} from "../crypto";
-import {Chart} from "angular-highcharts";
 import {HttpParams} from "@angular/common/http";
+import * as Highcharts from 'highcharts';
+const Wordcloud = require('highcharts/modules/wordcloud');
+Wordcloud(Highcharts);
 
 // Time intervals for retrieving the history of a crypto
 enum TimeInterval {
@@ -23,9 +30,85 @@ enum TimeInterval {
 
 export class CryptoViewComponent implements OnInit {
 
+  private chart: any;
+  private wordcloud: any;
+
   ngOnInit(): void {
+    this.chart = Highcharts.chart('chartDiv', {
+      chart: {
+        // Edit chart spacing
+        spacingBottom: 0,
+        spacingTop: 10,
+        spacingLeft: 0,
+        spacingRight: 0,
+
+        plotBackgroundColor: '#171b26',
+        backgroundColor: '#29314200',
+        type: 'line'
+      },
+      title: {
+        text: ""
+      },
+      credits: {
+        enabled: false
+      },
+      legend: {
+        enabled: false
+      },
+      yAxis: {
+        gridLineColor: '#293142',
+        labels: {
+          format: "{text}",
+          style: {
+            color: '#FFFFFF'
+          }
+        },
+        title: {
+          text: null
+        }
+      },
+      xAxis: {
+        type: 'datetime',
+        labels: {
+          style: {
+            color: '#FFFFFF'
+          }
+        }
+      },
+      plotOptions: {
+        series: {
+          marker: {
+            enabled: false
+          },
+        }
+      },
+    }) //Index 0
+    this.wordcloud = Highcharts.chart('wordcloudDiv',{
+      series: [{
+        type: 'wordcloud',
+        data: [{
+          name: 'Lorem',
+          weight: 3
+        }, {
+          name: 'Ipsum',
+          weight: 2
+        }, {
+          name: 'Dolor',
+          weight: 1
+        }],
+        name: 'Occurrences'
+      }],
+      title: {
+        text: ''
+      }
+    }, ) //Index 1
+
     this.initSeries();
     this.getCryptoInfo();
+
+    // Render the highcharts to the html
+
+    console.log(Highcharts.charts[0])
   }
 
   //This is the typescript file for the page that displays a specific crypto.
@@ -33,82 +116,6 @@ export class CryptoViewComponent implements OnInit {
   cryptoInfo: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
 
 
-  chart = new Chart({
-    chart: {
-      // Edit chart spacing
-      spacingBottom: 0,
-      spacingTop: 10,
-      spacingLeft: 0,
-      spacingRight: 0,
-
-      plotBackgroundColor: '#171b26',
-      backgroundColor: '#29314200',
-      type: 'line'
-    },
-    title: {
-      text: ""
-    },
-    credits: {
-      enabled: false
-    },
-    legend: {
-      enabled: false
-    },
-    yAxis: {
-      gridLineColor: '#293142',
-      labels: {
-        format: "{text}",
-        style: {
-          color: '#FFFFFF'
-        }
-      },
-      title: {
-        text: null
-      }
-    },
-    xAxis: {
-      type: 'datetime',
-      labels: {
-        style: {
-          color: '#FFFFFF'
-        }
-      }
-    },
-    plotOptions: {
-      series: {
-        marker:{
-          enabled: false
-        },
-      }
-    },
-  })
-  wordcloud = new Chart({
-    chart: {
-      // Edit chart spacing
-      spacingBottom: 0,
-      spacingTop: 10,
-      spacingLeft: 0,
-      spacingRight: 0,
-
-      plotBackgroundColor: '#171b26',
-      backgroundColor: '#29314200',
-      type: 'wordcloud'
-    },
-    title: {
-      text: "Wordcloud"
-    },
-    credits: {
-      enabled: false
-    },
-    legend: {
-      enabled: false
-    },
-    series: [{
-      type: 'wordcloud',
-      name: 'Occurrences',
-    }]
-
-  })
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) { }
 
@@ -196,13 +203,13 @@ export class CryptoViewComponent implements OnInit {
         }
 
         const date = (resp.history[resp.history.length-1].date - resp.history[0].date);
-        this.chart.ref.series[0].update({
+        this.chart.series[0].update({
           type: "line",
           pointStart: resp.history[0].date,
           pointInterval: date / resp.history.length,
         });
 
-        this.chart.ref.series[0].setData(tempData, true, true, true);
+        this.chart.series[0].setData(tempData, true, true, true);
       });
   }
 
@@ -237,10 +244,10 @@ export class CryptoViewComponent implements OnInit {
         this.updateCryptoSeries(maxPeriod, resp.length)
 
         // Set the data for each series, gotten from the response
-        this.chart.ref.series[1].setData(tempMentions, true, true, true)
-        this.chart.ref.series[2].setData(tempInteractions, true, true, true)
-        this.chart.ref.series[3].setData(tempPosSentiment, true, true, true)
-        this.chart.ref.series[4].setData(tempNegSentiment, true, true, true)
+        this.chart.series[1].setData(tempMentions, true, true, true)
+        this.chart.series[2].setData(tempInteractions, true, true, true)
+        this.chart.series[3].setData(tempPosSentiment, true, true, true)
+        this.chart.series[4].setData(tempNegSentiment, true, true, true)
         //his.chart.ref.series[5].setData(tempSentiment, true, true, true)
       });
   }
@@ -254,25 +261,25 @@ export class CryptoViewComponent implements OnInit {
   // Updates the series option for each series
   updateCryptoSeries(period: number, numPoints: number): void{
     // Mentions series
-    this.chart.ref.series[1].update({
+    this.chart.series[1].update({
       type: 'bar',
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
     // Interaction series
-    this.chart.ref.series[2].update({
+    this.chart.series[2].update({
       type: 'line',
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
     // Positive sentiment series
-    this.chart.ref.series[3].update({
+    this.chart.series[3].update({
       type: 'bar',
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
     // Negative sentiment series
-    this.chart.ref.series[4].update({
+    this.chart.series[4].update({
       type: 'bar',
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
@@ -316,17 +323,17 @@ export class CryptoViewComponent implements OnInit {
 
     switch (id){
       case 'Price':
-        this.chart.ref.series[0].update({visible: !this.chart.ref.series[0].visible, type: 'line'})
+        this.chart.series[0].update({visible: !this.chart.series[0].visible, type: 'line'})
         break;
       case 'Mentions':
-        this.chart.ref.series[1].update({visible: !this.chart.ref.series[1].visible, type: 'bar'})
+        this.chart.series[1].update({visible: !this.chart.series[1].visible, type: 'bar'})
         break;
       case 'Interactions':
-        this.chart.ref.series[2].update({visible: !this.chart.ref.series[2].visible, type: 'line'})
+        this.chart.series[2].update({visible: !this.chart.series[2].visible, type: 'line'})
         break;
       case 'Sentiment':
-        this.chart.ref.series[3].update({visible: !this.chart.ref.series[3].visible, type: 'bar'})
-        this.chart.ref.series[4].update({visible: !this.chart.ref.series[4].visible, type: 'bar'})
+        this.chart.series[3].update({visible: !this.chart.series[3].visible, type: 'bar'})
+        this.chart.series[4].update({visible: !this.chart.series[4].visible, type: 'bar'})
         //Total sentiment
         //this.chart.ref.series[5].update({visible: event.checked, type: 'bar'})
         break;

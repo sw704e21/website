@@ -256,7 +256,8 @@ export class CryptoViewComponent implements OnInit {
   // Gets all the info related to a specific crypto
   getCryptoInfo(): void {
     this.cryptoServiceService.getCryptoInfo(this.route.snapshot.paramMap.get("id")!)
-      .subscribe(resp => {this.cryptoInfo = resp; this.cryptoInfo.id = resp.identifier})
+      .subscribe(resp => {this.cryptoInfo = resp; this.cryptoInfo.id = resp.identifier;
+        this.cryptoInfo.icon = this.cryptoInfo.icon.replace("32","64")})
   }
 
   // Updates the series option for each series

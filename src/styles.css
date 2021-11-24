@@ -4,8 +4,8 @@ body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
   padding: 30px;
-  background: rgb(9,10,11);
-  background: linear-gradient(160deg, rgba(9,10,11,1) 15%, rgba(77,119,168,1) 60%, rgba(164,207,244,1) 96%) fixed;
+  background: hsla(255, 62%, 31%, 1);
+  background: linear-gradient(190deg, hsla(255, 62%, 31%, 1) 0%, hsla(190, 83%, 38%, 1) 100%) fixed;
 }
 
 .mat-table{

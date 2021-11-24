@@ -56,7 +56,9 @@ export class CryptoViewComponent implements OnInit {
       legend: {
         enabled: false
       },
-      yAxis: {
+      yAxis: [
+        // Mentions axis
+        {
         gridLineColor: '#293142',
         labels: {
           format: "{text}",
@@ -65,9 +67,70 @@ export class CryptoViewComponent implements OnInit {
           }
         },
         title: {
-          text: null
-        }
+          style: {
+            color: '#fbc6a4',
+            fontWeight: 'bold',
+          },
+          text: "Mentions"
+        },
+        visible: true
       },
+       // Price axis
+        {
+        gridLineColor: '#293142',
+        labels: {
+          format: "${text}",
+          style: {
+            color: '#FFFFFF'
+          }
+        },
+        title: {
+          style: {
+            color: '#cab8ff',
+            fontWeight: 'bold',
+          },
+          text: "Price"
+        },
+        opposite: true,
+        visible: false
+      },
+      // Interactions axis
+        {
+        gridLineColor: '#293142',
+        labels: {
+          format: "{text}",
+          style: {
+            color: '#FFFFFF'
+          }
+        },
+        title: {
+          style: {
+            color: '#B5DEFF',
+            fontWeight: 'bold',
+          },
+          text: "Interactions"
+        },
+        opposite: true,
+        visible: false
+      },
+        // Sentiment axis
+        {
+        gridLineColor: '#293142',
+        labels: {
+          format: "{text}",
+          style: {
+            color: '#FFFFFF'
+          }
+        },
+        title: {
+          style: {
+            color: '#000000',
+            fontWeight: 'bold',
+          },
+          text: "Sentiment"
+        },
+        visible: false
+      }],
       xAxis: {
         type: 'datetime',
         labels: {
@@ -168,6 +231,8 @@ export class CryptoViewComponent implements OnInit {
     this.chart.addSeries({
       name: 'Price',
       type: 'line',
+      color: '#cab8ff',
+      yAxis: 1,
       data: [],
       visible: false,
       tooltip: {
@@ -179,9 +244,9 @@ export class CryptoViewComponent implements OnInit {
     //Add the mentions series to the graph. Index 1
     this.chart.addSeries({
       name: 'Mentions',
-      color: '#1d5d1d',
-      type: 'bar',
-      borderColor: '#1d5d1d',
+      color: '#fbc6a4',
+      type: 'line',
+      yAxis: 0,
       data: [],
       visible: true
     }, true, true)
@@ -190,7 +255,9 @@ export class CryptoViewComponent implements OnInit {
     this.chart.addSeries({
       name: 'Interactions',
       type: 'line',
+      yAxis: 2,
       data: [],
+      color: '#B5DEFF',
       visible: false
     }, true, true)
 
@@ -198,8 +265,10 @@ export class CryptoViewComponent implements OnInit {
     this.chart.addSeries({
       name: "PosSentiment",
       type: 'bar',
-      color: '#2AA62A',
-      borderColor: '#2aa62a',
+      yAxis: 3,
+      color: '#C1FFD74d',
+      borderColor: '#00000000',
+      zIndex: -10,
       data: [],
       visible: false
     }, true, true)
@@ -208,8 +277,10 @@ export class CryptoViewComponent implements OnInit {
     this.chart.addSeries({
       name: "NegSentiment",
       type: 'bar',
-      color: '#a81e1e',
-      borderColor: '#A81E1E',
+      yAxis: 3,
+      color: '#ff78784d',
+      borderColor: '#00000000',
+      zIndex: -10,
       data: [],
       visible: false
     }, true, true)
@@ -218,7 +289,6 @@ export class CryptoViewComponent implements OnInit {
     this.chart.addSeries({
       name: 'Sentiment',
       color: '#FF0000',
-      borderColor: '#FF0000',
       type: 'bar',
       data: [],
       visible: false
@@ -303,7 +373,7 @@ export class CryptoViewComponent implements OnInit {
   updateCryptoSeries(period: number, numPoints: number): void{
     // Mentions series
     this.chart.series[1].update({
-      type: 'bar',
+      type: 'line',
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
@@ -364,15 +434,19 @@ export class CryptoViewComponent implements OnInit {
 
     switch (id){
       case 'Price':
-        this.chart.series[0].update({visible: !this.chart.series[0].visible, type: 'line'})
+        this.chart.yAxis[1].update({visible: !this.chart.series[0].visible});
+        this.chart.series[0].update({visible: !this.chart.series[0].visible, type: 'line'});
         break;
       case 'Mentions':
-        this.chart.series[1].update({visible: !this.chart.series[1].visible, type: 'bar'})
+        this.chart.yAxis[0].update({visible: !this.chart.series[1].visible});
+        this.chart.series[1].update({visible: !this.chart.series[1].visible, type: 'line'})
         break;
       case 'Interactions':
+        this.chart.yAxis[2].update({visible: !this.chart.series[2].visible});
         this.chart.series[2].update({visible: !this.chart.series[2].visible, type: 'line'})
         break;
       case 'Sentiment':
+        this.chart.yAxis[3].update({visible: !this.chart.series[3].visible});
         this.chart.series[3].update({visible: !this.chart.series[3].visible, type: 'bar'})
         this.chart.series[4].update({visible: !this.chart.series[4].visible, type: 'bar'})
         //Total sentiment

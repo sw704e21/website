@@ -20,11 +20,12 @@
 }
 
 .cryptoNavBar{
-  height: 50px;
+  height: 75px;
   background-color: #00000000;
   display: flex;
   justify-content: space-between;
 }
+
 
 .tokenIdentifier{
   display: flex;
@@ -85,7 +86,9 @@
   border: none;
   float: right;
   margin-right: 2.5%;
+  align-items: center;
   display: flex;
+  font-size: 15px;
 }
 
 

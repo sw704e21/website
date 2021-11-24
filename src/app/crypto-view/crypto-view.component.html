@@ -6,7 +6,9 @@
       <div>
         <div id="tokenName"> {{cryptoInfo.displayName}} </div>
         <div id="tokenId"> {{cryptoInfo.id}} </div>
+
       </div>
+      <div id="tokenPrice"> ${{cryptoInfo.price.toFixed(2)}}</div>
     </div>
 
     <mat-button-toggle-group  name="timeToggles" class="timeToggles" value="Week" >

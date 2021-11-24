@@ -83,29 +83,68 @@ export class CryptoViewComponent implements OnInit {
           },
         }
       },
-    }) //Index 0
+    }, )
     this.wordcloud = Highcharts.chart('wordcloudDiv',{
       chart: {
-        backgroundColor: '#00000000'
+        // Edit chart spacing
+        spacingBottom: 0,
+        spacingTop: 10,
+        spacingLeft: 0,
+        spacingRight: 0,
+
+        plotBackgroundColor: '#171b2600',
+        backgroundColor: '#29314200',
+        type: 'wordcloud'
       },
       series: [{
         type: 'wordcloud',
+        spiral: 'archimedean',
         data: [{
           name: 'Lorem',
-          weight: 3
+          weight: 6
         }, {
           name: 'Ipsum',
-          weight: 2
+          weight: 8
         }, {
           name: 'Dolor',
+          weight: 4
+        }, {
+          name: 'Lorem2',
+          weight: 2
+        }, {
+          name: 'Ipsum2',
+          weight: 2
+        }, {
+          name: 'Dolor2',
+          weight: 1
+        }, {
+          name: 'Lorem3',
+          weight: 3
+        }, {
+          name: 'Ipsum3',
+          weight: 2
+        }, {
+          name: 'Dolor3',
+          weight: 1
+        }, {
+          name: 'Lorem4',
+          weight: 3
+        }, {
+          name: 'Ipsum4',
+          weight: 4
+        }, {
+          name: 'Dolor4',
           weight: 1
         }],
-        name: 'Occurrences'
+        name: ''
       }],
       title: {
         text: ''
+      },
+      credits: {
+        enabled: false
       }
-    }, ) //Index 1
+    }, )
 
     this.initSeries();
     this.getCryptoInfo();

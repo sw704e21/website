@@ -206,6 +206,21 @@ export class CryptoViewComponent implements OnInit {
       },
       credits: {
         enabled: false
+      },
+      tooltip: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          point: {
+            // Functionality for when the word is clicked
+            events: {
+              click: function() {
+                console.log(this.name)
+              }
+            }
+          }
+        }
       }
     }, )
 

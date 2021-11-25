@@ -154,11 +154,94 @@
   color: white;
 }
 
-.galaxyScoreDiv{
+.cryptoScoreDiv{
   margin: auto;
   width: 45%;
   height: 95%;
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.26);
+  border-radius: 15px;
+}
+
+.cryptoScoreDiv h1 {
+  font-size: 20px;
+  color: white;
+  margin-left: 2.5%;
+  margin-top: 1%;
+}
+
+#overallScore{
+  margin-left: 2.5%;
+  margin-top: 5%;
+  width: 95%;
+}
+
+#separateScores{
+  width: 90%;
+  margin-top: 10%;
+  margin-left: 2.5%;
+}
+
+.sepScoreSegment .mat-progress-bar{
+  min-height: 10px;
+  border-radius: 10px;
+  width: 50%;
+  float: right;
+  margin-right: 15%;
+
+  /*Positioning*/
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sepScoreSegment p{
+  float: left;
+  margin-left: 5%;
+  font-size: 15px;
+  color: white;
+
+  /*Positioning*/
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sepScoreSegment{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 3%;
+  text-align: right;
+}
+
+#separateScores{
+  width: 100%;
+}
+
+#overallScore h1{
+  font-size: 30px;
+  color: #33b92a;
+}
+
+::ng-deep .mat-progress-bar-fill::after{
+  background-color: #32e727;
+}
+
+::ng-deep #overallScore .mat-progress-bar{
+  min-height: 15px;
+  border-radius: 10px;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: rgba(0, 0, 0, 0.32);
+}
+
+/* remove animation and the dots*/
+::ng-deep .mat-progress-bar-background {
+  background-color: rgba(236, 239, 241, 0);
+  fill: rgba(236, 239, 241, 0);
 }
 
 .wordcloudDiv{

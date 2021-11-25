@@ -124,7 +124,7 @@ export class CryptoViewComponent implements OnInit {
         },
         title: {
           style: {
-            color: '#000000',
+            color: '#C1FFD7',
             fontWeight: 'bold',
           },
           text: "Sentiment"
@@ -556,6 +556,7 @@ export class CryptoViewComponent implements OnInit {
 
   }
 
+  // Pipes the url such that it bypasses security
   cleanUrl(url: string){
     return this.sanitizer.bypassSecurityTrustResourceUrl(url)
   }

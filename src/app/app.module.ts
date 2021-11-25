@@ -19,6 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 @NgModule({
@@ -27,24 +28,25 @@ import {FormsModule} from "@angular/forms";
     CryptocurrenciesComponent,
     CryptoViewComponent
   ],
-    imports: [
-        BrowserModule,
-        ChartModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatTableModule,
-        MatSidenavModule,
-        HttpClientModule,
-        MatSortModule,
-        MatButtonToggleModule,
-        MatCheckboxModule,
-        MatTooltipModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    ChartModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatSidenavModule,
+    HttpClientModule,
+    MatSortModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatProgressBarModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,3 @@
-<body>
 <div class="container">
   <div class="cryptoNavBar">
     <div class="tokenIdentifier">
@@ -93,20 +92,13 @@
 
   <div class="segmentContainer">
     <div class="twitterDiv">
-      <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark" data-cards="hidden">
-        <a href="https://twitter.com/SpaceX/status/1463536409667530755?ref_src=twsrc%5Etfw"></a>
-      </blockquote>
-      <blockquote class="twitter-tweet" data-theme="dark" data-cards="hidden">
-        <a href="https://twitter.com/Bitcoin/status/1463514080820416513?ref_src=twsrc%5Etfw"></a>
+      <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark" data-cards="hidden" *ngFor="let twitterPost of twitterPosts;">
+        <a [href]="twitterPost"></a>
       </blockquote>
     </div>
+
     <div class="redditDiv">
-      <iframe class="reddit-embed" src="https://www.redditmedia.com/r/Bitcoin/comments/r18dyj/fiat_is_an_environmental_disaster_bitcoin_fixes/?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="127" width="640" scrolling="yes"></iframe>
-      <iframe class="reddit-embed" src="https://www.redditmedia.com/r/Bitcoin/comments/r18dyj/fiat_is_an_environmental_disaster_bitcoin_fixes/?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="127" width="640" scrolling="yes"></iframe>
-      <iframe class="reddit-embed" src="https://www.redditmedia.com/r/Bitcoin/comments/r18dyj/fiat_is_an_environmental_disaster_bitcoin_fixes/?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="127" width="640" scrolling="yes"></iframe>
-      <iframe class="reddit-embed" src="https://www.redditmedia.com/r/Bitcoin/comments/r18dyj/fiat_is_an_environmental_disaster_bitcoin_fixes/?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="127" width="640" scrolling="yes"></iframe>
-      <iframe class="reddit-embed" src="https://www.redditmedia.com/r/Bitcoin/comments/r18dyj/fiat_is_an_environmental_disaster_bitcoin_fixes/?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="127" width="640" scrolling="yes"></iframe>
+      <iframe id="reddit-embed" *ngFor="let redditPost of redditPosts;" [src]="redditPost" style="border: none;" height="126" width="100%" scrolling="no"></iframe>
     </div>
   </div>
 </div>
-</body>

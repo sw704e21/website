@@ -1,5 +1,4 @@
 import {Chart} from "angular-highcharts";
-
 declare var require: any;
 const More = require('highcharts/highcharts-more');
 More(Highcharts);
@@ -9,6 +8,7 @@ import {Location} from "@angular/common";
 import {CryptoServiceService} from "../crypto-service.service";
 import {Crypto} from "../crypto";
 import {HttpParams} from "@angular/common/http";
+import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import * as Highcharts from 'highcharts';
 const Wordcloud = require('highcharts/modules/wordcloud');
 Wordcloud(Highcharts);
@@ -301,14 +301,26 @@ export class CryptoViewComponent implements OnInit {
     (<any>window).twttr.widgets.load();
   }
 
-
   //This is the typescript file for the page that displays a specific crypto.
 
   cryptoInfo: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
+  // Reddit posts
+  redditLinkRef: string = '?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark'
+  redditPosts: SafeUrl[] = [
+    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1j47o/just_bought_my_first_00016_btc/' + this.redditLinkRef),
+    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1hiyo/saylor_bitcoin_will_100_x_from_here_5000000/'+ this.redditLinkRef),
+    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1d0c3/bitcoin_will_reach_500k_in_five_years_as_a_result/' + this.redditLinkRef)
+  ]
+  // Twitter posts
+  twitterLinkRef: string = '?ref_src=twsrc%5Etfw'
+  twitterPosts: SafeUrl[] = [
+    this.cleanUrl('https://twitter.com/Bitcoin/status/1463543725620019200' + this.twitterLinkRef),
+    this.cleanUrl('https://twitter.com/Bitcoin/status/1463514080820416513' + this.twitterLinkRef),
+    this.cleanUrl('https://twitter.com/Bitcoin/status/1463207674519048196' + this.twitterLinkRef)
+  ]
 
 
-
-  constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) { }
+  constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
 
   //Crypto history parameter
   historyParams = new HttpParams()
@@ -542,6 +554,10 @@ export class CryptoViewComponent implements OnInit {
         break;
     }
 
+  }
+
+  cleanUrl(url: string){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url)
   }
 
 

@@ -13,7 +13,7 @@
   left: 0;
   right: 0;
   width: 80%;
-  height: 300%;
+  height: 325%;
   margin-top: 1%;
   margin-right: auto;
   margin-left: auto;
@@ -120,6 +120,17 @@
   background-color: #0000004d;
 }
 
+.segmentContainerFEED{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  height: 800px;
+  background-color: #0000004d;
+}
+
 .tokenInfoDiv{
   width: 45%;
   height: 95%;
@@ -189,6 +200,38 @@
 
 .twitter-tweet {
   width: 100%;
+}
+
+#feedTitles {
+  display: flex;
+  width: 95%;
+  height: 100px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+}
+
+#feedAllText {
+  margin: auto;
+}
+
+#feedTextDiv{
+  text-align: center;
+}
+
+#feedSubDiv{
+  text-align: center;
+}
+
+#feedText{
+  font-size: 25px;
+  color: white;
+}
+
+#feedSubText{
+  font-size: 15px;
+  color: dimgrey;
 }
 
 

@@ -178,7 +178,16 @@
   margin: auto;
   width: 45%;
   height: 95%;
-  background-color: #ff7060;
+  background-color: #ff706000;
+  overflow: auto;
+}
+
+.reddit-embed{
+  width: 100%;
+}
+
+.twitter-tweet {
+  background-color: greenyellow;
 }
 
 

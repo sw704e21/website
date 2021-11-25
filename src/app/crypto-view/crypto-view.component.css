@@ -163,15 +163,31 @@
 
 .wordcloudDiv{
   margin: auto;
-  width: 45%;
+  width: 100%;
   height: 95%;
 }
-.socialMediaPostsDiv{
+
+.twitterDiv {
+  margin: auto;
+  width: 45%;
+  height: 95%;
+  background-color: green;
+}
+
+.redditDiv {
+  margin: auto;
+  width: 45%;
+  height: 95%;
+  background-color: #ff7060;
+}
+
+
+/*.socialMediaPostsDiv{
   margin: auto;
   width: 45%;
   height: 95%;
   background-color: blue;
-}
+}*/
 
 
 

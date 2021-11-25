@@ -161,8 +161,79 @@ export class CryptoViewComponent implements OnInit {
       },
       series: [{
         type: 'wordcloud',
-        spiral: 'archimedean',
         data: [{
+          name: 'Lorem',
+          weight: 6
+        }, {
+          name: 'Ipsum',
+          weight: 8
+        }, {
+          name: 'Dolor',
+          weight: 4
+        }, {
+          name: 'Lorem2',
+          weight: 2
+        }, {
+          name: 'Ipsum2',
+          weight: 2
+        }, {
+          name: 'Dolor2',
+          weight: 1
+        }, {
+          name: 'Lorem3',
+          weight: 3
+        }, {
+          name: 'Ipsum3',
+          weight: 2
+        }, {
+          name: 'Dolor3',
+          weight: 1
+        }, {
+          name: 'Lorem4',
+          weight: 3
+        }, {
+          name: 'Ipsum4',
+          weight: 4
+        }, {
+          name: 'Dolor4',
+          weight: 1
+        }, {
+          name: 'Lorem',
+          weight: 6
+        }, {
+          name: 'Ipsum',
+          weight: 8
+        }, {
+          name: 'Dolor',
+          weight: 4
+        }, {
+          name: 'Lorem2',
+          weight: 2
+        }, {
+          name: 'Ipsum2',
+          weight: 2
+        }, {
+          name: 'Dolor2',
+          weight: 1
+        }, {
+          name: 'Lorem3',
+          weight: 3
+        }, {
+          name: 'Ipsum3',
+          weight: 2
+        }, {
+          name: 'Dolor3',
+          weight: 1
+        }, {
+          name: 'Lorem4',
+          weight: 3
+        }, {
+          name: 'Ipsum4',
+          weight: 4
+        }, {
+          name: 'Dolor4',
+          weight: 1
+        }, {
           name: 'Lorem',
           weight: 6
         }, {

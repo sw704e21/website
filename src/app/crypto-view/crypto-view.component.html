@@ -116,7 +116,18 @@
     <div class="wordcloudDiv" id="wordcloudDiv"></div>
   </div>
 
-  <div class="segmentContainer">
+  <div id="feedTitles">
+    <div id="feedAllText">
+      <div id="feedTextDiv">
+        <p id="feedText">Most relevant social media posts from Twitter and Reddit</p>
+      </div>
+      <div id="feedSubDiv">
+        <p id="feedSubText"> Click any word in the wordcloud to filter the posts</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="segmentContainerFEED">
     <div class="twitterDiv">
       <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark" data-cards="hidden" *ngFor="let twitterPost of twitterPosts;">
         <a [href]="twitterPost"></a>

@@ -171,7 +171,8 @@
   margin: auto;
   width: 45%;
   height: 95%;
-  background-color: green;
+  background-color: #00000000;
+  overflow: auto;
 }
 
 .redditDiv {
@@ -187,7 +188,7 @@
 }
 
 .twitter-tweet {
-  background-color: greenyellow;
+  width: 100%;
 }
 
 

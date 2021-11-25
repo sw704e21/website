@@ -298,7 +298,9 @@ export class CryptoViewComponent implements OnInit {
     this.initSeries();
     this.getCryptoInfo();
 
+    (<any>window).twttr.widgets.load();
   }
+
 
   //This is the typescript file for the page that displays a specific crypto.
 

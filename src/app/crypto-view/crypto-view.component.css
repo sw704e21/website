@@ -182,53 +182,59 @@
 }
 
 #overallScore{
-  margin-left: 2.5%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 5%;
-  width: 95%;
+  width: 90%;
 }
 
 #separateScores{
-  width: 90%;
-  margin-top: 10%;
-  margin-left: 2.5%;
+  margin-top: 5%;
 }
 
 .sepScoreSegment .mat-progress-bar{
   min-height: 10px;
   border-radius: 10px;
-  width: 50%;
-  float: right;
-  margin-right: 15%;
+  width: 60%;
 
   /*Positioning*/
   top: 0;
   bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
+.sepScoreSegment h2{
+  font-size: 15px;
+  color: white;
+  width: 20%;
+
+  /*Positioning*/
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto auto auto 5%;
 }
 
 .sepScoreSegment p{
-  float: left;
-  margin-left: 5%;
   font-size: 15px;
   color: white;
 
-  /*Positioning*/
+  /* Positioning */
   top: 0;
   bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .sepScoreSegment{
-  display: flex;
+  display: inline-flex;
   width: 100%;
-  justify-content: space-between;
-  margin-top: 3%;
-}
-
-#separateScores{
-  width: 100%;
+  margin-top: 1%;
 }
 
 #overallScore h1{

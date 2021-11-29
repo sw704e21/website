@@ -37,7 +37,7 @@
   <div class="segmentContainer">
 
     <div class="cryptoScoreDiv">
-      <h1> Galaxy Score ({{cryptoInfo.id}})</h1>
+      <h1> Crypto Score TM ({{cryptoInfo.id}})</h1>
       <div id="overallScore">
         <h1> {{cryptoScore[0]}}/100 </h1>
         <mat-progress-bar mode="determinate" value="{{cryptoScore[0]}}"></mat-progress-bar>
@@ -46,20 +46,24 @@
       <div id="separateScores">
 
         <div class="sepScoreSegment">
-          <p>Price score</p>
+          <h2>Price score</h2>
           <mat-progress-bar mode="determinate" value="{{cryptoScore[1]}}"></mat-progress-bar>
+          <p>5/5</p>
         </div>
         <div class="sepScoreSegment">
-          <p>Social Impact Score</p>
+          <h2>Social Impact Score</h2>
           <mat-progress-bar mode="determinate" value="{{cryptoScore[2]}}"></mat-progress-bar>
+          <p>5/5</p>
         </div>
         <div class="sepScoreSegment">
-          <p>Average Sentiment</p>
+          <h2>Average Sentiment</h2>
           <mat-progress-bar mode="determinate" value="{{cryptoScore[3]}}"></mat-progress-bar>
+          <p>5/5</p>
         </div>
         <div class="sepScoreSegment">
-          <p>Correlation Rank</p>
+          <h2>Correlation Rank</h2>
           <mat-progress-bar mode="determinate" value="{{cryptoScore[4]}}"></mat-progress-bar>
+          <p>5/5</p>
         </div>
 
       </div>

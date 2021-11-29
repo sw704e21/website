@@ -37,26 +37,11 @@ export class CryptocurrenciesComponent implements OnInit {
       for (var i = 0; i < this.cryptoList.length; i++){
         this.cryptoList[i].id = resp[i].identifier;
         this.cryptoList[i].icon = resp[i].icon;
+        this.cryptoList[i].price = resp[i].price > 1 ? resp[i].price.toFixed(2): resp[i].price.toPrecision(4);
         //this.cryptoList[i].displayName = resp[i].displayName;
-        this.getPrice(this.cryptoList[i].id, i)
       }
       this.table.renderRows();
     })
-  }
-
-  getPrice(id: string, index: number): void{
-    //Caching for prices. Will save many API calls.
-    for (var i = 0; i < this.priceCache.length; i++){
-      if(this.priceCache[i][0] === id){
-        this.cryptoList[index].price = this.priceCache[i][1];
-        return;
-      }
-    }
-
-    this.cryptoServiceService.getPrice(id, index).subscribe(resp => {
-      this.cryptoList[index].price = resp.rate > 1 ? resp.rate.toFixed(2): resp.rate.toPrecision(4);
-      this.priceCache.push([id, resp.rate > 1 ? resp.rate.toFixed(2): resp.rate.toPrecision(4)])
-    } )
   }
 
 

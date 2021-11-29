@@ -4,8 +4,9 @@ body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
   padding: 30px;
-  background: rgb(9,10,11);
-  background: linear-gradient(160deg, rgba(9,10,11,1) 15%, rgba(77,119,168,1) 60%, rgba(164,207,244,1) 96%) fixed;
+  background: #485461;
+  background: linear-gradient(315deg, #485461 0%, #28313b 74%) fixed;
+
 }
 
 .mat-table{
@@ -20,3 +21,25 @@ body {
 }
 
 html {height: 100%}
+body {overflow: overlay;}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-color: #a19aa2 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #938f86;
+  border-radius: 10px;
+}

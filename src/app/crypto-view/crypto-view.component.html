@@ -1,48 +1,141 @@
 <body>
-<mat-sidenav-container class="example-container">
-  <mat-sidenav class="eh" opened mode="side">
-    <mat-button-toggle-group disabled vertical multiple class="seriesToggles">
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Price</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Price')">
-          </mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Mentions</div>
-          <div class="checkboxID"><mat-checkbox [checked]="true" class="checkboxID2" (change)="checkboxEvent($event, 'Mentions')"></mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Sentiment</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Sentiment')"></mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle>
-        <div class="Wrapper">
-          <div class="buttonID">Interactions</div>
-          <div class="checkboxID"><mat-checkbox class="checkboxID2" (change)="checkboxEvent($event, 'Interactions')"></mat-checkbox></div>
-        </div>
-      </mat-button-toggle>
+<div class="container">
+  <div class="cryptoNavBar">
+    <div class="tokenIdentifier">
+      <div id="tokenIcon"><img [src]="cryptoInfo.icon"/></div>
+      <div>
+        <div id="tokenName"> {{cryptoInfo.displayName}} </div>
+        <div id="tokenId"> {{cryptoInfo.id}} </div>
 
-    </mat-button-toggle-group>
-  </mat-sidenav>
-  <div class="chartDiv" id="chartDiv">
-    <mat-button-toggle-group  name="timeToggles" class="toggles" value="Week">
+      </div>
+      <div id="tokenPrice"> ${{cryptoInfo.price}}</div>
+    </div>
+
+    <mat-button-toggle-group  name="timeToggles" class="timeToggles" value="Week" >
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Day"> Day </mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Week">Week</mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Month">Month</mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="3Months">3 Months</mat-button-toggle>
       <mat-button-toggle (change)="onPeriodChange($event.value)" value="Year">Year</mat-button-toggle>
     </mat-button-toggle-group>
-    <highcharts-chart (load)="resizeChart()"
-      [chart]="chart"
-      style="width: 100%; height: 400px; display: block;"
-    ></highcharts-chart>
   </div>
-</mat-sidenav-container>
-</body>
 
+  <hr class="divider">
+
+  <div id="chartDiv" class="chartDiv">
+  </div>
+
+  <div class="toggleSeriesDiv">
+    <mat-button-toggle-group multiple name="seriesToggles" class="seriesToggle" value="Mentions" >
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Price"> Price </mat-button-toggle>
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Mentions"> Mentions </mat-button-toggle>
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Sentiment"> Sentiment </mat-button-toggle>
+      <mat-button-toggle class="seriesBtn" (change)="onSeriesToggle($event.value)" value="Interactions"> Interactions </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="segmentContainer">
+
+    <div class="cryptoScoreDiv">
+      <h1> Crypto Score TM ({{cryptoInfo.id}})</h1>
+      <div id="overallScore">
+        <h1> {{cryptoScore[0]}}/100 </h1>
+        <mat-progress-bar mode="determinate" value="{{cryptoScore[0]}}"></mat-progress-bar>
+      </div>
+
+      <div id="separateScores">
+
+        <div class="sepScoreSegment">
+          <h2>Price score</h2>
+          <mat-progress-bar mode="determinate" value="{{cryptoScore[1]}}"></mat-progress-bar>
+          <p>5/5</p>
+        </div>
+        <div class="sepScoreSegment">
+          <h2>Social Impact Score</h2>
+          <mat-progress-bar mode="determinate" value="{{cryptoScore[2]}}"></mat-progress-bar>
+          <p>5/5</p>
+        </div>
+        <div class="sepScoreSegment">
+          <h2>Average Sentiment</h2>
+          <mat-progress-bar mode="determinate" value="{{cryptoScore[3]}}"></mat-progress-bar>
+          <p>5/5</p>
+        </div>
+        <div class="sepScoreSegment">
+          <h2>Correlation Rank</h2>
+          <mat-progress-bar mode="determinate" value="{{cryptoScore[4]}}"></mat-progress-bar>
+          <p>5/5</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="tokenInfoDiv">
+      <div class="column">
+          <div class="row">
+            <div class="infoContainer">
+              <div class="smallText"> Pos Sent </div>
+              <div class="bigText"> {{cryptoInfo.posSentiment.toPrecision(4)}} </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="infoContainer">
+              <div class="smallText"> Neg Sent </div>
+              <div class="bigText"> {{cryptoInfo.negSentiment.toPrecision(4)}} </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="infoContainer">
+              <div class="smallText"> Rel Sent </div>
+              <div class="bigText"> {{cryptoInfo.relSentiment.toPrecision(4)}} </div>
+            </div>
+          </div>
+        </div>
+      <div class="column">
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> Interactions </div>
+            <div class="bigText"> {{cryptoInfo.mostInteractions}} </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> Mentions </div>
+            <div class="bigText"> {{cryptoInfo.mentions}} </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="infoContainer">
+            <div class="smallText"> 24h change </div>
+            <div class="bigText"> {{cryptoInfo.relMentions.toPrecision(4) +"%"}} </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  <div class="segmentContainer">
+    <div class="wordcloudDiv" id="wordcloudDiv"></div>
+  </div>
+
+  <div id="feedTitles">
+    <div id="feedAllText">
+      <div id="feedTextDiv">
+        <p id="feedText">Most relevant social media posts from Twitter and Reddit</p>
+      </div>
+      <div id="feedSubDiv">
+        <p id="feedSubText"> Click any word in the wordcloud to filter the posts</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="segmentContainerFEED">
+    <div class="twitterDiv">
+      <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark" data-cards="hidden" *ngFor="let twitterPost of twitterPosts;">
+        <a [href]="twitterPost"></a>
+      </blockquote>
+    </div>
+
+    <div class="redditDiv">
+      <iframe id="reddit-embed" *ngFor="let redditPost of redditPosts;" [src]="redditPost" style="border: none;" height="126" width="100%" scrolling="no"></iframe>
+    </div>
+  </div>
+</div>
+</body>

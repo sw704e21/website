@@ -1,4 +1,4 @@
-<mat-toolbar id="toolbar"> <span> <a class="LinkText" routerLink="/">{{title}}</a></span>
+<mat-toolbar id="toolbar"> <span> <a class="LinkText" (click)="reloadPage('', '/')" routerLink="/" >{{title}}</a></span>
   <div id="searchBarDiv">
       <mat-icon id="searchIcon">search</mat-icon>
       <mat-form-field id="searchBar">
@@ -11,7 +11,7 @@
 <div id="searchResultDiv" [style.display]="displaySearchResults" (mouseover)="hoverSearchResults=true" (mouseout)="hoverSearchResults=false">
   <ul id="searchResult" *ngFor="let crypto of tokenIdentifier; let i = index">
     <li *ngIf="i<5">
-      <a  routerLink="../crypto/{{crypto[0]}}" id="link" (click)="reloadPage(crypto[0])">
+      <a  routerLink="../crypto/{{crypto[0]}}" id="link" (click)="reloadPage(crypto[0], '/crypto/')">
         <div id="nameHeaderDiv">
           <div id="tokenIcon"><img [src]="crypto[2]" alt="TokenIcon"/></div>
         <div>

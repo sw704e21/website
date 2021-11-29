@@ -146,8 +146,8 @@
 
 .column{
   float: left;
-  width: 30%;
-  height: 100%;
+  width: 40%;
+  height: 80%;
 }
 
 .row{
@@ -156,14 +156,17 @@
 }
 
 .smallText{
-  font-size: 15px;
-  color: grey;
+  font-size: 18px;
+  height: 30px;
+  white-space: nowrap;
+  text-align: center;
+  color: white;
 }
 
 .bigText {
-  font-size: 24px;
-  color: white;
-  margin-top: 15%;
+  font-size: 18px;
+  text-align: center;
+  color: darkgray;
 }
 
 .cryptoScoreDiv{

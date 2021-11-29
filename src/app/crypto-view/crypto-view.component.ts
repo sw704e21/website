@@ -444,8 +444,8 @@ export class CryptoViewComponent implements OnInit {
         for (let i = 0; i < resp.length; i++){
           tempMentions.push(resp[i].mentions);
           tempInteractions.push(resp[i].interaction);
-          tempPosSentiment.push(resp[i].posSentiment)
-          tempNegSentiment.push(-resp[i].negSentiment)
+          tempPosSentiment.push(parseFloat(resp[i].posSentiment.toFixed(3)))
+          tempNegSentiment.push(-resp[i].negSentiment.toFixed(3))
           //tempSentiment.push(resp[i].sentiment);
         }
 

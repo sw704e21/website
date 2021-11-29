@@ -1,6 +1,6 @@
 .chartDiv{
   position: relative;
-  height: 400px;
+  height: 20%;
   width: 95%;
   left: 0;
   right: 0;
@@ -13,10 +13,10 @@
   left: 0;
   right: 0;
   width: 80%;
-  height: 325%;
   margin-top: 1%;
   margin-right: auto;
   margin-left: auto;
+  display: inline-block;
 }
 
 .cryptoNavBar{
@@ -325,40 +325,3 @@
   font-size: 15px;
   color: dimgrey;
 }
-
-
-/*.socialMediaPostsDiv{
-  margin: auto;
-  width: 45%;
-  height: 95%;
-  background-color: blue;
-}*/
-
-
-
-
-
-
-/*
-.seriesToggles {
-  font-size: 20px;
-  pointer-events: none;
-}
-
-.Wrapper {
-  width: 150px;
-  overflow: hidden;
-}
-.buttonID {
-  width: 125px;
-  text-align: left;
-  float:left;
-}
-.checkboxID {
-  overflow: hidden;
-}
-.checkboxID2 {
-  height: 0;
-  pointer-events: auto;
-}
- */

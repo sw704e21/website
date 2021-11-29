@@ -20,11 +20,6 @@ export class CryptoServiceService {
     return this.http.get<Crypto>(endpoint + "/coins/all", {params: params}).pipe(catchError(this.handleError));
   }
 
-  getPrice(id: string, index: number): Observable<any> {
-    return this.http.post("https://api.livecoinwatch.com/coins/single",
-      JSON.stringify({currency: 'USD', code: id, meta: true}),
-      {headers: headers});
-  }
 
   getPriceHistory(id: string, period: number): Observable<any> {
     return this.http.post("https://api.livecoinwatch.com/coins/single/history",

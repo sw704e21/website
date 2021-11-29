@@ -304,6 +304,7 @@ export class CryptoViewComponent implements OnInit {
   //This is the typescript file for the page that displays a specific crypto.
 
   cryptoInfo: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder", mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1, relSentiment: 1};
+  cryptoScore: number[] = [69, 100, 66, 74, 84]
   // Reddit posts
   redditLinkRef: string = '?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark'
   redditPosts: SafeUrl[] = [
@@ -370,7 +371,10 @@ export class CryptoViewComponent implements OnInit {
       borderColor: '#00000000',
       zIndex: -10,
       data: [],
-      visible: false
+      visible: false,
+      tooltip: {
+        pointFormat: 'Sentiment: ' + '<b>{point.y}</b>'
+      }
     }, true, true)
 
     //Add the negative sentiment series to the graph. Index 4
@@ -382,7 +386,10 @@ export class CryptoViewComponent implements OnInit {
       borderColor: '#00000000',
       zIndex: -10,
       data: [],
-      visible: false
+      visible: false,
+      tooltip: {
+        pointFormat: 'Sentiment: ' + '<b>{point.y}</b>'
+      }
     }, true, true)
 
     //Add the sentiment series to the graph. Index 3
@@ -466,7 +473,11 @@ export class CryptoViewComponent implements OnInit {
   getCryptoInfo(): void {
     this.cryptoServiceService.getCryptoInfo(this.route.snapshot.paramMap.get("id")!)
       .subscribe(resp => {this.cryptoInfo = resp; this.cryptoInfo.id = resp.identifier;
-        this.cryptoInfo.icon = this.cryptoInfo.icon.replace("32","64")})
+        this.cryptoInfo.icon = this.cryptoInfo.icon.replace("32","64");
+        this.cryptoInfo.price = parseFloat(this.cryptoInfo.price > 1
+          ? this.cryptoInfo.price.toFixed(2)
+          : this.cryptoInfo.price.toPrecision(4));
+      })
   }
 
   // Updates the series option for each series

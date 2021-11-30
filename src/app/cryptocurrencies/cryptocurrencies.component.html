@@ -20,7 +20,7 @@
         Momentum
       </div>
     </th>
-    <td id="finalScore" mat-cell  *matCellDef="let element"> {{element.final_score}}/100 </td>
+    <td class="finalScore" mat-cell #finalScore *matCellDef="let element"> {{element.final_score}}/100 </td>
   </ng-container>
 
   <ng-container matColumnDef="price">

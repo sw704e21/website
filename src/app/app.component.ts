@@ -55,7 +55,7 @@ export class AppComponent {
     }
   }
 
-  reloadPage(param: string) {
-    window.location.assign('../crypto/' + param)
+  reloadPage(param: string, destination: string) {
+    window.location.assign('..'+ destination + param)
   }
 }

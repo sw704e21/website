@@ -16,7 +16,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   cryptoList: Crypto[] = []
   priceCache: [string, Number][] = []
-  displayedColumns: string[] = ['name', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
+  displayedColumns: string[] = ['name', 'momentum', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
 
@@ -28,6 +28,12 @@ export class CryptocurrenciesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCryptocurrencies(this.params);
+
+    window.addEventListener('load', (event) => {
+      console.log(document.getElementById('finalScore'))
+      console.log(document.readyState)
+    })
+
   }
 
   //Gets currencies for the table on the frontpage
@@ -38,10 +44,11 @@ export class CryptocurrenciesComponent implements OnInit {
         this.cryptoList[i].id = resp[i].identifier;
         this.cryptoList[i].icon = resp[i].icon;
         this.cryptoList[i].price = resp[i].price > 1 ? resp[i].price.toFixed(2): resp[i].price.toPrecision(4);
-        //this.cryptoList[i].displayName = resp[i].displayName;
       }
-      this.table.renderRows();
+        this.table.renderRows();
     })
+
+
   }
 
 

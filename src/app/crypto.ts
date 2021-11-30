@@ -11,4 +11,11 @@
   relSentiment: Number;
   posSentiment: Number;
   negSentiment: Number;
+
+  //Momentum score
+  final_score: number;
+  average_sentiment: number;
+  correlation_rank: number;
+  price_score: number;
+  social_score: number;
 }

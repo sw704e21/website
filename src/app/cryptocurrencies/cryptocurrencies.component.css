@@ -35,6 +35,17 @@ td.mat-column-price {
   font-size: 15px;
 }
 
+.mat-column-momentum {
+  padding-left: 32px;
+  padding-right: 100px;
+  width: 64px;
+  font-size: 20px;
+  text-align: center;
+}
+td.mat-column-momentum {
+  font-size: 15px;
+}
+
 .mat-column-mentions {
   font-size: 20px;
   width: 100px;

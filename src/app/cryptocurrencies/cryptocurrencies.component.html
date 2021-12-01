@@ -20,7 +20,12 @@
         Momentum
       </div>
     </th>
-    <td class="finalScore" mat-cell #finalScore *matCellDef="let element"> {{element.final_score}}/100 </td>
+    <td [ngClass]="{'color-U10': element.final_score <= 10, 'color-U20': element.final_score <= 20 && element.final_score > 10,
+     'color-U30': element.final_score <= 30 && element.final_score > 20, 'color-U40': element.final_score <= 40 && element.final_score > 30,
+     'color-U50': element.final_score <= 50 && element.final_score > 40, 'color-U60': element.final_score <= 60 && element.final_score > 50,
+     'color-U70': element.final_score <= 70 && element.final_score > 60, 'color-U80': element.final_score <= 80 && element.final_score > 70,
+     'color-U90': element.final_score < 90 && element.final_score > 80, 'color-O90': element.final_score >= 90}"
+        mat-cell  *matCellDef="let element"> {{element.final_score}}/100 </td>
   </ng-container>
 
   <ng-container matColumnDef="price">
@@ -45,7 +50,7 @@
         24h change
       </div>
     </th>
-    <td mat-cell *matCellDef="let element" [style.color]="element.relMentions>0? '#26d870':'#ff7060'"> {{element.relMentions.toFixed(2) + '%'}} </td>
+    <td mat-cell *matCellDef="let element" [style.color]="element.relMentions>0? '#8cdd7a':'#e54057'"> {{element.relMentions.toFixed(2) + '%'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="interactions">
@@ -65,7 +70,7 @@
         Pos/Neg
       </div>
     </th>
-    <td mat-cell *matCellDef="let element" [style.color]="element.relSentiment>1? '#26d870': (element.relSentiment===1 ? '#FFFFFF':'#ff7060')"> {{element.relSentiment.toFixed(2)}} </td>
+    <td mat-cell *matCellDef="let element" [style.color]="element.relSentiment>1? '#8cdd7a': (element.relSentiment===1 ? '#FFFFFF':'#e54057')"> {{element.relSentiment.toFixed(2)}} </td>
 
   </ng-container>
 

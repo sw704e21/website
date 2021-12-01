@@ -14,7 +14,7 @@ import {delay} from "rxjs/operators";
   templateUrl: './cryptocurrencies.component.html',
   styleUrls: ['./cryptocurrencies.component.css']
 })
-export class CryptocurrenciesComponent implements OnInit, AfterViewInit {
+export class CryptocurrenciesComponent implements OnInit {
 
   cryptoList: Crypto[] = []
   priceCache: [string, Number][] = []
@@ -33,26 +33,6 @@ export class CryptocurrenciesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getCryptocurrencies(this.params);
 
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() =>
-      {
-
-        var length = this.table._contentColumnDefs.get(1)?.
-        _table._elementRef.nativeElement.getElementsByClassName('finalScore').length;
-
-        for(var i = 0; i < length; i++){
-        //  this.table._contentColumnDefs.get(1)?.
-        //  _table._elementRef.nativeElement.getElementsByClassName('finalScore')[i].nativeElement.style.color = 'red';
-        }
-
-        console.log(this.table._contentColumnDefs.get(1)?.
-        _table._elementRef.nativeElement.getElementsByClassName('finalScore')[3].style)
-        this.finalScore.nativeElement.style.color = 'red'
-
-      },
-      500);
   }
 
   //Gets currencies for the table on the frontpage

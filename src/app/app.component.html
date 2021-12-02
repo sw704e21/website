@@ -9,19 +9,21 @@
 </mat-toolbar>
 
 <div id="searchResultDiv" [style.display]="displaySearchResults" (mouseover)="hoverSearchResults=true" (mouseout)="hoverSearchResults=false">
+  <div class="AnchorDiv">
   <ul id="searchResult" *ngFor="let crypto of tokenIdentifier; let i = index">
     <li *ngIf="i<5">
       <a  routerLink="../crypto/{{crypto[0]}}" id="link" (click)="reloadPage(crypto[0], '/crypto/')">
         <div id="nameHeaderDiv">
           <div id="tokenIcon"><img [src]="crypto[2]" alt="TokenIcon"/></div>
-        <div>
-          <div id="nameText"> {{crypto[1]}}</div>
-          <div id="idText"> {{crypto[0]}}</div>
+          <div>
+            <div id="nameText"> {{crypto[1]}}</div>
+            <div id="idText"> {{crypto[0]}}</div>
+          </div>
         </div>
-      </div>
       </a>
     </li>
   </ul>
+</div>
 </div>
 
 <router-outlet></router-outlet>

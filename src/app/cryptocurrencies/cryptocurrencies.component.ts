@@ -47,7 +47,6 @@ export class CryptocurrenciesComponent implements OnInit {
         this.table.renderRows();
     })
 
-
   }
 
 

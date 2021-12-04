@@ -39,31 +39,31 @@
     <div class="cryptoScoreDiv">
       <h1> Crypto Score TM ({{cryptoInfo.id}})</h1>
       <div id="overallScore">
-        <h1> {{cryptoScore[0]}}/100 </h1>
-        <mat-progress-bar mode="determinate" value="{{cryptoScore[0]}}"></mat-progress-bar>
+        <h1> {{cryptoInfo.final_score}}/100 </h1>
+        <mat-progress-bar mode="determinate" value="{{cryptoInfo.final_score}}"></mat-progress-bar>
       </div>
 
       <div id="separateScores">
 
         <div class="sepScoreSegment">
           <h2>Price score</h2>
-          <mat-progress-bar mode="determinate" value="{{cryptoScore[1]}}"></mat-progress-bar>
-          <p>5/5</p>
+          <mat-progress-bar mode="determinate" value="{{cryptoInfo.price_score * 20}}"></mat-progress-bar>
+          <p>{{cryptoInfo.price_score}}/5</p>
         </div>
         <div class="sepScoreSegment">
           <h2>Social Impact Score</h2>
-          <mat-progress-bar mode="determinate" value="{{cryptoScore[2]}}"></mat-progress-bar>
-          <p>5/5</p>
+          <mat-progress-bar mode="determinate" value="{{cryptoInfo.social_score * 20}}"></mat-progress-bar>
+          <p>{{cryptoInfo.social_score}}/5</p>
         </div>
         <div class="sepScoreSegment">
           <h2>Average Sentiment</h2>
-          <mat-progress-bar mode="determinate" value="{{cryptoScore[3]}}"></mat-progress-bar>
-          <p>5/5</p>
+          <mat-progress-bar mode="determinate" value="{{cryptoInfo.average_sentiment * 20}}"></mat-progress-bar>
+          <p>{{cryptoInfo.average_sentiment}}/5</p>
         </div>
         <div class="sepScoreSegment">
           <h2>Correlation Rank</h2>
-          <mat-progress-bar mode="determinate" value="{{cryptoScore[4]}}"></mat-progress-bar>
-          <p>5/5</p>
+          <mat-progress-bar mode="determinate" value="{{cryptoInfo.correlation_rank * 20}}"></mat-progress-bar>
+          <p>{{cryptoInfo.correlation_rank}}/5</p>
         </div>
 
       </div>

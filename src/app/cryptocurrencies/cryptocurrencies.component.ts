@@ -1,11 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {Crypto} from "../crypto";
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {CryptoServiceService} from "../crypto-service.service";
 import {Sort} from "@angular/material/sort";
-import {MatTable} from "@angular/material/table";
+import {MatCell, MatColumnDef, MatTable} from "@angular/material/table";
 import {HttpParams} from "@angular/common/http";
+import {TimeInterval} from "rxjs/internal-compatibility";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -16,11 +18,13 @@ export class CryptocurrenciesComponent implements OnInit {
 
   cryptoList: Crypto[] = []
   priceCache: [string, Number][] = []
-  displayedColumns: string[] = ['name', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
+  displayedColumns: string[] = ['name', 'momentum', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
 
   @ViewChild(MatTable) table: MatTable<any>;
+
+  @ViewChild('finalScore') finalScore: ElementRef;
 
   params = new HttpParams()
     .set('length', 25)
@@ -28,6 +32,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCryptocurrencies(this.params);
+
   }
 
   //Gets currencies for the table on the frontpage
@@ -38,10 +43,10 @@ export class CryptocurrenciesComponent implements OnInit {
         this.cryptoList[i].id = resp[i].identifier;
         this.cryptoList[i].icon = resp[i].icon;
         this.cryptoList[i].price = resp[i].price > 1 ? resp[i].price.toFixed(2): resp[i].price.toPrecision(4);
-        //this.cryptoList[i].displayName = resp[i].displayName;
       }
-      this.table.renderRows();
+        this.table.renderRows();
     })
+
   }
 
 

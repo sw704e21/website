@@ -35,6 +35,17 @@ td.mat-column-price {
   font-size: 15px;
 }
 
+.mat-column-momentum {
+  padding-left: 32px;
+  padding-right: 100px;
+  width: 64px;
+  font-size: 20px;
+  text-align: center;
+}
+td.mat-column-momentum {
+  font-size: 15px;
+}
+
 .mat-column-mentions {
   font-size: 20px;
   width: 100px;
@@ -139,4 +150,37 @@ td.mat-column-pos-neg {
 
 .idText{
   font-size: 17px;
+}
+
+
+/* Momentum colors, for different values */
+.color-U10 {
+  color: #e54057;
+}
+.color-U20 {
+  color: #ec5b61;
+}
+.color-U30 {
+  color: #f07f6e;
+}
+.color-U40 {
+  color: #f59f79
+}
+.color-U50 {
+  color: #f9bc83
+}
+.color-U60 {
+  color: #fedc8f
+}
+.color-U70 {
+  color: #e6e08c
+}
+.color-U80 {
+  color: #b8df83
+}
+.color-U90 {
+  color: #8cdd7a
+}
+.color-O90 {
+  color: #77dd76
 }

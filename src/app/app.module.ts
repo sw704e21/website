@@ -20,7 +20,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -48,7 +48,7 @@ import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@ang
     FormsModule,
     MatProgressBarModule
   ],
-  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

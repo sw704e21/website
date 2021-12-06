@@ -4,9 +4,9 @@ import {CryptoViewComponent} from "./crypto-view/crypto-view.component";
 import {CryptocurrenciesComponent} from "./cryptocurrencies/cryptocurrencies.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'crypto/:id', component: CryptoViewComponent },
-  { path: 'frontpage', component: CryptocurrenciesComponent }
+  { path: '', component: CryptocurrenciesComponent }
 ];
 
 @NgModule({

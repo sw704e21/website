@@ -10,6 +10,7 @@ import {Crypto} from "../crypto";
 import {HttpParams} from "@angular/common/http";
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import * as Highcharts from 'highcharts';
+import {coerceStringArray} from "@angular/cdk/coercion";
 const Wordcloud = require('highcharts/modules/wordcloud');
 Wordcloud(Highcharts);
 
@@ -297,7 +298,7 @@ export class CryptoViewComponent implements OnInit {
 
     this.initSeries();
     this.getCryptoInfo();
-    this.getTFDict("BTC");
+    this.getTFDict();
 
     (<any>window).twttr.widgets.load();
   }
@@ -485,16 +486,17 @@ export class CryptoViewComponent implements OnInit {
   }
 
   // Get the tfdict for a specific coin, and display it in the wordcloud
-  getTFDict(id: string): void{
-    let tempDict: [string, number][]
+  getTFDict(): void{
+    let tempDict: [name: string, weight: number][] = []
     this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!)
       .subscribe(resp => {
-          Object.entries(resp).forEach(
-            ([key, value]) => console.log(key, )
-          )
+        for(let key in resp){
+          tempDict.push([key.toString(), resp[key].total])
         }
 
-      )
+        this.wordcloud.series[0].setData(tempDict)
+
+      })
   }
 
   // Updates the series option for each series

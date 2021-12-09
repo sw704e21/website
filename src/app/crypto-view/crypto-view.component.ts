@@ -297,6 +297,7 @@ export class CryptoViewComponent implements OnInit {
 
     this.initSeries();
     this.getCryptoInfo();
+    this.getTFDict("BTC");
 
     (<any>window).twttr.widgets.load();
   }
@@ -306,7 +307,6 @@ export class CryptoViewComponent implements OnInit {
   cryptoInfo: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder",
     mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1,
     relSentiment: 1, average_sentiment: 1, final_score: 50, price_score: 1, social_score: 1, correlation_rank: 1};
-  cryptoScore: number[] = []
   // Reddit posts
   redditLinkRef: string = '?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark'
   redditPosts: SafeUrl[] = [
@@ -322,6 +322,8 @@ export class CryptoViewComponent implements OnInit {
     this.cleanUrl('https://twitter.com/Bitcoin/status/1463207674519048196' + this.twitterLinkRef)
   ]
 
+  // Word dictionary
+  tfDict: [string, number][]
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
 
@@ -479,9 +481,20 @@ export class CryptoViewComponent implements OnInit {
         this.cryptoInfo.price = parseFloat(this.cryptoInfo.price > 1
           ? this.cryptoInfo.price.toFixed(2)
           : this.cryptoInfo.price.toPrecision(4));
-
-        console.log(this.cryptoInfo)
       })
+  }
+
+  // Get the tfdict for a specific coin, and display it in the wordcloud
+  getTFDict(id: string): void{
+    let tempDict: [string, number][]
+    this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!)
+      .subscribe(resp => {
+          Object.entries(resp).forEach(
+            ([key, value]) => console.log(key, )
+          )
+        }
+
+      )
   }
 
   // Updates the series option for each series

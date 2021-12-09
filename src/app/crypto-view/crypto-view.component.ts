@@ -179,9 +179,7 @@ export class CryptoViewComponent implements OnInit {
           point: {
             // Functionality for when the word is clicked
             events: {
-              click: function() {
-                
-              }
+              click: this.sortPosts.bind(this)
             }
           }
         }
@@ -498,8 +496,7 @@ export class CryptoViewComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url)
   }
 
-  // Sort the social media posts in relation to the selected word in wordcloud
-  sortPosts(word: string){
-    console.log(this.tfDict.keys())
+  sortPosts(obj: any){
+    console.log(obj.point.name)
   }
 }

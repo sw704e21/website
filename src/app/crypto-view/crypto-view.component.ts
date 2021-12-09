@@ -395,6 +395,8 @@ export class CryptoViewComponent implements OnInit {
           return b[1] - a[1];
         });
 
+        tempDict = tempDict.slice(0, 100)
+
         this.tfDict = tempDict
         this.wordcloud.series[0].setData(tempDict)
 
@@ -498,5 +500,9 @@ export class CryptoViewComponent implements OnInit {
 
   sortPosts(obj: any){
     console.log(obj.point.name)
+    let occs: [name: string, weight: number, occurences: string[]][] = [];
+
+    occs = this.tfDict.filter(x => x[0] == obj.point.name)
+    console.log(occs[0][2])
   }
 }

@@ -200,18 +200,10 @@ export class CryptoViewComponent implements OnInit {
     relSentiment: 1, average_sentiment: 1, final_score: 50, price_score: 1, social_score: 1, correlation_rank: 1};
   // Reddit posts
   redditLinkRef: string = '?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark'
-  redditPosts: SafeUrl[] = [
-    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1j47o/just_bought_my_first_00016_btc/' + this.redditLinkRef),
-    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1hiyo/saylor_bitcoin_will_100_x_from_here_5000000/'+ this.redditLinkRef),
-    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1d0c3/bitcoin_will_reach_500k_in_five_years_as_a_result/' + this.redditLinkRef)
-  ]
+  redditPosts: SafeUrl[] = []
   // Twitter posts
   twitterLinkRef: string = '?ref_src=twsrc%5Etfw'
-  twitterPosts: SafeUrl[] = [
-    this.cleanUrl('https://twitter.com/Bitcoin/status/1463543725620019200' + this.twitterLinkRef),
-    this.cleanUrl('https://twitter.com/Bitcoin/status/1463514080820416513' + this.twitterLinkRef),
-    this.cleanUrl('https://twitter.com/Bitcoin/status/1463207674519048196' + this.twitterLinkRef)
-  ]
+  twitterPosts: SafeUrl[] = []
 
   // Word dictionary
   tfDict: [name: string,weight: number,occurences:string[]][] = []
@@ -481,12 +473,26 @@ export class CryptoViewComponent implements OnInit {
   }
 
   sortPosts(obj: any){
-    console.log(obj.point.name)
+    let tempArrTwi: SafeUrl[] = []
+    let tempArrRed: SafeUrl[] = []
+
     // Get the URL to all occurences of the word
     let occs: string[];
     occs = this.tfDict.filter(x => x[0] == obj.point.name)[0][2]
-    occs = occs.filter((value, index) => occs.indexOf(value) === index)
 
-    console.log(occs)
+    // Split the urls into reddit and twitter arrays
+    for (let key in occs){
+      if(key.includes('twitter')){
+        tempArrTwi.push(this.cleanUrl(key + this.twitterLinkRef))
+      }
+      else if (key.includes('reddit.com')){
+
+        tempArrRed.push(this.cleanUrl(key.replace("reddit.com", "redditmedia.com")+this.redditLinkRef))
+      }
+    }
+    this.twitterPosts = tempArrTwi
+    this.redditPosts = tempArrRed
+    console.log(this.twitterPosts)
+    console.log(this.redditPosts)
   }
 }

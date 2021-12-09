@@ -377,7 +377,7 @@ export class CryptoViewComponent implements OnInit {
           tempDict.push([key.toString(), resp[key].total, resp[key].occurences])
         }
 
-        // sort by value
+        // Sort by value
         tempDict.sort(function (a, b) {
           return b[1] - a[1];
         });
@@ -386,6 +386,9 @@ export class CryptoViewComponent implements OnInit {
 
         this.tfDict = tempDict
         this.wordcloud.series[0].setData(tempDict)
+
+        // Get the posts for the most common keyword
+        this.sortPosts(this.route.snapshot.paramMap.get("id"))
       })
   }
 
@@ -478,7 +481,15 @@ export class CryptoViewComponent implements OnInit {
 
     // Get the URL to all occurences of the word
     let occs: string[];
-    occs = this.tfDict.filter(x => x[0] == obj.point.name)[0][2]
+
+    if (typeof obj == 'string'){
+      console.log("I am a string!")
+      occs = this.tfDict.filter(x => x[0] == obj)[0][2]
+    } else {
+      console.log("I am NOT a string!")
+      occs = this.tfDict.filter(x => x[0] == obj.point.name)[0][2]
+    }
+    console.log(this.tfDict[0][2])
 
     // Split the urls into reddit and twitter arrays
     for (let key in occs){
@@ -492,7 +503,5 @@ export class CryptoViewComponent implements OnInit {
     }
     this.twitterPosts = tempArrTwi
     this.redditPosts = tempArrRed
-    console.log(this.twitterPosts)
-    console.log(this.redditPosts)
   }
 }

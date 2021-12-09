@@ -56,6 +56,10 @@ export class AppComponent {
   }
 
   reloadPage(param: string, destination: string) {
-    window.location.assign('..'+ destination + param)
+    window.location.assign(destination + param)
+  }
+  reloadPageSpecific(param: string, destination: string) {
+    window.location.assign(destination + param)
+    window.location.reload();
   }
 }

@@ -383,11 +383,6 @@ export class CryptoViewComponent implements OnInit {
       .subscribe(resp => {
         for(let key in resp){
           tempDict.push([key.toString(), resp[key].total, resp[key].occurences])
-
-          //Get all urls for relevant posts
-          /*for (let urlKey in resp[key].occurences){
-            tempUrl.push(urlKey)
-          }*/
         }
 
         // sort by value
@@ -399,10 +394,6 @@ export class CryptoViewComponent implements OnInit {
 
         this.tfDict = tempDict
         this.wordcloud.series[0].setData(tempDict)
-
-        // Was very cool but not needed :(
-        /*tempUrl = tempUrl.filter((value, index) => tempUrl.indexOf(value) === index)
-        console.log(tempUrl)*/
       })
   }
 
@@ -432,13 +423,6 @@ export class CryptoViewComponent implements OnInit {
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
-    // Sentiment series
-    /*this.chart.ref.series[5].update({
-      type: 'bar',
-      color: '#0066FF',
-      pointStart: Date.now() - period,
-      pointInterval: period / numPoints
-    })*/
   }
 
   // Changes how far back to display the data
@@ -486,8 +470,6 @@ export class CryptoViewComponent implements OnInit {
         this.chart.yAxis[3].update({visible: !this.chart.series[3].visible});
         this.chart.series[3].update({visible: !this.chart.series[3].visible, type: 'bar'})
         this.chart.series[4].update({visible: !this.chart.series[4].visible, type: 'bar'})
-        //Total sentiment
-        //this.chart.ref.series[5].update({visible: event.checked, type: 'bar'})
         break;
     }
 
@@ -500,9 +482,11 @@ export class CryptoViewComponent implements OnInit {
 
   sortPosts(obj: any){
     console.log(obj.point.name)
-    let occs: [name: string, weight: number, occurences: string[]][] = [];
+    // Get the URL to all occurences of the word
+    let occs: string[];
+    occs = this.tfDict.filter(x => x[0] == obj.point.name)[0][2]
+    occs = occs.filter((value, index) => occs.indexOf(value) === index)
 
-    occs = this.tfDict.filter(x => x[0] == obj.point.name)
-    console.log(occs[0][2])
+    console.log(occs)
   }
 }

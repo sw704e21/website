@@ -391,6 +391,12 @@ export class CryptoViewComponent implements OnInit {
             tempUrl.push(urlKey)
           }*/
         }
+
+        // sort by value
+        tempDict.sort(function (a, b) {
+          return b[1] - a[1];
+        });
+
         this.tfDict = tempDict
         this.wordcloud.series[0].setData(tempDict)
 

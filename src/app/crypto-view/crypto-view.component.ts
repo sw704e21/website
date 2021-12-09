@@ -162,115 +162,7 @@ export class CryptoViewComponent implements OnInit {
       },
       series: [{
         type: 'wordcloud',
-        data: [{
-          name: 'Lorem',
-          weight: 6
-        }, {
-          name: 'Ipsum',
-          weight: 8
-        }, {
-          name: 'Dolor',
-          weight: 4
-        }, {
-          name: 'Lorem2',
-          weight: 2
-        }, {
-          name: 'Ipsum2',
-          weight: 2
-        }, {
-          name: 'Dolor2',
-          weight: 1
-        }, {
-          name: 'Lorem3',
-          weight: 3
-        }, {
-          name: 'Ipsum3',
-          weight: 2
-        }, {
-          name: 'Dolor3',
-          weight: 1
-        }, {
-          name: 'Lorem4',
-          weight: 3
-        }, {
-          name: 'Ipsum4',
-          weight: 4
-        }, {
-          name: 'Dolor4',
-          weight: 1
-        }, {
-          name: 'Lorem',
-          weight: 6
-        }, {
-          name: 'Ipsum',
-          weight: 8
-        }, {
-          name: 'Dolor',
-          weight: 4
-        }, {
-          name: 'Lorem2',
-          weight: 2
-        }, {
-          name: 'Ipsum2',
-          weight: 2
-        }, {
-          name: 'Dolor2',
-          weight: 1
-        }, {
-          name: 'Lorem3',
-          weight: 3
-        }, {
-          name: 'Ipsum3',
-          weight: 2
-        }, {
-          name: 'Dolor3',
-          weight: 1
-        }, {
-          name: 'Lorem4',
-          weight: 3
-        }, {
-          name: 'Ipsum4',
-          weight: 4
-        }, {
-          name: 'Dolor4',
-          weight: 1
-        }, {
-          name: 'Lorem',
-          weight: 6
-        }, {
-          name: 'Ipsum',
-          weight: 8
-        }, {
-          name: 'Dolor',
-          weight: 4
-        }, {
-          name: 'Lorem2',
-          weight: 2
-        }, {
-          name: 'Ipsum2',
-          weight: 2
-        }, {
-          name: 'Dolor2',
-          weight: 1
-        }, {
-          name: 'Lorem3',
-          weight: 3
-        }, {
-          name: 'Ipsum3',
-          weight: 2
-        }, {
-          name: 'Dolor3',
-          weight: 1
-        }, {
-          name: 'Lorem4',
-          weight: 3
-        }, {
-          name: 'Ipsum4',
-          weight: 4
-        }, {
-          name: 'Dolor4',
-          weight: 1
-        }],
+        data: [],
         name: ''
       }],
       title: {
@@ -288,7 +180,7 @@ export class CryptoViewComponent implements OnInit {
             // Functionality for when the word is clicked
             events: {
               click: function() {
-                console.log(this.name)
+                
               }
             }
           }
@@ -324,7 +216,7 @@ export class CryptoViewComponent implements OnInit {
   ]
 
   // Word dictionary
-  tfDict: [string, number][]
+  tfDict: [name: string,weight: number,occurences:string[]][] = []
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
 
@@ -487,15 +379,24 @@ export class CryptoViewComponent implements OnInit {
 
   // Get the tfdict for a specific coin, and display it in the wordcloud
   getTFDict(): void{
-    let tempDict: [name: string, weight: number][] = []
+    let tempDict: [name: string, weight: number, occurences: string[]][] = []
+    let tempUrl: string[] = []
     this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!)
       .subscribe(resp => {
         for(let key in resp){
-          tempDict.push([key.toString(), resp[key].total])
-        }
+          tempDict.push([key.toString(), resp[key].total, resp[key].occurences])
 
+          //Get all urls for relevant posts
+          /*for (let urlKey in resp[key].occurences){
+            tempUrl.push(urlKey)
+          }*/
+        }
+        this.tfDict = tempDict
         this.wordcloud.series[0].setData(tempDict)
 
+        // Was very cool but not needed :(
+        /*tempUrl = tempUrl.filter((value, index) => tempUrl.indexOf(value) === index)
+        console.log(tempUrl)*/
       })
   }
 
@@ -591,5 +492,8 @@ export class CryptoViewComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url)
   }
 
-
+  // Sort the social media posts in relation to the selected word in wordcloud
+  sortPosts(word: string){
+    console.log(this.tfDict.keys())
+  }
 }

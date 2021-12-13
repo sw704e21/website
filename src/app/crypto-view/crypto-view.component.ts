@@ -369,8 +369,10 @@ export class CryptoViewComponent implements OnInit {
 
   // Get the tfdict for a specific coin, and display it in the wordcloud
   getTFDict(): void{
+
+    let params = new HttpParams().set('length', 50);
     let tempDict: [name: string, weight: number][] = []
-    this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!, 20)
+    this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!, params)
       .subscribe(resp => {
         for(let i = 0; i < resp.length; i++){
           tempDict.push([resp[i]._id, resp[i].total])

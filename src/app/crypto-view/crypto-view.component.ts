@@ -35,6 +35,7 @@ export class CryptoViewComponent implements OnInit {
   private wordcloud: any;
 
   ngOnInit(): void {
+
     // Render the highcharts to the html
     this.chart = Highcharts.chart('chartDiv', {
       chart: {
@@ -190,23 +191,22 @@ export class CryptoViewComponent implements OnInit {
     this.getCryptoInfo();
     this.getTFDict();
 
-    (<any>window).twttr.widgets.load();
   }
 
   //This is the typescript file for the page that displays a specific crypto.
 
   cryptoInfo: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder",
-    mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1,
-    relSentiment: 1, average_sentiment: 1, final_score: 50, price_score: 1, social_score: 1, correlation_rank: 1};
+    mentions: 0, relMentions: 0, negSentiment: 0, posSentiment: 0, price: 0, mostInfluence: 0, mostInteractions: 0,
+    relSentiment: 0, average_sentiment: 0, final_score: 0, price_score: 0, social_score: 0, correlation_rank: 0};
   // Reddit posts
   redditLinkRef: string = '?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark'
   redditPosts: SafeUrl[] = []
   // Twitter posts
   twitterLinkRef: string = '?ref_src=twsrc%5Etfw'
   twitterPosts: SafeUrl[] = []
-
+  twitterDivReload: boolean = true;
   // Word dictionary
-  tfDict: [name: string,weight: number,occurences:string[]][] = []
+  tfDict: [name: string,weight: number][] = []
 
   constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
 
@@ -369,20 +369,17 @@ export class CryptoViewComponent implements OnInit {
 
   // Get the tfdict for a specific coin, and display it in the wordcloud
   getTFDict(): void{
-    let tempDict: [name: string, weight: number, occurences: string[]][] = []
-    let tempUrl: string[] = []
-    this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!)
+    let tempDict: [name: string, weight: number][] = []
+    this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!, 20)
       .subscribe(resp => {
-        for(let key in resp){
-          tempDict.push([key.toString(), resp[key].total, resp[key].occurences])
+        for(let i = 0; i < resp.length; i++){
+          tempDict.push([resp[i]._id, resp[i].total])
         }
 
         // Sort by value
         tempDict.sort(function (a, b) {
           return b[1] - a[1];
         });
-
-        tempDict = tempDict.slice(0, 100)
 
         this.tfDict = tempDict
         this.wordcloud.series[0].setData(tempDict)
@@ -476,32 +473,43 @@ export class CryptoViewComponent implements OnInit {
   }
 
   sortPosts(obj: any){
+    this.twitterPosts = []
     let tempArrTwi: SafeUrl[] = []
     let tempArrRed: SafeUrl[] = []
 
-    // Get the URL to all occurences of the word
-    let occs: string[];
+    // Get the URL of all occurences of the word
+    let occs: string[] = [];
+    let params = new HttpParams().set('length', 10);
+
 
     if (typeof obj == 'string'){
       console.log("I am a string!")
-      occs = this.tfDict.filter(x => x[0] == obj)[0][2]
+      this.cryptoServiceService.getURLS(this.route.snapshot.paramMap.get("id")!, obj, params).subscribe(resp => {
+        occs = resp.urls
+        console.log(occs)
+        for(let i = 0; i < occs.length; i++){
+          if(occs[i].includes('reddit.com')){
+            tempArrRed.push(this.cleanUrl(occs[i].replace("reddit.com", "redditmedia.com")+ this.redditLinkRef))
+          }
+        }
+        this.redditPosts = tempArrRed;
+      })
     } else {
       console.log("I am NOT a string!")
-      occs = this.tfDict.filter(x => x[0] == obj.point.name)[0][2]
+      this.cryptoServiceService.getURLS(this.route.snapshot.paramMap.get("id")!, obj.point.name, params).subscribe(resp => {
+        occs = resp.urls
+        console.log(occs)
+        for(let i = 0; i < occs.length; i++){
+          if(occs[i].includes('reddit.com')){
+            tempArrRed.push(this.cleanUrl(occs[i].replace("reddit.com", "redditmedia.com")+ this.redditLinkRef))
+          }
+        }
+        this.redditPosts = tempArrRed;
+      })
     }
-    console.log(this.tfDict[0][2])
 
-    // Split the urls into reddit and twitter arrays
-    for (let key in occs){
-      if(key.includes('twitter')){
-        tempArrTwi.push(this.cleanUrl(key + this.twitterLinkRef))
-      }
-      else if (key.includes('reddit.com')){
+    this.twitterPosts = tempArrTwi;
+    (<any>window).twttr.widgets.load();
 
-        tempArrRed.push(this.cleanUrl(key.replace("reddit.com", "redditmedia.com")+this.redditLinkRef))
-      }
-    }
-    this.twitterPosts = tempArrTwi
-    this.redditPosts = tempArrRed
   }
 }

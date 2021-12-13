@@ -39,6 +39,13 @@ export class CryptoServiceService {
     return this.http.get<Crypto>(endpoint + '/coins/' + id + "/info").pipe(catchError(this.handleError));
   }
 
+  getTFDict(id: string, params: HttpParams): Observable<any>{
+    return this.http.get<Crypto>(endpoint + '/data/tfdict/' + id + "/", {params: params}).pipe(catchError(this.handleError));
+  }
+  getURLS(id: string, word: string,  params: HttpParams): Observable<any>{
+    return this.http.get<Crypto>(endpoint + '/data/urls/' + id + "/" + word + "/", {params: params}).pipe(catchError(this.handleError));
+  }
+
   //Primitive error handling
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {

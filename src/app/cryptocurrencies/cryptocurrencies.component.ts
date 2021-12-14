@@ -3,11 +3,8 @@ import {Crypto} from "../crypto";
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {CryptoServiceService} from "../crypto-service.service";
-import {Sort} from "@angular/material/sort";
 import {MatCell, MatColumnDef, MatTable} from "@angular/material/table";
 import {HttpParams} from "@angular/common/http";
-import {TimeInterval} from "rxjs/internal-compatibility";
-import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -20,7 +17,7 @@ export class CryptocurrenciesComponent implements OnInit {
   priceCache: [string, Number][] = []
   displayedColumns: string[] = ['name', 'momentum', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
 
-  constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
+  constructor(public route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
 
   @ViewChild(MatTable) table: MatTable<any>;
 

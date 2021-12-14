@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {HttpParams} from "@angular/common/http";
 import {CryptoServiceService} from "./crypto-service.service";
-import {delay} from "rxjs/operators";
 
 
 @Component({

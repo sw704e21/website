@@ -27,7 +27,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
   declarations: [
     AppComponent,
     CryptocurrenciesComponent,
-    CryptoViewComponent
+    CryptoViewComponent,
+  ],
+  entryComponents: [
   ],
   imports: [
     BrowserModule,

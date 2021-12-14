@@ -2,7 +2,7 @@ import {Chart} from "angular-highcharts";
 declare var require: any;
 const More = require('highcharts/highcharts-more');
 More(Highcharts);
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {CryptoServiceService} from "../crypto-service.service";
@@ -10,6 +10,7 @@ import {Crypto} from "../crypto";
 import {HttpParams} from "@angular/common/http";
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import * as Highcharts from 'highcharts';
+import {MatIconModule} from "@angular/material/icon";
 const Wordcloud = require('highcharts/modules/wordcloud');
 Wordcloud(Highcharts);
 
@@ -298,7 +299,8 @@ export class CryptoViewComponent implements OnInit {
     this.initSeries();
     this.getCryptoInfo();
 
-    (<any>window).twttr.widgets.load();
+    //Causes an error cause widget is undefined (no it's not)
+    //(<any>window).twttr.widgets.load();
   }
 
   //This is the typescript file for the page that displays a specific crypto.
@@ -323,7 +325,7 @@ export class CryptoViewComponent implements OnInit {
   ]
 
 
-  constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
+  constructor(public route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
 
   //Crypto history parameter
   historyParams = new HttpParams()

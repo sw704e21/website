@@ -1,14 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CryptoViewComponent } from './crypto-view.component';
+import {ActivatedRoute} from "@angular/router";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('CryptoViewComponent', () => {
   let component: CryptoViewComponent;
   let fixture: ComponentFixture<CryptoViewComponent>;
 
+  const fakeActivatedRoute = {
+    snapshot: {paramMap: {get(): string { return '123';}}}
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CryptoViewComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [ CryptoViewComponent ],
+      providers: [{provide: ActivatedRoute, useValue: fakeActivatedRoute}]
     })
     .compileComponents();
   });

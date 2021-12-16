@@ -17,7 +17,7 @@ export class CryptocurrenciesComponent implements OnInit {
   priceCache: [string, Number][] = []
   displayedColumns: string[] = ['name', 'momentum', 'price', 'mentions', 'mentionsPercent', 'interactions', 'pos-neg'];
 
-  constructor(public route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
+  constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService) {}
 
   @ViewChild(MatTable) table: MatTable<any>;
 
@@ -34,7 +34,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   //Gets currencies for the table on the frontpage
   getCryptocurrencies(params: HttpParams): void {
-    this.cryptoServiceService.getCryptocurrencies(this.params).subscribe(resp => {
+    this.cryptoServiceService.getCryptocurrencies(params).subscribe(resp => {
       this.cryptoList = resp;
       for (var i = 0; i < this.cryptoList.length; i++){
         this.cryptoList[i].id = resp[i].identifier;

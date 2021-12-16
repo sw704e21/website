@@ -1,7 +1,7 @@
 <body>
 <div class="container">
   <div class="cryptoNavBar">
-    <div class="tokenIdentifier">
+    <div class="tokenIdentifier" *ngIf="cryptoInfo">
       <div id="tokenIcon"><img [src]="cryptoInfo.icon"/></div>
       <div>
         <div id="tokenName"> {{cryptoInfo.displayName}} </div>
@@ -21,7 +21,6 @@
   </div>
 
   <hr class="divider">
-
   <div id="chartDiv" class="chartDiv">
   </div>
 
@@ -34,7 +33,7 @@
     </mat-button-toggle-group>
   </div>
 
-  <div class="segmentContainer">
+  <div class="segmentContainer" *ngIf="cryptoInfo">
 
     <div class="cryptoScoreDiv">
       <h1> Crypto Score TM ({{cryptoInfo.id}})</h1>
@@ -44,7 +43,6 @@
       </div>
 
       <div id="separateScores">
-
         <div class="sepScoreSegment">
           <h2>Price score</h2>
           <mat-progress-bar mode="determinate" value="{{cryptoInfo.price_score * 20}}"></mat-progress-bar>

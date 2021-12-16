@@ -31,8 +31,8 @@ enum TimeInterval {
 
 export class CryptoViewComponent implements OnInit {
 
-  private chart: any;
-  private wordcloud: any;
+  public chart: any;
+  public wordcloud: any;
 
   ngOnInit(): void {
     // Render the highcharts to the html
@@ -298,7 +298,6 @@ export class CryptoViewComponent implements OnInit {
 
     this.initSeries();
     this.getCryptoInfo();
-
     //Causes an error cause widget is undefined (no it's not)
     //(<any>window).twttr.widgets.load();
   }
@@ -451,6 +450,7 @@ export class CryptoViewComponent implements OnInit {
           tempPosSentiment.push(parseFloat(resp[i].posSentiment.toFixed(3)))
           tempNegSentiment.push(-resp[i].negSentiment.toFixed(3))
           //tempSentiment.push(resp[i].sentiment);
+
         }
 
         // Reverse the data. First element in resp is the newest data point when it should be the last.
@@ -459,6 +459,7 @@ export class CryptoViewComponent implements OnInit {
         tempPosSentiment.reverse();
         tempNegSentiment.reverse();
         //tempSentiment.reverse();
+
 
         // Set the earliest data point we have on the graph
         let maxPeriod = resp[resp.length-1].time *60*60*1000
@@ -482,7 +483,6 @@ export class CryptoViewComponent implements OnInit {
           ? this.cryptoInfo.price.toFixed(2)
           : this.cryptoInfo.price.toPrecision(4));
 
-        console.log(this.cryptoInfo)
       })
   }
 

@@ -192,39 +192,7 @@ describe('CryptoServiceService', () => {
     request.flush(expectedPriceHistory);
 
     expect(actualPriceHistory).toEqual(expectedPriceHistory);
+    
   })
 
-  /*it('#getCryptocurrencies should throw correct error response', function (done: DoneFn) {
-    const status = 500;
-    const statusText = 'Server error';
-    const errorEvent = new ErrorEvent('API error');
-
-    let mockParams = new HttpParams()
-      .set('length', 3)
-      .set('sortParam', '-mentions')
-
-    service.getCryptocurrencies(mockParams).subscribe(
-      () => {
-          fail('next handler must not be called');
-          done();
-        },
-        (error) => {
-          actualError = error;
-          done();
-        },
-        () => {
-          fail('complete handler must not be called');
-          done();
-        });
-
-      httpTestingController.expectOne('http://cryptoserver.northeurope.cloudapp.azure.com/coins/all?length=3&sortParam=-mentions').error(errorEvent, {status, statusText});
-
-
-      if (!actualError){
-        throw new Error('Error needs to be defined');
-      }
-      expect(actualError.error).toEqual(errorEvent);
-      expect(actualError.status).toEqual(status);
-      expect(actualError.statusText).toEqual(statusText);
-    }); */
 });

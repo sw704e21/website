@@ -35,6 +35,9 @@ export class CryptoViewComponent implements OnInit {
   public wordcloud: any;
 
   ngOnInit(): void {
+    //Causes an error cause widget is undefined (no it's not)
+    (<any>window).twttr.widgets.load();
+
     // Render the highcharts to the html
     this.chart = Highcharts.chart('chartDiv', {
       chart: {
@@ -298,8 +301,7 @@ export class CryptoViewComponent implements OnInit {
 
     this.initSeries();
     this.getCryptoInfo();
-    //Causes an error cause widget is undefined (no it's not)
-    //(<any>window).twttr.widgets.load();
+
   }
 
   //This is the typescript file for the page that displays a specific crypto.

@@ -192,7 +192,7 @@ describe('CryptoServiceService', () => {
     request.flush(expectedPriceHistory);
 
     expect(actualPriceHistory).toEqual(expectedPriceHistory);
-    
+
   })
 
 });

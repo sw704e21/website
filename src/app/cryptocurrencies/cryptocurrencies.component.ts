@@ -3,11 +3,8 @@ import {Crypto} from "../crypto";
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {CryptoServiceService} from "../crypto-service.service";
-import {Sort} from "@angular/material/sort";
 import {MatCell, MatColumnDef, MatTable} from "@angular/material/table";
 import {HttpParams} from "@angular/common/http";
-import {TimeInterval} from "rxjs/internal-compatibility";
-import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -37,7 +34,7 @@ export class CryptocurrenciesComponent implements OnInit {
 
   //Gets currencies for the table on the frontpage
   getCryptocurrencies(params: HttpParams): void {
-    this.cryptoServiceService.getCryptocurrencies(this.params).subscribe(resp => {
+    this.cryptoServiceService.getCryptocurrencies(params).subscribe(resp => {
       this.cryptoList = resp;
       for (var i = 0; i < this.cryptoList.length; i++){
         this.cryptoList[i].id = resp[i].identifier;

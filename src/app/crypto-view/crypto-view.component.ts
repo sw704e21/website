@@ -2,7 +2,7 @@ import {Chart} from "angular-highcharts";
 declare var require: any;
 const More = require('highcharts/highcharts-more');
 More(Highcharts);
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {CryptoServiceService} from "../crypto-service.service";
@@ -10,6 +10,7 @@ import {Crypto} from "../crypto";
 import {HttpParams} from "@angular/common/http";
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import * as Highcharts from 'highcharts';
+import {MatIconModule} from "@angular/material/icon";
 import {coerceStringArray} from "@angular/cdk/coercion";
 const Wordcloud = require('highcharts/modules/wordcloud');
 Wordcloud(Highcharts);
@@ -31,10 +32,13 @@ enum TimeInterval {
 
 export class CryptoViewComponent implements OnInit {
 
-  private chart: any;
-  private wordcloud: any;
+  public chart: any;
+  public wordcloud: any;
 
   ngOnInit(): void {
+    //Causes an error cause widget is undefined (no it's not)
+    (<any>window).twttr.widgets.load();
+
 
     // Render the highcharts to the html
     this.chart = Highcharts.chart('chartDiv', {
@@ -208,7 +212,7 @@ export class CryptoViewComponent implements OnInit {
   // Word dictionary
   tfDict: [name: string,weight: number][] = []
 
-  constructor(private route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
+  constructor(public route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
 
   //Crypto history parameter
   historyParams = new HttpParams()
@@ -334,6 +338,7 @@ export class CryptoViewComponent implements OnInit {
           tempPosSentiment.push(parseFloat(resp[i].posSentiment.toFixed(3)))
           tempNegSentiment.push(-resp[i].negSentiment.toFixed(3))
           //tempSentiment.push(resp[i].sentiment);
+
         }
 
         // Reverse the data. First element in resp is the newest data point when it should be the last.
@@ -342,6 +347,7 @@ export class CryptoViewComponent implements OnInit {
         tempPosSentiment.reverse();
         tempNegSentiment.reverse();
         //tempSentiment.reverse();
+
 
         // Set the earliest data point we have on the graph
         let maxPeriod = resp[resp.length-1].time *60*60*1000
@@ -382,6 +388,7 @@ export class CryptoViewComponent implements OnInit {
         tempDict.sort(function (a, b) {
           return b[1] - a[1];
         });
+
 
         this.tfDict = tempDict
         this.wordcloud.series[0].setData(tempDict)

@@ -11,6 +11,7 @@ import {HttpParams} from "@angular/common/http";
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import * as Highcharts from 'highcharts';
 import {MatIconModule} from "@angular/material/icon";
+import {coerceStringArray} from "@angular/cdk/coercion";
 const Wordcloud = require('highcharts/modules/wordcloud');
 Wordcloud(Highcharts);
 
@@ -37,6 +38,7 @@ export class CryptoViewComponent implements OnInit {
   ngOnInit(): void {
     //Causes an error cause widget is undefined (no it's not)
     (<any>window).twttr.widgets.load();
+
 
     // Render the highcharts to the html
     this.chart = Highcharts.chart('chartDiv', {
@@ -165,115 +167,7 @@ export class CryptoViewComponent implements OnInit {
       },
       series: [{
         type: 'wordcloud',
-        data: [{
-          name: 'Lorem',
-          weight: 6
-        }, {
-          name: 'Ipsum',
-          weight: 8
-        }, {
-          name: 'Dolor',
-          weight: 4
-        }, {
-          name: 'Lorem2',
-          weight: 2
-        }, {
-          name: 'Ipsum2',
-          weight: 2
-        }, {
-          name: 'Dolor2',
-          weight: 1
-        }, {
-          name: 'Lorem3',
-          weight: 3
-        }, {
-          name: 'Ipsum3',
-          weight: 2
-        }, {
-          name: 'Dolor3',
-          weight: 1
-        }, {
-          name: 'Lorem4',
-          weight: 3
-        }, {
-          name: 'Ipsum4',
-          weight: 4
-        }, {
-          name: 'Dolor4',
-          weight: 1
-        }, {
-          name: 'Lorem',
-          weight: 6
-        }, {
-          name: 'Ipsum',
-          weight: 8
-        }, {
-          name: 'Dolor',
-          weight: 4
-        }, {
-          name: 'Lorem2',
-          weight: 2
-        }, {
-          name: 'Ipsum2',
-          weight: 2
-        }, {
-          name: 'Dolor2',
-          weight: 1
-        }, {
-          name: 'Lorem3',
-          weight: 3
-        }, {
-          name: 'Ipsum3',
-          weight: 2
-        }, {
-          name: 'Dolor3',
-          weight: 1
-        }, {
-          name: 'Lorem4',
-          weight: 3
-        }, {
-          name: 'Ipsum4',
-          weight: 4
-        }, {
-          name: 'Dolor4',
-          weight: 1
-        }, {
-          name: 'Lorem',
-          weight: 6
-        }, {
-          name: 'Ipsum',
-          weight: 8
-        }, {
-          name: 'Dolor',
-          weight: 4
-        }, {
-          name: 'Lorem2',
-          weight: 2
-        }, {
-          name: 'Ipsum2',
-          weight: 2
-        }, {
-          name: 'Dolor2',
-          weight: 1
-        }, {
-          name: 'Lorem3',
-          weight: 3
-        }, {
-          name: 'Ipsum3',
-          weight: 2
-        }, {
-          name: 'Dolor3',
-          weight: 1
-        }, {
-          name: 'Lorem4',
-          weight: 3
-        }, {
-          name: 'Ipsum4',
-          weight: 4
-        }, {
-          name: 'Dolor4',
-          weight: 1
-        }],
+        data: [],
         name: ''
       }],
       title: {
@@ -290,9 +184,7 @@ export class CryptoViewComponent implements OnInit {
           point: {
             // Functionality for when the word is clicked
             events: {
-              click: function() {
-                console.log(this.name)
-              }
+              click: this.sortPosts.bind(this)
             }
           }
         }
@@ -301,30 +193,24 @@ export class CryptoViewComponent implements OnInit {
 
     this.initSeries();
     this.getCryptoInfo();
+    this.getTFDict();
 
   }
 
   //This is the typescript file for the page that displays a specific crypto.
 
   cryptoInfo: Crypto = {id: "Placeholder", icon: "Placeholder", name: "Placeholder", displayName: "Placeholder",
-    mentions: 200, relMentions: 1, negSentiment: 2, posSentiment: 2, price: 100, mostInfluence: 1, mostInteractions: 1,
-    relSentiment: 1, average_sentiment: 1, final_score: 50, price_score: 1, social_score: 1, correlation_rank: 1};
-  cryptoScore: number[] = []
+    mentions: 0, relMentions: 0, negSentiment: 0, posSentiment: 0, price: 0, mostInfluence: 0, mostInteractions: 0,
+    relSentiment: 0, average_sentiment: 0, final_score: 0, price_score: 0, social_score: 0, correlation_rank: 0};
   // Reddit posts
   redditLinkRef: string = '?ref_source=embed&amp;ref=share&amp;embed=true&amp;showmedia=false&amp;theme=dark'
-  redditPosts: SafeUrl[] = [
-    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1j47o/just_bought_my_first_00016_btc/' + this.redditLinkRef),
-    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1hiyo/saylor_bitcoin_will_100_x_from_here_5000000/'+ this.redditLinkRef),
-    this.cleanUrl('https://www.redditmedia.com/r/Bitcoin/comments/r1d0c3/bitcoin_will_reach_500k_in_five_years_as_a_result/' + this.redditLinkRef)
-  ]
+  redditPosts: SafeUrl[] = []
   // Twitter posts
   twitterLinkRef: string = '?ref_src=twsrc%5Etfw'
-  twitterPosts: SafeUrl[] = [
-    this.cleanUrl('https://twitter.com/Bitcoin/status/1463543725620019200' + this.twitterLinkRef),
-    this.cleanUrl('https://twitter.com/Bitcoin/status/1463514080820416513' + this.twitterLinkRef),
-    this.cleanUrl('https://twitter.com/Bitcoin/status/1463207674519048196' + this.twitterLinkRef)
-  ]
-
+  twitterPosts: SafeUrl[] = []
+  twitterDivReload: boolean = true;
+  // Word dictionary
+  tfDict: [name: string,weight: number][] = []
 
   constructor(public route: ActivatedRoute, private location: Location, private cryptoServiceService: CryptoServiceService, private sanitizer: DomSanitizer) {}
 
@@ -484,7 +370,31 @@ export class CryptoViewComponent implements OnInit {
         this.cryptoInfo.price = parseFloat(this.cryptoInfo.price > 1
           ? this.cryptoInfo.price.toFixed(2)
           : this.cryptoInfo.price.toPrecision(4));
+      })
+  }
 
+  // Get the tfdict for a specific coin, and display it in the wordcloud
+  getTFDict(): void{
+
+    let params = new HttpParams().set('length', 50);
+    let tempDict: [name: string, weight: number][] = []
+    this.cryptoServiceService.getTFDict(this.route.snapshot.paramMap.get("id")!, params)
+      .subscribe(resp => {
+        for(let i = 0; i < resp.length; i++){
+          tempDict.push([resp[i]._id, resp[i].total])
+        }
+
+        // Sort by value
+        tempDict.sort(function (a, b) {
+          return b[1] - a[1];
+        });
+
+
+        this.tfDict = tempDict
+        this.wordcloud.series[0].setData(tempDict)
+
+        // Get the posts for the most common keyword
+        this.sortPosts(this.route.snapshot.paramMap.get("id"))
       })
   }
 
@@ -514,13 +424,6 @@ export class CryptoViewComponent implements OnInit {
       pointStart: Date.now() - period,
       pointInterval: period / numPoints
     })
-    // Sentiment series
-    /*this.chart.ref.series[5].update({
-      type: 'bar',
-      color: '#0066FF',
-      pointStart: Date.now() - period,
-      pointInterval: period / numPoints
-    })*/
   }
 
   // Changes how far back to display the data
@@ -568,8 +471,6 @@ export class CryptoViewComponent implements OnInit {
         this.chart.yAxis[3].update({visible: !this.chart.series[3].visible});
         this.chart.series[3].update({visible: !this.chart.series[3].visible, type: 'bar'})
         this.chart.series[4].update({visible: !this.chart.series[4].visible, type: 'bar'})
-        //Total sentiment
-        //this.chart.ref.series[5].update({visible: event.checked, type: 'bar'})
         break;
     }
 
@@ -580,5 +481,44 @@ export class CryptoViewComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url)
   }
 
+  sortPosts(obj: any){
+    this.twitterPosts = []
+    let tempArrTwi: SafeUrl[] = []
+    let tempArrRed: SafeUrl[] = []
 
+    // Get the URL of all occurences of the word
+    let occs: string[] = [];
+    let params = new HttpParams().set('length', 10);
+
+
+    if (typeof obj == 'string'){
+      console.log("I am a string!")
+      this.cryptoServiceService.getURLS(this.route.snapshot.paramMap.get("id")!, obj, params).subscribe(resp => {
+        occs = resp.urls
+        console.log(occs)
+        for(let i = 0; i < occs.length; i++){
+          if(occs[i].includes('reddit.com')){
+            tempArrRed.push(this.cleanUrl(occs[i].replace("reddit.com", "redditmedia.com")+ this.redditLinkRef))
+          }
+        }
+        this.redditPosts = tempArrRed;
+      })
+    } else {
+      console.log("I am NOT a string!")
+      this.cryptoServiceService.getURLS(this.route.snapshot.paramMap.get("id")!, obj.point.name, params).subscribe(resp => {
+        occs = resp.urls
+        console.log(occs)
+        for(let i = 0; i < occs.length; i++){
+          if(occs[i].includes('reddit.com')){
+            tempArrRed.push(this.cleanUrl(occs[i].replace("reddit.com", "redditmedia.com")+ this.redditLinkRef))
+          }
+        }
+        this.redditPosts = tempArrRed;
+      })
+    }
+
+    this.twitterPosts = tempArrTwi;
+    (<any>window).twttr.widgets.load();
+
+  }
 }
